@@ -1,0 +1,4 @@
+import { services } from '../../lib/data';
+import ServiceCard from '../../components/ServiceCard';
+export const metadata={title:'Services — Eroll Oliver'};
+export default function Services(){return <div className="page-wrap shell"><div className="page-heading"><p className="eyebrow"><span/> Services</p><h1>Build the website. Connect the workflow.</h1><p>Six service areas laid out with the same numbered-card treatment as the homepage reference.</p></div><div className="service-grid service-page-grid">{services.map(s=><ServiceCard key={s.number} service={s}/>)}</div>{services.map(s=><section className="service-detail" id={s.id} key={s.id}><span>{s.number}</span><div><h2>{s.title}</h2><p>{s.short}</p><ul><li>Strategy and structure</li><li>Responsive implementation</li><li>Testing and optimization</li><li>Handoff and iteration</li></ul></div></section>)}</div>}

@@ -1,0 +1,1 @@
+export default function Marquee({items, dark=false, reverse=false, slow=false}){ const list=[...items,...items,...items]; return <div className={`marquee-bar ${dark?'marquee-dark':''}`}><div className={`marquee-track ${reverse?'reverse':''} ${slow?'slow':''}`}>{list.map((i,idx)=><span key={`${i}-${idx}`}>{i}<b>✦</b></span>)}</div></div> }

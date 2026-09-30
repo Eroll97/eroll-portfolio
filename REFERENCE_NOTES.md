@@ -1,0 +1,5 @@
+# Replica Reference Notes
+
+The inspected reference established the following visual/interaction requirements: fixed header, scroll progress, custom cursor, ambient glow/noise, hero grid and right-side animated canvas, huge solid/outline name, typewriter role, two hero CTAs, three stats, technology marquee, six numbered tilt service cards, horizontally snapping project carousel, hover-scrolling website screenshots, crossed opposite-direction marquees, eight-card tool grid, invert-on-hover experience rows, layered browser mockups, floating technology pills, opposite-direction testimonial rails, three blog cards, final CTA, multi-column footer and floating assistant.
+
+The Portfolio page reference established: 40 projects, sticky Category sidebar on desktop, All/WordPress/Shopify/GoHighLevel platform filters, mobile filter chips, category counts, a two-column desktop project grid, 300px screenshot viewport, category/platform badges, tech pills, hover-scroll screenshots, arrow rotation and full-width View Project control.
