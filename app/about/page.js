@@ -1830,7 +1830,7 @@ export default function About() {
                     {/* INSTAGRAM */}
 
                     <a
-                      href="#"
+                      href="#https://www.instagram.com/eroll_onnn?stkn=MXZ4c2h5Y2cxaDAxZA=="
                       target="_blank"
                       rel="noreferrer"
                       aria-label="Instagram"
