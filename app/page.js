@@ -12,11 +12,12 @@ import {
 
 import SectionHeading from '../components/SectionHeading';
 import Marquee from '../components/Marquee';
-import HeroCanvas from '../components/HeroCanvas';
+import VantaGlobe from '../components/VantaGlobe';
 import Typewriter from '../components/Typewriter';
 import ServiceCard from '../components/ServiceCard';
 import FeaturedCarousel from '../components/FeaturedCarousel';
 import HoverScrollPreview from '../components/HoverScrollPreview';
+import CursorFollowName from '../components/CursorFollowName';
 
 export default function Home() {
   return (
@@ -24,13 +25,18 @@ export default function Home() {
       {/* =========================================================
           HERO
       ========================================================= */}
-      <section className="hero-section">
+      <VantaGlobe>
+
+        {/* VANTA GLOBE - FULL HERO BACKGROUND */}
+        <VantaGlobe />
+
+        {/* DARK OVERLAY ABOVE VANTA */}
+        <div className="hero-vanta-overlay" />
+
+        {/* HERO GRID */}
         <div className="hero-grid-bg" />
 
-        <div className="hero-orb">
-          <HeroCanvas />
-        </div>
-
+        {/* DECORATIVE HERO ELEMENTS */}
         <div className="hero-glow hero-glow-a" />
         <div className="hero-glow hero-glow-b" />
 
@@ -43,19 +49,21 @@ export default function Home() {
         <div className="hero-dot dot-a" />
         <div className="hero-dot dot-b" />
 
+        {/* HERO CONTENT */}
         <div className="shell hero-inner">
+
           <p className="availability">
             <span />
             Available for new projects
           </p>
 
-          <h1 className="hero-title">
-            <span>EROLL</span>
-            <span className="outline">OLIVER</span>
-          </h1>
+          <CursorFollowName />
 
           <div className="hero-bottom">
+
+            {/* LEFT CONTENT */}
             <div className="hero-copy">
+
               <p className="typewriter">
                 <Typewriter />
               </p>
@@ -67,17 +75,28 @@ export default function Home() {
               </p>
 
               <div className="hero-actions">
-                <Link href="/portfolio" className="btn-solid">
+
+                <Link
+                  href="/portfolio"
+                  className="btn-solid"
+                >
                   View my work
                 </Link>
 
-                <Link href="/contact" className="btn-outline">
+                <Link
+                  href="/contact"
+                  className="btn-outline"
+                >
                   Contact me
                 </Link>
+
               </div>
+
             </div>
 
+            {/* HERO STATS */}
             <div className="hero-stats">
+
               <div>
                 <strong>6+</strong>
                 <span>Years experience</span>
@@ -92,16 +111,22 @@ export default function Home() {
                 <strong>4</strong>
                 <span>Companies worked with</span>
               </div>
+
             </div>
+
           </div>
+
         </div>
 
+        {/* SCROLL INDICATOR */}
         <div className="scroll-cue">
           <div>
             <span />
           </div>
         </div>
-      </section>
+
+      </VantaGlobe>
+
 
       {/* =========================================================
           TOP MARQUEE
@@ -119,10 +144,12 @@ export default function Home() {
         ]}
       />
 
+
       {/* =========================================================
           SERVICES
       ========================================================= */}
       <section className="section shell">
+
         <SectionHeading
           eyebrow="What I do"
           title="Services that grow businesses"
@@ -130,20 +157,26 @@ export default function Home() {
         />
 
         <div className="service-grid">
+
           {services.map((service) => (
             <ServiceCard
               key={service.number}
               service={service}
             />
           ))}
+
         </div>
+
       </section>
+
 
       {/* =========================================================
           FEATURED WORK
       ========================================================= */}
       <section className="section section-soft featured-section">
+
         <div className="shell">
+
           <SectionHeading
             eyebrow="Featured work"
             title="Real websites. Real businesses."
@@ -157,16 +190,21 @@ export default function Home() {
               </Link>
             }
           />
+
         </div>
 
         <FeaturedCarousel projects={projects} />
+
       </section>
+
 
       {/* =========================================================
           CROSSED MARQUEES
       ========================================================= */}
       <div className="crossed-marquees">
+
         <div className="cross white">
+
           <Marquee
             items={[
               'PASSIONATE',
@@ -176,9 +214,11 @@ export default function Home() {
               'RELIABLE',
             ]}
           />
+
         </div>
 
         <div className="cross black">
+
           <Marquee
             items={[
               'PASSIONATE',
@@ -190,13 +230,17 @@ export default function Home() {
             dark
             reverse
           />
+
         </div>
+
       </div>
+
 
       {/* =========================================================
           SKILLS & TOOLS
       ========================================================= */}
       <section className="section shell">
+
         <SectionHeading
           eyebrow="Skills & Tools"
           title="Technologies I work with"
@@ -204,11 +248,14 @@ export default function Home() {
         />
 
         <div className="tools-grid">
+
           {tools.map(([name, img]) => (
+
             <div
               className="tool-card"
               key={name}
             >
+
               <span />
 
               <div>
@@ -219,52 +266,80 @@ export default function Home() {
                 />
               </div>
 
-              <p>{name}</p>
+              <p>
+                {name}
+              </p>
+
             </div>
+
           ))}
+
         </div>
+
       </section>
+
 
       {/* =========================================================
           EXPERIENCE
       ========================================================= */}
       <section className="section shell experience-section">
+
         <SectionHeading
           eyebrow="Experience"
           title="6+ years, four companies, dozens of launches"
         />
 
         <div className="experience-list">
+
           {experience.map((item) => (
+
             <div
               className="experience-row"
               key={item.company}
             >
+
               <div>
+
                 <img
                   src={item.logo}
-                  alt=""
+                  alt={`${item.company} logo`}
                 />
 
-                <h3>{item.company}</h3>
+                <h3>
+                  {item.company}
+                </h3>
+
               </div>
 
-              <p>{item.title}</p>
+              <p>
+                {item.title}
+              </p>
 
-              <span>{item.period}</span>
+              <span>
+                {item.period}
+              </span>
+
             </div>
+
           ))}
+
         </div>
+
       </section>
 
+
       {/* =========================================================
-          LAUNCH WEBSITE
+          LAUNCH WEBSITE SECTION
       ========================================================= */}
       <section className="launch-section shell">
+
         <div className="launch-card">
 
-          {/* LEFT CONTENT */}
-          <div>
+          {/* =====================================================
+              LEFT COLUMN
+          ===================================================== */}
+          <div className="launch-content">
+
             <p className="eyebrow">
               <span />
               Start your website
@@ -275,10 +350,10 @@ export default function Home() {
             </h2>
 
             <p>
-              Have an idea? Looking to sell services or products? Whether it's
-              a portfolio, business site, funnel or eCommerce store — I help
-              turn your vision into a fully functional website with automation
-              behind it.
+              Have an idea? Looking to sell services or products? Whether
+              it's a portfolio, business site, funnel or eCommerce store —
+              I help turn your vision into a fully functional website with
+              automation behind it.
             </p>
 
             <Link
@@ -287,91 +362,168 @@ export default function Home() {
             >
               Launch now →
             </Link>
+
           </div>
 
-          {/* RIGHT VISUAL */}
+
+          {/* =====================================================
+              RIGHT COLUMN
+          ===================================================== */}
           <div className="launch-visual">
 
-            <div className="launch-grid" />
-            <div className="launch-glow" />
+            {/* SOFT BACKGROUND GLOW */}
+            <div className="launch-visual-glow" />
 
-            {/* =====================================================
-                WEBSITE 1
-                HOVER = SCREENSHOT SCROLLS
-            ===================================================== */}
+            {/* ROTATING DASHED CIRCLE */}
+            <div className="launch-spin-circle" />
+
+            {/* SMALL DECORATIVE CIRCLE */}
+            <div className="launch-small-circle" />
+
+            {/* GRID */}
+            <div className="launch-grid" />
+
+
+            {/* =================================================
+                LARGE BACK WEBSITE
+            ================================================= */}
             <HoverScrollPreview
-              className="browser browser-one"
-              src={projects[0].image}
+              className="launch-browser browser-one"
+              src={projects[0]?.image}
               alt="Business website preview"
             >
-              <div className="browser-top">
-                <i />
-                <i />
-                <i />
 
-                <span>
+              <div className="launch-browser-top">
+
+                <div className="launch-browser-dots">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+
+                <div className="launch-browser-address">
                   yourbusiness.com
-                </span>
+                </div>
+
               </div>
+
             </HoverScrollPreview>
 
-            {/* =====================================================
-                WEBSITE 2
-                HOVER = SCREENSHOT SCROLLS
-            ===================================================== */}
+
+            {/* =================================================
+                SMALL FRONT WEBSITE
+            ================================================= */}
             <HoverScrollPreview
-              className="browser browser-two"
-              src={projects[15].image}
+              className="launch-browser browser-two"
+              src={projects[15]?.image}
               alt="Online store preview"
             >
-              <div className="browser-top">
-                <i />
-                <i />
-                <i />
 
-                <span>
+              <div className="launch-browser-top">
+
+                <div className="launch-browser-dots">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+
+                <div className="launch-browser-address">
                   yourstore.com
-                </span>
+                </div>
+
               </div>
+
             </HoverScrollPreview>
 
-            {/* WORDPRESS */}
-            <span className="float-badge fb1">
-              <img
-                src={tools[0][1]}
-                alt="WordPress"
-              />
 
-              WordPress
-            </span>
+            {/* =================================================
+                WORDPRESS BADGE
+            ================================================= */}
+            <div className="launch-floating-badge launch-badge-wordpress">
 
-            {/* GOHIGHLEVEL */}
-            <span className="float-badge fb2">
-              <img
-                src={tools[1][1]}
-                alt="GoHighLevel"
-              />
+              <span>
 
-              GoHighLevel
-            </span>
+                <img
+                  src={tools[0]?.[1]}
+                  alt="WordPress"
+                />
 
-            {/* SHOPIFY */}
-            <span className="float-badge fb3">
-              <img
-                src={tools[4][1]}
-                alt="Shopify"
-              />
+                WordPress
 
-              Shopify
-            </span>
+              </span>
 
-            {/* SPEED BADGE */}
-            <span className="float-badge fb4">
-              ⚡ Loads in &lt;2s
-            </span>
+            </div>
 
-            {/* SITES LAUNCHED */}
-            <div className="sites-stat">
+
+            {/* =================================================
+                GOHIGHLEVEL BADGE
+            ================================================= */}
+            <div className="launch-floating-badge launch-badge-ghl">
+
+              <span>
+
+                <img
+                  src={tools[1]?.[1]}
+                  alt="GoHighLevel"
+                />
+
+                GoHighLevel
+
+              </span>
+
+            </div>
+
+
+            {/* =================================================
+                SHOPIFY BADGE
+            ================================================= */}
+            <div className="launch-floating-badge launch-badge-shopify">
+
+              <span>
+
+                <img
+                  src={tools[4]?.[1]}
+                  alt="Shopify"
+                />
+
+                Shopify
+
+              </span>
+
+            </div>
+
+
+            {/* =================================================
+                SPEED BADGE
+            ================================================= */}
+            <div className="launch-floating-badge launch-badge-speed">
+
+              <span>
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+                </svg>
+
+                Loads in &lt;2s
+
+              </span>
+
+            </div>
+
+
+            {/* =================================================
+                SITES LAUNCHED
+            ================================================= */}
+            <div className="launch-sites-stat">
+
               <strong>
                 40+
               </strong>
@@ -379,55 +531,77 @@ export default function Home() {
               <small>
                 Sites launched
               </small>
+
             </div>
 
           </div>
+
         </div>
+
       </section>
+
 
       {/* =========================================================
           TESTIMONIALS
       ========================================================= */}
       <section className="section section-soft testimonials">
+
         <div className="shell">
+
           <SectionHeading
             eyebrow="Testimonials"
             title="What clients say about working with me"
-            copy="The same two-row moving testimonial system as the reference. Replace these placeholders with feedback you are authorized to publish."
+            copy="Feedback from clients I've worked with across websites, funnels, CRM systems and automation projects."
           />
+
         </div>
+
 
         <div className="testimonial-rows">
 
+          {/* TOP ROW */}
           <div className="testimonial-track forward">
+
             {[...testimonialsTop, ...testimonialsTop].map(
               (testimonial, index) => (
+
                 <Testimonial
                   t={testimonial}
                   key={`top-${index}`}
                 />
+
               )
             )}
+
           </div>
 
+
+          {/* BOTTOM ROW */}
           <div className="testimonial-track backward">
+
             {[...testimonialsBottom, ...testimonialsBottom].map(
               (testimonial, index) => (
+
                 <Testimonial
                   t={testimonial}
                   key={`bottom-${index}`}
                 />
+
               )
             )}
+
           </div>
 
         </div>
+
       </section>
+
 
       {/* =========================================================
           BLOG
       ========================================================= */}
       <section className="section shell">
+
         <SectionHeading
           eyebrow="From the blog"
           title="Latest articles & insights"
@@ -442,27 +616,36 @@ export default function Home() {
           }
         />
 
+
         <div className="blog-grid">
+
           {posts.map((post) => (
+
             <Link
               className="blog-card"
               href={`/blog/${post.slug}`}
               key={post.slug}
             >
+
               <div className="blog-image">
+
                 <img
                   src={post.image}
-                  alt=""
+                  alt={post.title}
+                  loading="lazy"
                 />
 
                 <span>
                   {post.category}
                 </span>
+
               </div>
+
 
               <div className="blog-body">
 
                 <div className="blog-meta">
+
                   <span>
                     {post.date}
                   </span>
@@ -472,17 +655,22 @@ export default function Home() {
                   <span>
                     {post.read}
                   </span>
+
                 </div>
+
 
                 <h3>
                   {post.title}
                 </h3>
 
+
                 <p>
                   {post.excerpt}
                 </p>
 
+
                 <div className="blog-author">
+
                   <span>
                     EO
                   </span>
@@ -494,18 +682,25 @@ export default function Home() {
                   <b>
                     Read →
                   </b>
+
                 </div>
 
               </div>
+
             </Link>
+
           ))}
+
         </div>
+
       </section>
+
 
       {/* =========================================================
           FINAL CTA
       ========================================================= */}
       <section className="final-cta">
+
         <div className="shell">
 
           <p>
@@ -521,6 +716,7 @@ export default function Home() {
           </h2>
 
           <div>
+
             <Link
               href="/contact"
               className="btn-solid"
@@ -534,17 +730,20 @@ export default function Home() {
             >
               WhatsApp me
             </Link>
+
           </div>
 
         </div>
+
       </section>
+
     </>
   );
 }
 
 
 /* =========================================================
-   TESTIMONIAL
+   TESTIMONIAL CARD
 ========================================================= */
 
 function Testimonial({ t }) {
@@ -566,6 +765,7 @@ function Testimonial({ t }) {
         </span>
 
         <div>
+
           <strong>
             {t[2]}
           </strong>
@@ -573,9 +773,11 @@ function Testimonial({ t }) {
           <small>
             {t[3]}
           </small>
+
         </div>
 
       </div>
+
     </div>
   );
 }

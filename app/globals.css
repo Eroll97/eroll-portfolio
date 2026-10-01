@@ -221,3 +221,189 @@
   }
 
 }
+/* =========================================================
+   BIGGER EROLL OLIVER HERO TITLE
+========================================================= */
+
+.hero-title {
+  margin: 28px 0 0 !important;
+
+  font-size: clamp(110px, 11vw, 185px) !important;
+  line-height: 0.78 !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: -0.065em !important;
+
+  width: max-content;
+  max-width: 100%;
+}
+
+.hero-title > span {
+  display: block;
+  white-space: nowrap;
+}
+
+/* EROLL */
+.hero-title > span:first-child {
+  color: #ffffff;
+}
+
+/* OLIVER */
+.hero-title .outline {
+  color: transparent !important;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.75) !important;
+  text-stroke: 2px rgba(255, 255, 255, 0.75) !important;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .hero-title {
+    font-size: clamp(90px, 13vw, 145px) !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+  .hero-title {
+    font-size: clamp(62px, 19vw, 100px) !important;
+    line-height: 0.82 !important;
+    letter-spacing: -0.055em !important;
+  }
+
+  .hero-title .outline {
+    -webkit-text-stroke-width: 1.5px !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: clamp(56px, 18vw, 82px) !important;
+  }
+}
+/* =========================================================
+   EROLL OLIVER - CURSOR FOLLOW EFFECT
+========================================================= */
+
+.cursor-follow-name {
+  --eroll-x: 0px;
+  --eroll-y: 0px;
+
+  --oliver-x: 0px;
+  --oliver-y: 0px;
+
+  --name-rotate: 0deg;
+
+  position: relative;
+
+  width: fit-content;
+  max-width: 100%;
+
+  cursor: default;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   EROLL
+========================================================= */
+
+.cursor-follow-name .cursor-name-eroll {
+  display: block;
+
+  transform:
+    translate3d(
+      var(--eroll-x),
+      var(--eroll-y),
+      0
+    )
+    rotate(var(--name-rotate)) !important;
+
+  transition:
+    transform 0.12s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+
+  will-change: transform;
+
+  animation: none !important;
+}
+
+
+/* =========================================================
+   OLIVER
+========================================================= */
+
+.cursor-follow-name .cursor-name-oliver {
+  display: block;
+
+  transform:
+    translate3d(
+      var(--oliver-x),
+      var(--oliver-y),
+      0
+    )
+    rotate(var(--name-rotate)) !important;
+
+  transition:
+    transform 0.16s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+
+  will-change: transform;
+
+  animation: none !important;
+}
+
+
+/* REMOVE OLD HOVER MOVEMENT */
+
+.cursor-follow-name:hover > span:first-child,
+.cursor-follow-name:hover > span:last-child {
+  animation: none !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+  .cursor-follow-name .cursor-name-eroll,
+  .cursor-follow-name .cursor-name-oliver {
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-follow-name .cursor-name-eroll,
+  .cursor-follow-name .cursor-name-oliver {
+    transition: none !important;
+    transform: none !important;
+  }
+}
