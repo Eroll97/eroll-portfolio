@@ -1757,8 +1757,8 @@ export default function About() {
                     </svg>
 
 
-                    <a href="mailto:your@email.com">
-                      your@email.com
+                    <a href="mailto:erolloliver97@gmail.com">
+                      erolloliver97@gmail.com
                     </a>
 
                   </div>
