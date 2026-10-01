@@ -12,31 +12,49 @@ import {
 
 import SectionHeading from '../components/SectionHeading';
 import Marquee from '../components/Marquee';
-import VantaGlobe from '../components/VantaGlobe';
-import Typewriter from '../components/Typewriter';
+import VantaHero from '../components/VantaHero';
+import CursorFollowName from '../components/CursorFollowName';
 import ServiceCard from '../components/ServiceCard';
 import FeaturedCarousel from '../components/FeaturedCarousel';
 import HoverScrollPreview from '../components/HoverScrollPreview';
-import CursorFollowName from '../components/CursorFollowName';
 
 export default function Home() {
+  const getToolIcon = (toolName) => {
+    const tool = tools.find(
+      ([name]) => name.toLowerCase() === toolName.toLowerCase()
+    );
+
+    return tool?.[1] || '';
+  };
+
+  const wordpressIcon = getToolIcon('WordPress');
+  const ghlIcon = getToolIcon('GoHighLevel');
+  const shopifyIcon = getToolIcon('Shopify');
+
+  const firstLaunchImage =
+    projects?.[0]?.image || '';
+
+  const secondLaunchImage =
+    projects?.[15]?.image ||
+    projects?.[1]?.image ||
+    projects?.[0]?.image ||
+    '';
+
   return (
     <>
       {/* =========================================================
           HERO
       ========================================================= */}
-      <VantaGlobe>
 
-        {/* VANTA GLOBE - FULL HERO BACKGROUND */}
-        <VantaGlobe />
+      <VantaHero>
 
-        {/* DARK OVERLAY ABOVE VANTA */}
+        {/* DARK OVERLAY */}
         <div className="hero-vanta-overlay" />
 
-        {/* HERO GRID */}
+        {/* GRID */}
         <div className="hero-grid-bg" />
 
-        {/* DECORATIVE HERO ELEMENTS */}
+        {/* DECORATIVE ELEMENTS */}
         <div className="hero-glow hero-glow-a" />
         <div className="hero-glow hero-glow-b" />
 
@@ -49,7 +67,11 @@ export default function Home() {
         <div className="hero-dot dot-a" />
         <div className="hero-dot dot-b" />
 
-        {/* HERO CONTENT */}
+
+        {/* =====================================================
+            HERO CONTENT
+        ===================================================== */}
+
         <div className="shell hero-inner">
 
           <p className="availability">
@@ -61,11 +83,12 @@ export default function Home() {
 
           <div className="hero-bottom">
 
-            {/* LEFT CONTENT */}
+            {/* LEFT SIDE */}
+
             <div className="hero-copy">
 
               <p className="typewriter">
-                <Typewriter />
+                AI Automation Expert
               </p>
 
               <p className="hero-desc">
@@ -94,7 +117,9 @@ export default function Home() {
 
             </div>
 
-            {/* HERO STATS */}
+
+            {/* RIGHT STATS */}
+
             <div className="hero-stats">
 
               <div>
@@ -118,19 +143,22 @@ export default function Home() {
 
         </div>
 
+
         {/* SCROLL INDICATOR */}
+
         <div className="scroll-cue">
           <div>
             <span />
           </div>
         </div>
 
-      </VantaGlobe>
+      </VantaHero>
 
 
       {/* =========================================================
           TOP MARQUEE
       ========================================================= */}
+
       <Marquee
         items={[
           'WordPress',
@@ -148,6 +176,7 @@ export default function Home() {
       {/* =========================================================
           SERVICES
       ========================================================= */}
+
       <section className="section shell">
 
         <SectionHeading
@@ -173,6 +202,7 @@ export default function Home() {
       {/* =========================================================
           FEATURED WORK
       ========================================================= */}
+
       <section className="section section-soft featured-section">
 
         <div className="shell">
@@ -201,6 +231,7 @@ export default function Home() {
       {/* =========================================================
           CROSSED MARQUEES
       ========================================================= */}
+
       <div className="crossed-marquees">
 
         <div className="cross white">
@@ -239,6 +270,7 @@ export default function Home() {
       {/* =========================================================
           SKILLS & TOOLS
       ========================================================= */}
+
       <section className="section shell">
 
         <SectionHeading
@@ -282,6 +314,7 @@ export default function Home() {
       {/* =========================================================
           EXPERIENCE
       ========================================================= */}
+
       <section className="section shell experience-section">
 
         <SectionHeading
@@ -331,13 +364,13 @@ export default function Home() {
       {/* =========================================================
           LAUNCH WEBSITE SECTION
       ========================================================= */}
+
       <section className="launch-section shell">
 
         <div className="launch-card">
 
-          {/* =====================================================
-              LEFT COLUMN
-          ===================================================== */}
+          {/* LEFT COLUMN */}
+
           <div className="launch-content">
 
             <p className="eyebrow">
@@ -366,31 +399,23 @@ export default function Home() {
           </div>
 
 
-          {/* =====================================================
-              RIGHT COLUMN
-          ===================================================== */}
+          {/* RIGHT COLUMN */}
+
           <div className="launch-visual">
 
-            {/* SOFT BACKGROUND GLOW */}
+            <div className="launch-grid" />
             <div className="launch-visual-glow" />
 
-            {/* ROTATING DASHED CIRCLE */}
             <div className="launch-spin-circle" />
-
-            {/* SMALL DECORATIVE CIRCLE */}
             <div className="launch-small-circle" />
 
-            {/* GRID */}
-            <div className="launch-grid" />
 
+            {/* BACK WEBSITE */}
 
-            {/* =================================================
-                LARGE BACK WEBSITE
-            ================================================= */}
             <HoverScrollPreview
               className="launch-browser browser-one"
-              src={projects[0]?.image}
-              alt="Business website preview"
+              src={firstLaunchImage}
+              alt="WordPress business website"
             >
 
               <div className="launch-browser-top">
@@ -410,13 +435,12 @@ export default function Home() {
             </HoverScrollPreview>
 
 
-            {/* =================================================
-                SMALL FRONT WEBSITE
-            ================================================= */}
+            {/* FRONT WEBSITE */}
+
             <HoverScrollPreview
               className="launch-browser browser-two"
-              src={projects[15]?.image}
-              alt="Online store preview"
+              src={secondLaunchImage}
+              alt="Shopify online store"
             >
 
               <div className="launch-browser-top">
@@ -436,17 +460,18 @@ export default function Home() {
             </HoverScrollPreview>
 
 
-            {/* =================================================
-                WORDPRESS BADGE
-            ================================================= */}
+            {/* WORDPRESS */}
+
             <div className="launch-floating-badge launch-badge-wordpress">
 
               <span>
 
-                <img
-                  src={tools[0]?.[1]}
-                  alt="WordPress"
-                />
+                {wordpressIcon && (
+                  <img
+                    src={wordpressIcon}
+                    alt=""
+                  />
+                )}
 
                 WordPress
 
@@ -455,17 +480,18 @@ export default function Home() {
             </div>
 
 
-            {/* =================================================
-                GOHIGHLEVEL BADGE
-            ================================================= */}
+            {/* GHL */}
+
             <div className="launch-floating-badge launch-badge-ghl">
 
               <span>
 
-                <img
-                  src={tools[1]?.[1]}
-                  alt="GoHighLevel"
-                />
+                {ghlIcon && (
+                  <img
+                    src={ghlIcon}
+                    alt=""
+                  />
+                )}
 
                 GoHighLevel
 
@@ -474,17 +500,18 @@ export default function Home() {
             </div>
 
 
-            {/* =================================================
-                SHOPIFY BADGE
-            ================================================= */}
+            {/* SHOPIFY */}
+
             <div className="launch-floating-badge launch-badge-shopify">
 
               <span>
 
-                <img
-                  src={tools[4]?.[1]}
-                  alt="Shopify"
-                />
+                {shopifyIcon && (
+                  <img
+                    src={shopifyIcon}
+                    alt=""
+                  />
+                )}
 
                 Shopify
 
@@ -493,9 +520,8 @@ export default function Home() {
             </div>
 
 
-            {/* =================================================
-                SPEED BADGE
-            ================================================= */}
+            {/* SPEED */}
+
             <div className="launch-floating-badge launch-badge-speed">
 
               <span>
@@ -519,9 +545,8 @@ export default function Home() {
             </div>
 
 
-            {/* =================================================
-                SITES LAUNCHED
-            ================================================= */}
+            {/* SITES LAUNCHED */}
+
             <div className="launch-sites-stat">
 
               <strong>
@@ -544,6 +569,7 @@ export default function Home() {
       {/* =========================================================
           TESTIMONIALS
       ========================================================= */}
+
       <section className="section section-soft testimonials">
 
         <div className="shell">
@@ -559,7 +585,6 @@ export default function Home() {
 
         <div className="testimonial-rows">
 
-          {/* TOP ROW */}
           <div className="testimonial-track forward">
 
             {[...testimonialsTop, ...testimonialsTop].map(
@@ -576,7 +601,6 @@ export default function Home() {
           </div>
 
 
-          {/* BOTTOM ROW */}
           <div className="testimonial-track backward">
 
             {[...testimonialsBottom, ...testimonialsBottom].map(
@@ -600,6 +624,7 @@ export default function Home() {
       {/* =========================================================
           BLOG
       ========================================================= */}
+
       <section className="section shell">
 
         <SectionHeading
@@ -658,16 +683,13 @@ export default function Home() {
 
                 </div>
 
-
                 <h3>
                   {post.title}
                 </h3>
 
-
                 <p>
                   {post.excerpt}
                 </p>
-
 
                 <div className="blog-author">
 
@@ -699,6 +721,7 @@ export default function Home() {
       {/* =========================================================
           FINAL CTA
       ========================================================= */}
+
       <section className="final-cta">
 
         <div className="shell">
@@ -743,7 +766,7 @@ export default function Home() {
 
 
 /* =========================================================
-   TESTIMONIAL CARD
+   TESTIMONIAL
 ========================================================= */
 
 function Testimonial({ t }) {

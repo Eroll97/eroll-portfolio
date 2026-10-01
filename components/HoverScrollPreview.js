@@ -1,17 +1,25 @@
 'use client';
 
-import { useRef } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export default function HoverScrollPreview({
+  children,
+  className = '',
   src,
   alt = '',
-  className = '',
-  children,
 }) {
   const viewportRef = useRef(null);
   const imageRef = useRef(null);
 
-  const startScroll = () => {
+  const [scrollDistance, setScrollDistance] =
+    useState(0);
+
+  const measureScroll = useCallback(() => {
     const viewport = viewportRef.current;
     const image = imageRef.current;
 
@@ -19,74 +27,61 @@ export default function HoverScrollPreview({
       return;
     }
 
-    /*
-     * Calculate exactly how much of the screenshot
-     * exists below the visible browser window.
-     */
-    const imageHeight = image.getBoundingClientRect().height;
-    const viewportHeight = viewport.clientHeight;
+    const viewportHeight =
+      viewport.clientHeight;
 
-    const distance = Math.max(
-      0,
-      imageHeight - viewportHeight
+    const imageHeight =
+      image.scrollHeight;
+
+    setScrollDistance(
+      Math.max(
+        0,
+        imageHeight - viewportHeight
+      )
+    );
+  }, []);
+
+  useEffect(() => {
+    measureScroll();
+
+    window.addEventListener(
+      'resize',
+      measureScroll
     );
 
-    /*
-     * Calculate speed based on screenshot length.
-     * This keeps long screenshots smooth instead of
-     * moving extremely fast.
-     */
-    const duration = Math.max(
-      3.5,
-      Math.min(9, distance / 110)
-    );
-
-    image.style.transitionDuration = `${duration}s`;
-
-    image.style.transform =
-      `translate3d(0, -${distance}px, 0)`;
-  };
-
-
-  const resetScroll = () => {
-    const image = imageRef.current;
-
-    if (!image) {
-      return;
-    }
-
-    /*
-     * Return to the top slightly faster.
-     */
-    image.style.transitionDuration = '2.5s';
-
-    image.style.transform =
-      'translate3d(0, 0, 0)';
-  };
-
+    return () => {
+      window.removeEventListener(
+        'resize',
+        measureScroll
+      );
+    };
+  }, [measureScroll]);
 
   return (
-    <div
-      className={`launch-scroll-browser ${className}`}
-      onMouseEnter={startScroll}
-      onMouseLeave={resetScroll}
-    >
+    <div className={className}>
 
-      {/* Fake browser header */}
       {children}
 
-      {/* Screenshot viewport */}
       <div
         ref={viewportRef}
-        className="launch-scroll-window"
+        className="launch-browser-viewport"
       >
-        <img
-          ref={imageRef}
-          className="launch-scroll-image"
-          src={src}
-          alt={alt}
-          draggable="false"
-        />
+
+        {src && (
+          <img
+            ref={imageRef}
+            className="launch-browser-image"
+            src={src}
+            alt={alt}
+            loading="lazy"
+            onLoad={measureScroll}
+            style={{
+              '--preview-scroll':
+                `${scrollDistance}px`,
+            }}
+          />
+        )}
+
       </div>
 
     </div>

@@ -9,11 +9,12 @@ export default function CursorFollowName() {
   const handlePointerMove = (event) => {
     const title = titleRef.current;
 
-    if (!title) return;
+    if (!title) {
+      return;
+    }
 
     const rect = title.getBoundingClientRect();
 
-    // Cursor position from -1 to +1
     const x =
       ((event.clientX - rect.left) / rect.width - 0.5) * 2;
 
@@ -23,47 +24,39 @@ export default function CursorFollowName() {
     cancelAnimationFrame(frameRef.current);
 
     frameRef.current = requestAnimationFrame(() => {
-      /*
-       * EROLL follows the cursor.
-       */
       title.style.setProperty(
         '--eroll-x',
-        `${x * 34}px`
+        `${x * 28}px`
       );
 
       title.style.setProperty(
         '--eroll-y',
-        `${y * 22}px`
+        `${y * 16}px`
       );
 
-      /*
-       * OLIVER follows slightly more strongly,
-       * creating depth.
-       */
       title.style.setProperty(
         '--oliver-x',
-        `${x * 48}px`
+        `${x * 42}px`
       );
 
       title.style.setProperty(
         '--oliver-y',
-        `${y * 30}px`
+        `${y * 24}px`
       );
 
-      /*
-       * Very subtle rotation based on cursor.
-       */
       title.style.setProperty(
         '--name-rotate',
-        `${x * 1.5}deg`
+        `${x * 1.2}deg`
       );
     });
   };
 
-  const handlePointerLeave = () => {
+  const resetPosition = () => {
     const title = titleRef.current;
 
-    if (!title) return;
+    if (!title) {
+      return;
+    }
 
     cancelAnimationFrame(frameRef.current);
 
@@ -81,8 +74,9 @@ export default function CursorFollowName() {
       ref={titleRef}
       className="hero-title cursor-follow-name"
       onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
+      onPointerLeave={resetPosition}
     >
+
       <span className="cursor-name-eroll">
         EROLL
       </span>
@@ -90,6 +84,7 @@ export default function CursorFollowName() {
       <span className="outline cursor-name-oliver">
         OLIVER
       </span>
+
     </h1>
   );
 }
