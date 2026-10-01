@@ -76,9 +76,13 @@ export default function Footer() {
             </li>
 
             <li>
-              <a href="/Eroll-Oliver-Resume.pdf" download>
-                <u>Download Resume</u>
-              </a>
+              <a
+  href="/Eroll-CV.pdf"
+  download="Eroll-Oliver-CV.pdf"
+  aria-label="Download Eroll Oliver Resume"
+>
+  <u>Download Resume</u>
+</a>
             </li>
           </ul>
         </div>
