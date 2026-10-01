@@ -53,3 +53,171 @@
 @media (max-width:1100px){.desktop-nav{gap:20px}.hero-orb{right:-180px;width:580px;height:580px}.hero-stats{gap:28px}.service-grid{grid-template-columns:repeat(2,1fr)}.tools-grid{grid-template-columns:repeat(3,1fr)}.portfolio-layout{grid-template-columns:220px 1fr}.footer-grid{grid-template-columns:1fr 1fr 1fr}}
 @media (max-width:900px){.desktop-nav,.hire-btn{display:none}.menu-btn{display:flex}.mobile-menu{position:absolute;left:24px;right:24px;top:72px;display:grid;gap:2px;padding:14px;border:1px solid var(--line);border-radius:18px;background:rgba(5,5,5,.96);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transform:translateY(-8px);transition:.25s}.mobile-menu.show{opacity:1;pointer-events:auto;transform:none}.mobile-menu a{padding:12px;border-radius:10px;color:rgba(255,255,255,.65);font-size:12px;text-transform:uppercase;letter-spacing:.14em}.mobile-menu a:hover{background:rgba(255,255,255,.08);color:#fff}.hero-orb{opacity:.45;right:-220px}.hero-bottom{flex-direction:column;align-items:flex-start}.hero-stats{width:100%;justify-content:flex-start}.scroll-cue{display:none}.section{padding:96px 0}.section-heading{align-items:flex-start;flex-direction:column}.featured-item{width:46%}.launch-card{grid-template-columns:1fr;padding:38px}.launch-visual{min-height:430px}.blog-grid,.blog-page-grid{grid-template-columns:repeat(2,1fr)}.portfolio-layout{display:block}.portfolio-sidebar{display:none}.mobile-filters{display:block;margin-bottom:28px}.mobile-filters>div{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px}.mobile-filters>div>span{margin-right:4px;color:rgba(255,255,255,.42);font-size:9px;text-transform:uppercase;letter-spacing:.14em}.about-grid,.contact-grid{grid-template-columns:1fr}.pricing-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}}
 @media (max-width:680px){.shell,.nav-shell,.carousel-controls{width:min(100% - 32px,1280px)}.hero-section{padding-top:82px}.hero-inner{padding:64px 0}.hero-orb{display:none}.hero-title{font-size:clamp(58px,19vw,92px)}.hero-desc{font-size:14px}.hero-stats{gap:20px;justify-content:space-between}.hero-stats div{min-width:0}.hero-stats strong{font-size:38px}.hero-stats span{font-size:9px}.service-grid{grid-template-columns:1fr}.section{padding:78px 0}.section-heading h2{font-size:38px}.crossed-marquees{height:150px}.crossed-marquees .marquee-track span{font-size:17px}.tools-grid{grid-template-columns:repeat(2,1fr)}.experience-row{grid-template-columns:1fr;padding:22px}.experience-row>span{text-align:left}.launch-card{padding:26px}.launch-card h2{font-size:36px}.launch-visual{min-height:340px}.browser-one{width:84%;height:66%}.browser-two{width:66%;height:50%}.float-badge{font-size:9px;padding:7px 9px}.sites-stat{padding:9px 12px}.testimonial-card{width:330px}.blog-grid,.blog-page-grid,.portfolio-grid{grid-template-columns:1fr}.featured-item{width:85%;min-width:85%}.page-wrap{padding:120px 0 80px}.page-heading h1{font-size:42px}.service-detail{grid-template-columns:1fr}.service-detail>span{font-size:44px}.service-detail ul{grid-template-columns:1fr}.contact-form{grid-template-columns:1fr}.contact-form label:nth-child(4){grid-column:auto}.final-cta{padding:90px 0}.final-cta h2{font-size:50px}.final-cta>div>div{flex-direction:column;align-items:center}.footer-grid{grid-template-columns:1fr}.footer-grid>div:first-child{grid-column:auto}.footer-bottom{flex-direction:column}.portfolio-grid .project-shot{height:260px}.portfolio-grid .project-card:hover .project-shot img{transform:translateY(calc(-100% + 260px))}}
+/* =========================================================
+   LAUNCH SECTION
+   WEBSITE PREVIEW HOVER SCROLL
+========================================================= */
+
+
+/* Keep each browser frame clipped */
+.launch-scroll-browser {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   SCREENSHOT VIEWPORT
+========================================================= */
+
+.launch-scroll-window {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  /*
+   * Browser header stays fixed.
+   * Screenshot begins underneath it.
+   */
+  top: 32px;
+
+  bottom: 0;
+
+  overflow: hidden;
+
+  border-radius: 0 0 inherit inherit;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   FULL WEBSITE SCREENSHOT
+========================================================= */
+
+.launch-scroll-image {
+  display: block;
+
+  width: 100%;
+  max-width: none;
+
+  height: auto;
+
+  position: relative;
+
+  top: 0;
+  left: 0;
+
+  transform:
+    translate3d(0, 0, 0);
+
+  transition-property:
+    transform;
+
+  transition-duration:
+    5s;
+
+  transition-timing-function:
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+
+  will-change:
+    transform;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   BROWSER HEADER
+   Must stay above scrolling screenshot
+========================================================= */
+
+.launch-scroll-browser .browser-top {
+  position: relative;
+
+  z-index: 10;
+}
+
+
+/* =========================================================
+   HOVER FEEDBACK
+========================================================= */
+
+.launch-scroll-browser {
+  cursor: pointer;
+}
+
+
+/*
+ * Slight visual feedback only.
+ * Does NOT move or tilt the browser.
+ */
+.launch-scroll-browser:hover {
+  filter:
+    brightness(1.03);
+}
+
+
+/* =========================================================
+   ENSURE EXISTING FLOATING BADGES STAY ABOVE THE BROWSERS
+========================================================= */
+
+.launch-visual .float-badge,
+.launch-visual .sites-stat {
+  z-index: 20;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+  .launch-scroll-window {
+    top: 30px;
+  }
+
+}
+
+
+@media (max-width: 767px) {
+
+  /*
+   * Mobile devices don't really have hover.
+   * Keep the screenshot positioned normally.
+   */
+
+  .launch-scroll-image {
+    transform:
+      translate3d(0, 0, 0) !important;
+
+    transition:
+      none !important;
+  }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .launch-scroll-image {
+    transform:
+      translate3d(0, 0, 0) !important;
+
+    transition:
+      none !important;
+  }
+
+}

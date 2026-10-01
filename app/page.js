@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import {
   services,
   projects,
@@ -15,7 +16,7 @@ import HeroCanvas from '../components/HeroCanvas';
 import Typewriter from '../components/Typewriter';
 import ServiceCard from '../components/ServiceCard';
 import FeaturedCarousel from '../components/FeaturedCarousel';
-import CursorParallax from '../components/CursorParallax';
+import HoverScrollPreview from '../components/HoverScrollPreview';
 
 export default function Home() {
   return (
@@ -130,7 +131,10 @@ export default function Home() {
 
         <div className="service-grid">
           {services.map((service) => (
-            <ServiceCard key={service.number} service={service} />
+            <ServiceCard
+              key={service.number}
+              service={service}
+            />
           ))}
         </div>
       </section>
@@ -145,7 +149,10 @@ export default function Home() {
             title="Real websites. Real businesses."
             copy="A selection of the sites I've designed, built and launched for clients around the world. Hover a card to scroll through the page."
             action={
-              <Link className="pill-link" href="/portfolio">
+              <Link
+                className="pill-link"
+                href="/portfolio"
+              >
                 View all 40 projects
               </Link>
             }
@@ -187,7 +194,7 @@ export default function Home() {
       </div>
 
       {/* =========================================================
-          SKILLS
+          SKILLS & TOOLS
       ========================================================= */}
       <section className="section shell">
         <SectionHeading
@@ -198,7 +205,10 @@ export default function Home() {
 
         <div className="tools-grid">
           {tools.map(([name, img]) => (
-            <div className="tool-card" key={name}>
+            <div
+              className="tool-card"
+              key={name}
+            >
               <span />
 
               <div>
@@ -226,9 +236,16 @@ export default function Home() {
 
         <div className="experience-list">
           {experience.map((item) => (
-            <div className="experience-row" key={item.company}>
+            <div
+              className="experience-row"
+              key={item.company}
+            >
               <div>
-                <img src={item.logo} alt="" />
+                <img
+                  src={item.logo}
+                  alt=""
+                />
+
                 <h3>{item.company}</h3>
               </div>
 
@@ -241,12 +258,12 @@ export default function Home() {
       </section>
 
       {/* =========================================================
-          LAUNCH WEBSITE / CURSOR PARALLAX
+          LAUNCH WEBSITE
       ========================================================= */}
       <section className="launch-section shell">
         <div className="launch-card">
 
-          {/* LEFT SIDE */}
+          {/* LEFT CONTENT */}
           <div>
             <p className="eyebrow">
               <span />
@@ -258,95 +275,113 @@ export default function Home() {
             </h2>
 
             <p>
-              Have an idea? Looking to sell services or products? Whether
-              it's a portfolio, business site, funnel or eCommerce store —
-              I help turn your vision into a fully functional website with
-              automation behind it.
+              Have an idea? Looking to sell services or products? Whether it's
+              a portfolio, business site, funnel or eCommerce store — I help
+              turn your vision into a fully functional website with automation
+              behind it.
             </p>
 
-            <Link href="/contact" className="btn-solid">
+            <Link
+              href="/contact"
+              className="btn-solid"
+            >
               Launch now →
             </Link>
           </div>
 
-          {/* =====================================================
-              RIGHT SIDE INTERACTIVE VISUAL
-          ===================================================== */}
-          <CursorParallax className="launch-visual">
+          {/* RIGHT VISUAL */}
+          <div className="launch-visual">
 
-            {/* Static background */}
             <div className="launch-grid" />
             <div className="launch-glow" />
 
-            {/* Back website */}
-            <div className="browser browser-one parallax-main">
+            {/* =====================================================
+                WEBSITE 1
+                HOVER = SCREENSHOT SCROLLS
+            ===================================================== */}
+            <HoverScrollPreview
+              className="browser browser-one"
+              src={projects[0].image}
+              alt="Business website preview"
+            >
               <div className="browser-top">
                 <i />
                 <i />
                 <i />
-                <span>yourbusiness.com</span>
+
+                <span>
+                  yourbusiness.com
+                </span>
               </div>
+            </HoverScrollPreview>
 
-              <img
-                src={projects[0].image}
-                alt="Business website preview"
-              />
-            </div>
-
-            {/* Front website */}
-            <div className="browser browser-two parallax-front">
+            {/* =====================================================
+                WEBSITE 2
+                HOVER = SCREENSHOT SCROLLS
+            ===================================================== */}
+            <HoverScrollPreview
+              className="browser browser-two"
+              src={projects[15].image}
+              alt="Online store preview"
+            >
               <div className="browser-top">
                 <i />
                 <i />
                 <i />
-                <span>yourstore.com</span>
+
+                <span>
+                  yourstore.com
+                </span>
               </div>
+            </HoverScrollPreview>
 
-              <img
-                src={projects[15].image}
-                alt="Online store preview"
-              />
-            </div>
-
-            {/* WordPress badge */}
-            <span className="float-badge fb1 parallax-badge">
+            {/* WORDPRESS */}
+            <span className="float-badge fb1">
               <img
                 src={tools[0][1]}
                 alt="WordPress"
               />
+
               WordPress
             </span>
 
-            {/* GoHighLevel badge */}
-            <span className="float-badge fb2 parallax-badge">
+            {/* GOHIGHLEVEL */}
+            <span className="float-badge fb2">
               <img
                 src={tools[1][1]}
                 alt="GoHighLevel"
               />
+
               GoHighLevel
             </span>
 
-            {/* Shopify badge */}
-            <span className="float-badge fb3 parallax-badge">
+            {/* SHOPIFY */}
+            <span className="float-badge fb3">
               <img
                 src={tools[4][1]}
                 alt="Shopify"
               />
+
               Shopify
             </span>
 
-            {/* Speed badge */}
-            <span className="float-badge fb4 parallax-badge">
+            {/* SPEED BADGE */}
+            <span className="float-badge fb4">
               ⚡ Loads in &lt;2s
             </span>
 
-            {/* Sites launched */}
-            <div className="sites-stat parallax-stat">
-              <strong>40+</strong>
-              <small>Sites launched</small>
+            {/* SITES LAUNCHED */}
+            <div className="sites-stat">
+              <strong>
+                40+
+              </strong>
+
+              <small>
+                Sites launched
+              </small>
             </div>
 
-          </CursorParallax>
+          </div>
         </div>
       </section>
 
@@ -363,13 +398,16 @@ export default function Home() {
         </div>
 
         <div className="testimonial-rows">
+
           <div className="testimonial-track forward">
-            {[...testimonialsTop, ...testimonialsTop].map((testimonial, index) => (
-              <Testimonial
-                t={testimonial}
-                key={`top-${index}`}
-              />
-            ))}
+            {[...testimonialsTop, ...testimonialsTop].map(
+              (testimonial, index) => (
+                <Testimonial
+                  t={testimonial}
+                  key={`top-${index}`}
+                />
+              )
+            )}
           </div>
 
           <div className="testimonial-track backward">
@@ -382,6 +420,7 @@ export default function Home() {
               )
             )}
           </div>
+
         </div>
       </section>
 
@@ -394,7 +433,10 @@ export default function Home() {
           title="Latest articles & insights"
           copy="What I've learned building websites and automation systems — written simply, no jargon."
           action={
-            <Link className="pill-link" href="/blog">
+            <Link
+              className="pill-link"
+              href="/blog"
+            >
               View all articles
             </Link>
           }
@@ -413,27 +455,47 @@ export default function Home() {
                   alt=""
                 />
 
-                <span>{post.category}</span>
+                <span>
+                  {post.category}
+                </span>
               </div>
 
               <div className="blog-body">
+
                 <div className="blog-meta">
-                  <span>{post.date}</span>
+                  <span>
+                    {post.date}
+                  </span>
+
                   <i />
-                  <span>{post.read}</span>
+
+                  <span>
+                    {post.read}
+                  </span>
                 </div>
 
-                <h3>{post.title}</h3>
+                <h3>
+                  {post.title}
+                </h3>
 
-                <p>{post.excerpt}</p>
+                <p>
+                  {post.excerpt}
+                </p>
 
                 <div className="blog-author">
-                  <span>EO</span>
+                  <span>
+                    EO
+                  </span>
 
-                  <small>Eroll Oliver</small>
+                  <small>
+                    Eroll Oliver
+                  </small>
 
-                  <b>Read →</b>
+                  <b>
+                    Read →
+                  </b>
                 </div>
+
               </div>
             </Link>
           ))}
@@ -445,7 +507,10 @@ export default function Home() {
       ========================================================= */}
       <section className="final-cta">
         <div className="shell">
-          <p>Have a project in mind?</p>
+
+          <p>
+            Have a project in mind?
+          </p>
 
           <h2>
             Let's build something that{' '}
@@ -470,18 +535,22 @@ export default function Home() {
               WhatsApp me
             </Link>
           </div>
+
         </div>
       </section>
     </>
   );
 }
 
+
 /* =========================================================
-   TESTIMONIAL CARD
+   TESTIMONIAL
 ========================================================= */
+
 function Testimonial({ t }) {
   return (
     <div className="testimonial-card">
+
       <div className="stars">
         ★★★★★
       </div>
@@ -491,6 +560,7 @@ function Testimonial({ t }) {
       </p>
 
       <div className="testimonial-author">
+
         <span>
           {t[1]}
         </span>
@@ -504,6 +574,7 @@ function Testimonial({ t }) {
             {t[3]}
           </small>
         </div>
+
       </div>
     </div>
   );
