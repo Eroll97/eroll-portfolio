@@ -1,0 +1,494 @@
+/* =========================================================
+   EROLL OLIVER FOOTER
+   ISOLATED — DOES NOT AFFECT OTHER SECTIONS
+========================================================= */
+
+.footer {
+  position: relative;
+
+  width: 100%;
+
+  background: #000000;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.container {
+  width:
+    min(
+      1540px,
+      calc(100% - 80px)
+    );
+
+  margin: 0 auto;
+
+  padding:
+    78px 0
+    46px;
+}
+
+
+/* =========================================================
+   TOP GRID
+========================================================= */
+
+.footerGrid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(300px, 1.1fr)
+    minmax(330px, 1fr)
+    minmax(280px, 0.95fr);
+
+  align-items: start;
+
+  gap:
+    clamp(
+      70px,
+      8vw,
+      150px
+    );
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brandColumn {
+  min-width: 0;
+}
+
+
+.brand {
+  display: inline-block;
+
+  color: #ffffff;
+
+  font-family:
+    var(--display),
+    Arial,
+    sans-serif;
+
+  font-size: 37px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing:
+    -0.04em;
+
+  text-decoration: none;
+}
+
+
+.brand span {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description {
+  max-width: 390px;
+
+  margin:
+    26px 0 0;
+
+  color:
+    rgba(255, 255, 255, 0.52);
+
+  font-size: 17px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+========================================================= */
+
+.socials {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 25px;
+}
+
+
+.socialButton {
+  width: 52px;
+
+  height: 52px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex:
+    0 0 52px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.25);
+
+  border-radius: 50%;
+
+  color:
+    rgba(255, 255, 255, 0.65);
+
+  background:
+    transparent;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.socialButton svg {
+  width: 19px;
+
+  height: 19px;
+
+  display: block;
+
+  fill: currentColor;
+}
+
+
+.socialButton:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    #ffffff;
+
+  background:
+    #ffffff;
+
+  color:
+    #000000;
+}
+
+
+/* =========================================================
+   COLUMN LABEL
+========================================================= */
+
+.label {
+  margin: 0;
+
+  color:
+    rgba(255, 255, 255, 0.34);
+
+  font-size: 14px;
+
+  line-height: 1;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing:
+    0.12em;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.navigationGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(110px, 1fr)
+    );
+
+  gap: 50px;
+
+  margin-top: 27px;
+}
+
+
+.navigationGrid ul,
+.contactList {
+  margin: 0;
+
+  padding: 0;
+
+  list-style: none;
+}
+
+
+.navigationGrid li {
+  margin-bottom: 14px;
+}
+
+
+.navigationGrid a {
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  font-size: 17px;
+
+  line-height: 1.2;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.navigationGrid a:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contactList {
+  margin-top: 27px;
+}
+
+
+.contactList li {
+  margin-bottom: 10px;
+
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  font-size: 17px;
+
+  line-height: 1.25;
+}
+
+
+.contactList a {
+  color:
+    rgba(255, 255, 255, 0.58);
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.contactList a:hover {
+  color: #ffffff;
+}
+
+
+.contactList
+.underlinedLink {
+  text-decoration: underline;
+
+  text-decoration-thickness:
+    1px;
+
+  text-underline-offset:
+    4px;
+}
+
+
+/* =========================================================
+   FOOTER BOTTOM
+========================================================= */
+
+.footerBottom {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 30px;
+
+  margin-top: 78px;
+
+  padding-top: 39px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+}
+
+
+.footerBottom p {
+  margin: 0;
+
+  color:
+    rgba(255, 255, 255, 0.36);
+
+  font-size: 14px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .container {
+    width:
+      min(
+        100% - 48px,
+        1540px
+      );
+
+    padding-top:
+      65px;
+  }
+
+
+  .footerGrid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:
+      55px 70px;
+  }
+
+
+  .brandColumn {
+    grid-column:
+      1 / -1;
+  }
+
+
+  .description {
+    max-width: 500px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .container {
+    width:
+      calc(
+        100% - 32px
+      );
+
+    padding:
+      55px 0
+      30px;
+  }
+
+
+  .footerGrid {
+    grid-template-columns:
+      1fr;
+
+    gap: 48px;
+  }
+
+
+  .brandColumn {
+    grid-column: auto;
+  }
+
+
+  .brand {
+    font-size: 32px;
+  }
+
+
+  .description {
+    max-width: 100%;
+
+    font-size: 15px;
+  }
+
+
+  .navigationGrid {
+    max-width: 340px;
+
+    gap: 35px;
+  }
+
+
+  .navigationGrid a,
+  .contactList li {
+    font-size: 15px;
+  }
+
+
+  .footerBottom {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    margin-top: 55px;
+
+    padding-top: 28px;
+  }
+
+
+  .footerBottom p {
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+  .navigationGrid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 25px;
+  }
+
+
+  .socialButton {
+    width: 46px;
+
+    height: 46px;
+
+    flex-basis: 46px;
+  }
+
+
+  .socialButton svg {
+    width: 17px;
+
+    height: 17px;
+  }
+}

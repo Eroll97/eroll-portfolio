@@ -1,6 +1,83 @@
 'use client';
+
 import { useEffect, useState } from 'react';
-const words=['AI Automation Expert','WordPress Developer','GoHighLevel Expert','Funnel Builder'];
-export default function Typewriter(){ const [word,setWord]=useState(0),[text,setText]=useState(''); useEffect(()=>{ const target=words[word]; let direction=1; let i=0; let timer;
-  const tick=()=>{ i+=direction; setText(target.slice(0,i)); if(i===target.length){ direction=-1; timer=setTimeout(tick,1300); return;} if(i===0&&direction===-1){ setWord((word+1)%words.length); return;} timer=setTimeout(tick,direction===1?70:28); }; tick(); return()=>clearTimeout(timer); },[word]);
-  return <span>{text}<b className="blink">_</b></span> }
+
+const words = [
+  'Website Developer',
+  'GHL Expert',
+  'Funnel Builder',
+  'AI Automation Expert',
+];
+
+export default function Typewriter() {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = words[wordIndex];
+    let timeout;
+
+    // TYPE
+    if (!deleting && text.length < currentWord.length) {
+      timeout = setTimeout(() => {
+        setText(currentWord.slice(0, text.length + 1));
+      }, 80);
+    }
+
+    // WAIT AFTER FULL WORD
+    else if (!deleting && text.length === currentWord.length) {
+      timeout = setTimeout(() => {
+        setDeleting(true);
+      }, 1400);
+    }
+
+    // ERASE
+    else if (deleting && text.length > 0) {
+      timeout = setTimeout(() => {
+        setText(currentWord.slice(0, text.length - 1));
+      }, 40);
+    }
+
+    // NEXT WORD
+    else if (deleting && text.length === 0) {
+      timeout = setTimeout(() => {
+        setDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+      }, 200);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [text, deleting, wordIndex]);
+
+  return (
+    <span className="typewriter-text">
+      {text}
+      <span className="typewriter-cursor">_</span>
+
+      <style jsx>{`
+        .typewriter-text {
+          display: inline;
+        }
+
+        .typewriter-cursor {
+          display: inline-block;
+          margin-left: 2px;
+          animation: blinkCursor 0.8s steps(1) infinite;
+        }
+
+        @keyframes blinkCursor {
+          0%,
+          49% {
+            opacity: 1;
+          }
+
+          50%,
+          100% {
+            opacity: 0;
+          }
+        }
+      `}</style>
+    </span>
+  );
+}

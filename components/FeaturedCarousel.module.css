@@ -1,0 +1,875 @@
+/* =========================================================
+   FEATURED PROJECT CAROUSEL
+   ONLY AFFECTS THIS COMPONENT
+========================================================= */
+
+.carousel {
+  width: 100%;
+
+  overflow: hidden;
+
+  padding-bottom: 12px;
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls {
+  width:
+    min(
+      1280px,
+      calc(100% - 64px)
+    );
+
+  display: flex;
+
+  justify-content:
+    flex-end;
+
+  gap: 12px;
+
+  margin:
+    34px auto
+    0;
+}
+
+.controls button {
+  width: 48px;
+
+  height: 48px;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.24
+    );
+
+  border-radius: 50%;
+
+  background:
+    transparent;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    );
+
+  transition:
+    background
+      0.25s ease,
+    color
+      0.25s ease,
+    border-color
+      0.25s ease,
+    transform
+      0.25s ease;
+}
+
+.controls button svg {
+  width: 20px;
+
+  height: 20px;
+
+  fill: none;
+
+  stroke:
+    currentColor;
+
+  stroke-width: 2;
+
+  stroke-linecap:
+    round;
+
+  stroke-linejoin:
+    round;
+}
+
+.controls button:hover {
+  background: #fff;
+
+  border-color: #fff;
+
+  color: #000;
+
+  transform:
+    scale(1.05);
+}
+
+
+/* =========================================================
+   CAROUSEL TRACK
+========================================================= */
+
+.track {
+  display: flex;
+
+  gap: 24px;
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  padding:
+    24px 0
+    4px;
+
+  scroll-behavior:
+    smooth;
+
+  scroll-snap-type:
+    x mandatory;
+
+  scrollbar-width:
+    none;
+
+  overscroll-behavior-inline:
+    contain;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   EACH ITEM
+========================================================= */
+
+.item {
+  flex:
+    0 0
+    23.5%;
+
+  min-width:
+    290px;
+
+  scroll-snap-align:
+    start;
+
+  perspective:
+    1000px;
+}
+
+
+/* =========================================================
+   PROJECT CARD
+========================================================= */
+
+.card {
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+
+  position: relative;
+
+  display: flex;
+
+  flex-direction:
+    column;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.12
+    );
+
+  border-radius:
+    20px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.035
+    );
+
+  color: #fff;
+
+  text-decoration:
+    none;
+
+  transform:
+    perspective(900px)
+    rotateX(
+      var(--rotate-x)
+    )
+    rotateY(
+      var(--rotate-y)
+    );
+
+  transform-style:
+    preserve-3d;
+
+  transition:
+    transform
+      0.18s ease,
+    border-color
+      0.28s ease,
+    background
+      0.28s ease,
+    box-shadow
+      0.28s ease;
+}
+
+.card:hover {
+  border-color:
+    rgba(
+      255,
+      255,
+      255,
+      0.34
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.055
+    );
+
+  box-shadow:
+    0 24px 60px
+    rgba(
+      0,
+      0,
+      0,
+      0.35
+    );
+}
+
+
+/* =========================================================
+   WEBSITE SCREENSHOT
+========================================================= */
+
+.imageWindow {
+  position: relative;
+
+  width: 100%;
+
+  height: 300px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: #fff;
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.1
+    );
+}
+
+.imageWindow img {
+  position: absolute;
+
+  left: 0;
+
+  top: 0;
+
+  display: block;
+
+  width: 100%;
+
+  max-width: none;
+
+  height: auto;
+
+  min-height: 100%;
+
+  object-fit: cover;
+
+  object-position:
+    top center;
+
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+
+  transition:
+    transform
+      7s
+      cubic-bezier(
+        0.2,
+        0.65,
+        0.2,
+        1
+      );
+
+  will-change:
+    transform;
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   HOVER CARD = WEBSITE SCROLLS DOWN
+========================================================= */
+
+.card:hover
+.imageWindow img {
+  transform:
+    translate3d(
+      0,
+      calc(
+        -100% + 300px
+      ),
+      0
+    );
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+========================================================= */
+
+.imageFade {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(
+        0,
+        0,
+        0,
+        0.2
+      ),
+      transparent
+    );
+
+  transition:
+    opacity
+      0.3s ease;
+}
+
+.card:hover
+.imageFade {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   IMAGE BADGES
+========================================================= */
+
+.platform,
+.category {
+  position: absolute;
+
+  top: 12px;
+
+  z-index: 4;
+
+  padding:
+    7px 14px;
+
+  border-radius:
+    999px;
+
+  font-size: 10px;
+
+  line-height: 1;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.12em;
+
+  backdrop-filter:
+    blur(10px);
+}
+
+.platform {
+  left: 12px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.94
+    );
+
+  color: #000;
+
+  font-weight: 700;
+}
+
+.category {
+  right: 12px;
+
+  background:
+    rgba(
+      10,
+      10,
+      10,
+      0.78
+    );
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.content {
+  display: flex;
+
+  flex: 1;
+
+  flex-direction:
+    column;
+
+  min-height: 280px;
+}
+
+.heading {
+  display: flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    space-between;
+
+  gap: 18px;
+
+  padding:
+    22px 22px
+    16px;
+}
+
+.heading h3 {
+  margin: 0;
+
+  color: #fff;
+
+  font-family:
+    var(--display);
+
+  font-size: 19px;
+
+  line-height: 1.25;
+
+  font-weight: 600;
+}
+
+.heading p {
+  margin:
+    8px 0 0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.48
+    );
+
+  font-size: 14px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   ROUND ARROW
+========================================================= */
+
+.arrow {
+  width: 40px;
+
+  height: 40px;
+
+  flex:
+    0 0
+    40px;
+
+  display: grid;
+
+  place-items: center;
+
+  margin-top: 1px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.2
+    );
+
+  border-radius: 50%;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.65
+    );
+
+  transition:
+    transform
+      0.3s ease,
+    background
+      0.3s ease,
+    color
+      0.3s ease,
+    border-color
+      0.3s ease;
+}
+
+.card:hover
+.arrow {
+  transform:
+    rotate(45deg);
+
+  background: #fff;
+
+  border-color: #fff;
+
+  color: #000;
+}
+
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  padding:
+    0 22px
+    18px;
+}
+
+.tags span {
+  padding:
+    6px 12px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.15
+    );
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.025
+    );
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.58
+    );
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   VIEW PROJECT BUTTON
+========================================================= */
+
+.view {
+  margin-top: auto;
+
+  padding:
+    0 22px
+    22px;
+}
+
+.view > span {
+  min-height: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  padding:
+    0 20px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.2
+    );
+
+  border-radius:
+    999px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+  font-size: 11px;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.13em;
+
+  transition:
+    background
+      0.3s ease,
+    color
+      0.3s ease,
+    border-color
+      0.3s ease;
+}
+
+.view b {
+  font-size: 15px;
+
+  font-weight: 400;
+
+  transition:
+    transform
+      0.3s ease;
+}
+
+.card:hover
+.view > span {
+  background: #fff;
+
+  border-color: #fff;
+
+  color: #000;
+}
+
+.card:hover
+.view b {
+  transform:
+    rotate(45deg);
+}
+
+
+/* =========================================================
+   CAROUSEL DOTS
+========================================================= */
+
+.dots {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    center;
+
+  gap: 9px;
+
+  margin-top: 30px;
+}
+
+.dots button {
+  width: 9px;
+
+  height: 9px;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius:
+    999px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.24
+    );
+
+  transition:
+    width
+      0.3s ease,
+    background
+      0.3s ease;
+}
+
+.dots button:hover {
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.55
+    );
+}
+
+.dots
+.activeDot {
+  width: 38px;
+
+  background: #fff;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (
+  max-width: 1000px
+) {
+  .item {
+    flex-basis:
+      46%;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+  max-width: 680px
+) {
+  .controls {
+    width:
+      calc(
+        100% - 32px
+      );
+
+    margin-top:
+      26px;
+  }
+
+  .controls button {
+    width: 42px;
+
+    height: 42px;
+  }
+
+  .track {
+    gap: 16px;
+
+    padding-top:
+      18px;
+  }
+
+  .item {
+    flex-basis:
+      85%;
+
+    min-width:
+      280px;
+  }
+
+  .imageWindow {
+    height: 260px;
+  }
+
+  .card:hover
+  .imageWindow img {
+    transform:
+      translate3d(
+        0,
+        calc(
+          -100% + 260px
+        ),
+        0
+      );
+  }
+
+  .heading {
+    padding:
+      18px 18px
+      14px;
+  }
+
+  .tags {
+    padding:
+      0 18px
+      16px;
+  }
+
+  .view {
+    padding:
+      0 18px
+      18px;
+  }
+
+  .content {
+    min-height:
+      260px;
+  }
+}

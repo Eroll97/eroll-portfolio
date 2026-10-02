@@ -17,6 +17,7 @@ import CursorFollowName from '../components/CursorFollowName';
 import ServiceCard from '../components/ServiceCard';
 import FeaturedCarousel from '../components/FeaturedCarousel';
 import HoverScrollPreview from '../components/HoverScrollPreview';
+import Typewriter from '../components/Typewriter';
 
 export default function Home() {
   const getToolIcon = (toolName) => {
@@ -88,7 +89,7 @@ export default function Home() {
             <div className="hero-copy">
 
               <p className="typewriter">
-                AI Automation Expert
+              <Typewriter />
               </p>
 
               <p className="hero-desc">
@@ -128,12 +129,12 @@ export default function Home() {
               </div>
 
               <div>
-                <strong>40+</strong>
+                <strong>800+</strong>
                 <span>Websites launched</span>
               </div>
 
               <div>
-                <strong>4</strong>
+                <strong>55</strong>
                 <span>Companies worked with</span>
               </div>
 
@@ -550,7 +551,7 @@ export default function Home() {
             <div className="launch-sites-stat">
 
               <strong>
-                40+
+                800+
               </strong>
 
               <small>

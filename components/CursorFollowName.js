@@ -1,17 +1,23 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function CursorFollowName() {
   const titleRef = useRef(null);
   const frameRef = useRef(null);
 
+  useEffect(() => {
+    return () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, []);
+
   const handlePointerMove = (event) => {
     const title = titleRef.current;
 
-    if (!title) {
-      return;
-    }
+    if (!title) return;
 
     const rect = title.getBoundingClientRect();
 
@@ -21,7 +27,9 @@ export default function CursorFollowName() {
     const y =
       ((event.clientY - rect.top) / rect.height - 0.5) * 2;
 
-    cancelAnimationFrame(frameRef.current);
+    if (frameRef.current) {
+      cancelAnimationFrame(frameRef.current);
+    }
 
     frameRef.current = requestAnimationFrame(() => {
       title.style.setProperty(
@@ -54,11 +62,11 @@ export default function CursorFollowName() {
   const resetPosition = () => {
     const title = titleRef.current;
 
-    if (!title) {
-      return;
-    }
+    if (!title) return;
 
-    cancelAnimationFrame(frameRef.current);
+    if (frameRef.current) {
+      cancelAnimationFrame(frameRef.current);
+    }
 
     title.style.setProperty('--eroll-x', '0px');
     title.style.setProperty('--eroll-y', '0px');
@@ -76,7 +84,6 @@ export default function CursorFollowName() {
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPosition}
     >
-
       <span className="cursor-name-eroll">
         EROLL
       </span>
@@ -84,7 +91,6 @@ export default function CursorFollowName() {
       <span className="outline cursor-name-oliver">
         OLIVER
       </span>
-
     </h1>
   );
 }

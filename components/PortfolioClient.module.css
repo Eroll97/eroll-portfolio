@@ -1,0 +1,825 @@
+/* =========================================================
+   PORTFOLIO CLIENT
+   SMOOTH 3D TILT - NO SHAKE
+========================================================= */
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  align-items: start;
+  gap: 38px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+  position: sticky;
+  top: 110px;
+}
+
+
+/* =========================================================
+   FILTER BOXES
+========================================================= */
+
+.filterBox,
+.platformBox {
+  overflow: hidden;
+
+  padding: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.platformBox {
+  margin-top: 16px;
+}
+
+.filterTitle {
+  margin: 4px 7px 15px;
+
+  color: rgba(255, 255, 255, 0.42);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+
+/* =========================================================
+   CATEGORY BUTTONS
+========================================================= */
+
+.filterBox button {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) auto;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 11px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.58);
+
+  font-size: 13px;
+  text-align: left;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.filterBox button:hover {
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.categoryIcon {
+  color: rgba(255, 255, 255, 0.42);
+
+  font-size: 12px;
+}
+
+.filterBox button b {
+  min-width: 26px;
+
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.055);
+
+  color: rgba(255, 255, 255, 0.45);
+
+  font-size: 10px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+.filterBox .activeCategory {
+  background: #ffffff;
+
+  color: #000000;
+
+  font-weight: 600;
+}
+
+.filterBox .activeCategory .categoryIcon {
+  color: #000000;
+}
+
+.filterBox .activeCategory b {
+  background: #000000;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   PLATFORM FILTER
+========================================================= */
+
+.platformList {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 8px;
+}
+
+.platformList button {
+  padding: 8px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  border-radius: 999px;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.52);
+
+  font-size: 11px;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.platformList button:hover {
+  border-color: rgba(255, 255, 255, 0.42);
+
+  color: #ffffff;
+}
+
+.platformList .activePlatform {
+  border-color: #ffffff;
+
+  background: #ffffff;
+
+  color: #000000;
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.results {
+  min-width: 0;
+}
+
+.showing {
+  margin: 0 0 20px;
+
+  color: rgba(255, 255, 255, 0.44);
+
+  font-size: 13px;
+}
+
+.showing strong {
+  color: #ffffff;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   PROJECT GRID
+========================================================= */
+
+.projectGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 28px 24px;
+}
+
+
+/* =========================================================
+   PROJECT ITEM
+   THIS GIVES THE CARD 3D DEPTH
+========================================================= */
+
+.projectItem {
+  min-width: 0;
+
+  perspective: 1200px;
+}
+
+
+/* =========================================================
+   PROJECT CARD
+========================================================= */
+
+.projectCard {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.022);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  transform:
+    perspective(1200px)
+    rotateX(0deg)
+    rotateY(0deg)
+    translate3d(0, 0, 0)
+    scale(1);
+
+  transform-style: preserve-3d;
+
+  transform-origin: center center;
+
+  will-change: transform;
+
+  /*
+     THIS IS WHAT MAKES IT SMOOTH
+  */
+
+  transition:
+    transform 0.55s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease,
+    background 0.4s ease,
+    box-shadow 0.55s
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   SMOOTH 3D TILT
+   NO SHAKE
+   NO KEYFRAMES
+========================================================= */
+
+.projectCard:hover {
+  transform:
+    perspective(1200px)
+    rotateX(2deg)
+    rotateY(-3deg)
+    translate3d(0, -7px, 0)
+    scale(1.012);
+
+  border-color: rgba(255, 255, 255, 0.27);
+
+  background: rgba(255, 255, 255, 0.042);
+
+  box-shadow:
+    18px 28px 65px
+    rgba(0, 0, 0, 0.36);
+}
+
+
+/* =========================================================
+   WEBSITE SCREENSHOT
+========================================================= */
+
+.projectShot {
+  position: relative;
+
+  height: 280px;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+  background: #ffffff;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+}
+
+.projectShot img {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  display: block;
+
+  width: 100%;
+  max-width: none;
+
+  height: auto;
+  min-height: 100%;
+
+  object-fit: cover;
+  object-position: top center;
+
+  transform: translate3d(0, 0, 0);
+
+  transition:
+    transform 7s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+
+  will-change: transform;
+}
+
+
+/* =========================================================
+   HOVER = WEBSITE IMAGE SCROLL
+========================================================= */
+
+.projectCard:hover .projectShot img {
+  transform:
+    translate3d(
+      0,
+      calc(-100% + 280px),
+      0
+    );
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+========================================================= */
+
+.projectFade {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.18),
+      transparent
+    );
+
+  transition:
+    opacity 0.4s ease;
+}
+
+.projectCard:hover .projectFade {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.platformBadge,
+.categoryBadge {
+  position: absolute;
+
+  z-index: 5;
+
+  top: 12px;
+
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  backdrop-filter: blur(8px);
+}
+
+.platformBadge {
+  left: 12px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  color: #000000;
+}
+
+.categoryBadge {
+  right: 12px;
+
+  background: rgba(0, 0, 0, 0.74);
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   PROJECT CONTENT
+========================================================= */
+
+.projectContent {
+  display: flex;
+
+  flex: 1;
+
+  flex-direction: column;
+}
+
+.projectHeading {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  padding: 24px 22px 18px;
+}
+
+.projectHeading > div {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   PROJECT TITLE
+========================================================= */
+
+.projectHeading h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 22px;
+
+  line-height: 1.25;
+
+  font-weight: 650;
+
+  letter-spacing: -0.02em;
+}
+
+
+/* =========================================================
+   PROJECT DESCRIPTION
+========================================================= */
+
+.projectHeading p {
+  margin: 10px 0 0;
+
+  color: rgba(255, 255, 255, 0.54);
+
+  font-size: 15px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   ROUND ARROW
+========================================================= */
+
+.projectArrow {
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  border-radius: 50%;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 17px;
+
+  transition:
+    transform 0.45s
+      cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.projectCard:hover .projectArrow {
+  transform: rotate(45deg);
+
+  border-color: #ffffff;
+
+  background: #ffffff;
+
+  color: #000000;
+}
+
+
+/* =========================================================
+   TAGS
+========================================================= */
+
+.tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  padding: 0 22px 18px;
+}
+
+.tags span {
+  padding: 6px 11px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color:
+    rgba(255, 255, 255, 0.56);
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   VIEW PROJECT
+========================================================= */
+
+.projectButton {
+  margin-top: auto;
+
+  padding: 0 22px 22px;
+}
+
+.projectButton > span {
+  min-height: 46px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0 18px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.16);
+
+  border-radius: 999px;
+
+  color:
+    rgba(255, 255, 255, 0.7);
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.11em;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.projectButton b {
+  font-size: 16px;
+
+  font-weight: 400;
+
+  transition:
+    transform 0.45s
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.projectCard:hover .projectButton > span {
+  border-color: #ffffff;
+
+  background: #ffffff;
+
+  color: #000000;
+}
+
+.projectCard:hover .projectButton b {
+  transform: rotate(45deg);
+}
+
+
+/* =========================================================
+   MOBILE FILTERS
+========================================================= */
+
+.mobileFilters {
+  display: none;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+}
+
+.mobileFilters select {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 13px 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.12);
+
+  border-radius: 9px;
+
+  background: #0d0d0d;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  outline: none;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty {
+  padding: 70px 20px;
+
+  text-align: center;
+
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.empty h3 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 24px;
+}
+
+.empty p {
+  margin: 10px 0 0;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+  .layout {
+    grid-template-columns:
+      200px
+      minmax(0, 1fr);
+
+    gap: 24px;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .projectShot {
+    height: 320px;
+  }
+
+  .projectCard:hover .projectShot img {
+    transform:
+      translate3d(
+        0,
+        calc(-100% + 320px),
+        0
+      );
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+  .layout {
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .mobileFilters {
+    display: flex;
+  }
+
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+
+  /*
+     NO TILT ON MOBILE
+     because mobile has no mouse hover
+  */
+
+  .projectCard,
+  .projectCard:hover {
+    transform: none;
+  }
+
+  .projectShot {
+    height: 275px;
+  }
+
+  .projectCard:hover .projectShot img {
+    transform:
+      translate3d(
+        0,
+        calc(-100% + 275px),
+        0
+      );
+  }
+
+  .projectHeading h2 {
+    font-size: 20px;
+  }
+
+  .projectHeading p {
+    font-size: 14px;
+  }
+
+  .tags span {
+    font-size: 10px;
+  }
+
+  .projectButton > span {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .projectCard,
+  .projectCard:hover {
+    transform: none;
+
+    transition: none;
+  }
+
+  .projectShot img {
+    transition: none;
+  }
+
+  .projectCard:hover .projectShot img {
+    transform: none;
+  }
+}

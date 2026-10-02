@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import VisualEffects from '../components/VisualEffects';
 import AssistantBubble from '../components/AssistantBubble';
+import CustomCursor from '../components/CustomCursor';
 
 export const metadata = {
   title: 'EROLL OLIVER — WordPress Developer & GHL Expert',
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <VisualEffects />
+        <CustomCursor />
         <Header />
         <main>{children}</main>
         <Footer />

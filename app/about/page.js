@@ -1628,7 +1628,7 @@ export default function About() {
 
                   <div className="stat-box">
                     <strong>
-                      500+
+                      800+
                     </strong>
 
                     <span>
@@ -1641,7 +1641,7 @@ export default function About() {
 
                   <div className="stat-box">
                     <strong>
-                      4
+                      55
                     </strong>
 
                     <span>
@@ -1897,13 +1897,13 @@ export default function About() {
                   {/* DOWNLOAD CV */}
 
                   <a
-                    href="/cv.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="download-cv"
-                  >
-                    Download CV
-                  </a>
+  href="/Eroll-Oliver-CV.pdf"
+  download="Eroll-Oliver-CV.pdf"
+  className="download-cv"
+  aria-label="Download Eroll Oliver CV"
+>
+  Download CV
+</a>  
 
                 </div>
 
@@ -2348,7 +2348,7 @@ export default function About() {
                       <div className="timeline-title-info">
 
                         <h3>
-                          500+ Websites Launched
+                          800+ Websites Launched
                         </h3>
 
                       </div>

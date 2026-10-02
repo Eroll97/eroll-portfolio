@@ -100,8 +100,8 @@ export default function Header() {
 
         <a
           className="hire-btn"
-          href="/Eroll-CV.pdf"
-          download="Eroll-CV.pdf"
+          href="/Eroll-Oliver-CV.pdf"
+          download="Eroll-Oliver-CV.pdf"
           aria-label="Download Eroll Oliver CV"
         >
           Hire Me
@@ -154,8 +154,8 @@ export default function Header() {
 
         <a
           className="mobile-hire-btn"
-          href="/Eroll-CV.pdf"
-          download="Eroll-CV.pdf"
+          href="/Eroll-Oliver-CV.pdf"
+          download="Eroll-Oliver-CV.pdf"
           aria-label="Download Eroll Oliver CV"
         >
           Hire Me

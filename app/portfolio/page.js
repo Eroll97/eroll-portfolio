@@ -8,23 +8,27 @@ export const metadata = {
 
 export default function Portfolio() {
   return (
-    <main className={`${styles.portfolioPage} page-wrap shell`}>
-      <div className={styles.pageHeading}>
-        <p className="eyebrow">
-          <span />
-          Portfolio
-        </p>
+    <main className={styles.portfolioPage}>
+      <div className={styles.container}>
+        <div className={styles.pageHeading}>
+          <p className={styles.eyebrow}>
+            <span />
+            Portfolio
+          </p>
 
-        <h1>Websites I&apos;ve built &amp; launched</h1>
+          <h1>
+            Websites I&apos;ve built &amp; launched
+          </h1>
 
-        <p>
-          Every project below is a real, live website from the reference data.
-          Hover any card to scroll through the full page — click to visit the
-          live site.
-        </p>
+          <p>
+            Every project below is a real, live website I&apos;ve worked on.
+            Hover any card to scroll through the page — click to visit the
+            live website.
+          </p>
+        </div>
+
+        <PortfolioClient projects={projects} />
       </div>
-
-      <PortfolioClient projects={projects} />
     </main>
   );
 }
