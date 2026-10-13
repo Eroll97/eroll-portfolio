@@ -1,4 +1,5 @@
-import Link from 'next/link';
+
+import Link from "next/link";
 
 import {
   services,
@@ -8,54 +9,67 @@ import {
   testimonialsTop,
   testimonialsBottom,
   posts,
-} from '../lib/data';
+} from "../lib/data";
 
-import SectionHeading from '../components/SectionHeading';
-import Marquee from '../components/Marquee';
-import VantaHero from '../components/VantaHero';
-import CursorFollowName from '../components/CursorFollowName';
-import ServiceCard from '../components/ServiceCard';
-import FeaturedCarousel from '../components/FeaturedCarousel';
-import HoverScrollPreview from '../components/HoverScrollPreview';
-import Typewriter from '../components/Typewriter';
+// COMPONENTS
+import BrandCarousel from "../components/BrandCarousel";
+import PastProjects from "../components/PastProjects";
+import SectionHeading from "../components/SectionHeading";
+import Marquee from "../components/Marquee";
+import VantaHero from "../components/VantaHero";
+import CursorFollowName from "../components/CursorFollowName";
+import ServiceCard from "../components/ServiceCard";
+import FeaturedCarousel from "../components/FeaturedCarousel";
+import HoverScrollPreview from "../components/HoverScrollPreview";
+import Typewriter from "../components/Typewriter";
+
+/* =========================================================
+   EROLL OLIVER — COMPLETE HOMEPAGE
+========================================================= */
 
 export default function Home() {
+
   const getToolIcon = (toolName) => {
     const tool = tools.find(
-      ([name]) => name.toLowerCase() === toolName.toLowerCase()
+      ([name]) =>
+        name.toLowerCase() === toolName.toLowerCase()
     );
 
-    return tool?.[1] || '';
+    return tool?.[1] || "";
   };
 
-  const wordpressIcon = getToolIcon('WordPress');
-  const ghlIcon = getToolIcon('GoHighLevel');
-  const shopifyIcon = getToolIcon('Shopify');
+  const wordpressIcon = getToolIcon("WordPress");
+  const ghlIcon = getToolIcon("GoHighLevel");
+  const shopifyIcon = getToolIcon("Shopify");
 
   const firstLaunchImage =
-    projects?.[0]?.image || '';
+    projects?.[0]?.image || "";
 
   const secondLaunchImage =
     projects?.[15]?.image ||
     projects?.[1]?.image ||
     projects?.[0]?.image ||
-    '';
+    "";
 
   return (
     <>
-      {/* =========================================================
-          HERO
-      ========================================================= */}
+
+      {/* ============================================
+          HERO SECTION
+      ============================================ */}
 
       <VantaHero>
 
         {/* DARK OVERLAY */}
+
         <div className="hero-vanta-overlay" />
 
-        {/* GRID */}
+        {/* BACKGROUND GRID */}
+
         <div className="hero-grid-bg" />
 
         {/* DECORATIVE ELEMENTS */}
+
         <div className="hero-glow hero-glow-a" />
         <div className="hero-glow hero-glow-b" />
 
@@ -68,10 +82,7 @@ export default function Home() {
         <div className="hero-dot dot-a" />
         <div className="hero-dot dot-b" />
 
-
-        {/* =====================================================
-            HERO CONTENT
-        ===================================================== */}
+        {/* HERO CONTENT */}
 
         <div className="shell hero-inner">
 
@@ -84,18 +95,20 @@ export default function Home() {
 
           <div className="hero-bottom">
 
-            {/* LEFT SIDE */}
+            {/* LEFT CONTENT */}
 
             <div className="hero-copy">
 
               <p className="typewriter">
-              <Typewriter />
+                <Typewriter />
               </p>
 
               <p className="hero-desc">
-                I build fast, responsive websites and intelligent automation
-                workflows — including AI agent-powered systems — that help
-                businesses convert more leads and save time.
+                I build fast, responsive websites and
+                intelligent automation workflows —
+                including AI agent-powered systems —
+                that help businesses convert more
+                leads and save time.
               </p>
 
               <div className="hero-actions">
@@ -118,8 +131,7 @@ export default function Home() {
 
             </div>
 
-
-            {/* RIGHT STATS */}
+            {/* HERO STATISTICS */}
 
             <div className="hero-stats">
 
@@ -144,7 +156,6 @@ export default function Home() {
 
         </div>
 
-
         {/* SCROLL INDICATOR */}
 
         <div className="scroll-cue">
@@ -156,27 +167,37 @@ export default function Home() {
       </VantaHero>
 
 
-      {/* =========================================================
+      {/* ============================================
           TOP MARQUEE
-      ========================================================= */}
+      ============================================ */}
 
       <Marquee
         items={[
-          'WordPress',
-          'Go HighLevel',
-          'Funnel Building',
-          'AI Agents',
-          'CRM Automation',
-          'Shopify',
-          'Lead Generation',
-          'Speed Optimization',
+          "WordPress",
+          "Go HighLevel",
+          "Funnel Building",
+          "AI Agents",
+          "CRM Automation",
+          "Shopify",
+          "Lead Generation",
+          "Speed Optimization",
         ]}
       />
 
 
-      {/* =========================================================
-          SERVICES
-      ========================================================= */}
+      {/* ============================================
+          BRAND CAROUSEL
+
+          Two rows of scrolling brand logos
+          Black, charcoal, gray and white theme
+      ============================================ */}
+
+      <BrandCarousel />
+
+
+      {/* ============================================
+          SERVICES SECTION
+      ============================================ */}
 
       <section className="section shell">
 
@@ -189,10 +210,12 @@ export default function Home() {
         <div className="service-grid">
 
           {services.map((service) => (
+
             <ServiceCard
               key={service.number}
               service={service}
             />
+
           ))}
 
         </div>
@@ -200,9 +223,9 @@ export default function Home() {
       </section>
 
 
-      {/* =========================================================
-          FEATURED WORK
-      ========================================================= */}
+      {/* ============================================
+          FEATURED WORK SECTION
+      ============================================ */}
 
       <section className="section section-soft featured-section">
 
@@ -229,35 +252,54 @@ export default function Home() {
       </section>
 
 
-      {/* =========================================================
+      {/* ============================================
+          NEW — PAST PROJECTS SHOWCASE
+
+          Automation Projects
+          Chat Agents
+          Voice Agents
+          GoHighLevel Websites / Funnels
+
+          Includes interactive project galleries,
+          image preview dialogs, and website links.
+      ============================================ */}
+
+      <PastProjects />
+
+
+      {/* ============================================
           CROSSED MARQUEES
-      ========================================================= */}
+      ============================================ */}
 
       <div className="crossed-marquees">
+
+        {/* WHITE MARQUEE */}
 
         <div className="cross white">
 
           <Marquee
             items={[
-              'PASSIONATE',
-              'INNOVATIVE',
-              'CREATIVE',
-              'DEDICATED',
-              'RELIABLE',
+              "PASSIONATE",
+              "INNOVATIVE",
+              "CREATIVE",
+              "DEDICATED",
+              "RELIABLE",
             ]}
           />
 
         </div>
 
+        {/* DARK MARQUEE */}
+
         <div className="cross black">
 
           <Marquee
             items={[
-              'PASSIONATE',
-              'INNOVATIVE',
-              'CREATIVE',
-              'DEDICATED',
-              'RELIABLE',
+              "PASSIONATE",
+              "INNOVATIVE",
+              "CREATIVE",
+              "DEDICATED",
+              "RELIABLE",
             ]}
             dark
             reverse
@@ -268,9 +310,9 @@ export default function Home() {
       </div>
 
 
-      {/* =========================================================
-          SKILLS & TOOLS
-      ========================================================= */}
+      {/* ============================================
+          SKILLS AND TOOLS
+      ============================================ */}
 
       <section className="section shell">
 
@@ -292,16 +334,16 @@ export default function Home() {
               <span />
 
               <div>
+
                 <img
                   src={img}
                   alt={`${name} logo`}
                   loading="lazy"
                 />
+
               </div>
 
-              <p>
-                {name}
-              </p>
+              <p>{name}</p>
 
             </div>
 
@@ -312,9 +354,9 @@ export default function Home() {
       </section>
 
 
-      {/* =========================================================
-          EXPERIENCE
-      ========================================================= */}
+      {/* ============================================
+          EXPERIENCE SECTION
+      ============================================ */}
 
       <section className="section shell experience-section">
 
@@ -339,19 +381,13 @@ export default function Home() {
                   alt={`${item.company} logo`}
                 />
 
-                <h3>
-                  {item.company}
-                </h3>
+                <h3>{item.company}</h3>
 
               </div>
 
-              <p>
-                {item.title}
-              </p>
+              <p>{item.title}</p>
 
-              <span>
-                {item.period}
-              </span>
+              <span>{item.period}</span>
 
             </div>
 
@@ -362,9 +398,9 @@ export default function Home() {
       </section>
 
 
-      {/* =========================================================
+      {/* ============================================
           LAUNCH WEBSITE SECTION
-      ========================================================= */}
+      ============================================ */}
 
       <section className="launch-section shell">
 
@@ -380,13 +416,16 @@ export default function Home() {
             </p>
 
             <h2>
-              Launch your website or online business with confidence
+              Launch your website or online
+              business with confidence
             </h2>
 
             <p>
-              Have an idea? Looking to sell services or products? Whether
-              it's a portfolio, business site, funnel or eCommerce store —
-              I help turn your vision into a fully functional website with
+              Have an idea? Looking to sell services
+              or products? Whether it's a portfolio,
+              business site, funnel or eCommerce
+              store — I help turn your vision into
+              a fully functional website with
               automation behind it.
             </p>
 
@@ -405,13 +444,15 @@ export default function Home() {
           <div className="launch-visual">
 
             <div className="launch-grid" />
+
             <div className="launch-visual-glow" />
 
             <div className="launch-spin-circle" />
+
             <div className="launch-small-circle" />
 
 
-            {/* BACK WEBSITE */}
+            {/* BACK WEBSITE PREVIEW */}
 
             <HoverScrollPreview
               className="launch-browser browser-one"
@@ -436,7 +477,7 @@ export default function Home() {
             </HoverScrollPreview>
 
 
-            {/* FRONT WEBSITE */}
+            {/* FRONT WEBSITE PREVIEW */}
 
             <HoverScrollPreview
               className="launch-browser browser-two"
@@ -461,7 +502,7 @@ export default function Home() {
             </HoverScrollPreview>
 
 
-            {/* WORDPRESS */}
+            {/* WORDPRESS BADGE */}
 
             <div className="launch-floating-badge launch-badge-wordpress">
 
@@ -481,7 +522,7 @@ export default function Home() {
             </div>
 
 
-            {/* GHL */}
+            {/* GOHIGHLEVEL BADGE */}
 
             <div className="launch-floating-badge launch-badge-ghl">
 
@@ -501,7 +542,7 @@ export default function Home() {
             </div>
 
 
-            {/* SHOPIFY */}
+            {/* SHOPIFY BADGE */}
 
             <div className="launch-floating-badge launch-badge-shopify">
 
@@ -521,7 +562,7 @@ export default function Home() {
             </div>
 
 
-            {/* SPEED */}
+            {/* SPEED BADGE */}
 
             <div className="launch-floating-badge launch-badge-speed">
 
@@ -546,7 +587,7 @@ export default function Home() {
             </div>
 
 
-            {/* SITES LAUNCHED */}
+            {/* WEBSITES LAUNCHED STAT */}
 
             <div className="launch-sites-stat">
 
@@ -567,9 +608,9 @@ export default function Home() {
       </section>
 
 
-      {/* =========================================================
-          TESTIMONIALS
-      ========================================================= */}
+      {/* ============================================
+          TESTIMONIALS SECTION
+      ============================================ */}
 
       <section className="section section-soft testimonials">
 
@@ -583,37 +624,42 @@ export default function Home() {
 
         </div>
 
-
         <div className="testimonial-rows">
+
+          {/* FIRST TESTIMONIAL ROW */}
 
           <div className="testimonial-track forward">
 
-            {[...testimonialsTop, ...testimonialsTop].map(
-              (testimonial, index) => (
+            {[
+              ...testimonialsTop,
+              ...testimonialsTop,
+            ].map((testimonial, index) => (
 
-                <Testimonial
-                  t={testimonial}
-                  key={`top-${index}`}
-                />
+              <Testimonial
+                t={testimonial}
+                key={`top-${index}`}
+              />
 
-              )
-            )}
+            ))}
 
           </div>
 
 
+          {/* SECOND TESTIMONIAL ROW */}
+
           <div className="testimonial-track backward">
 
-            {[...testimonialsBottom, ...testimonialsBottom].map(
-              (testimonial, index) => (
+            {[
+              ...testimonialsBottom,
+              ...testimonialsBottom,
+            ].map((testimonial, index) => (
 
-                <Testimonial
-                  t={testimonial}
-                  key={`bottom-${index}`}
-                />
+              <Testimonial
+                t={testimonial}
+                key={`bottom-${index}`}
+              />
 
-              )
-            )}
+            ))}
 
           </div>
 
@@ -622,9 +668,9 @@ export default function Home() {
       </section>
 
 
-      {/* =========================================================
-          BLOG
-      ========================================================= */}
+      {/* ============================================
+          BLOG SECTION
+      ============================================ */}
 
       <section className="section shell">
 
@@ -642,7 +688,6 @@ export default function Home() {
           }
         />
 
-
         <div className="blog-grid">
 
           {posts.map((post) => (
@@ -652,6 +697,8 @@ export default function Home() {
               href={`/blog/${post.slug}`}
               key={post.slug}
             >
+
+              {/* BLOG IMAGE */}
 
               <div className="blog-image">
 
@@ -668,35 +715,30 @@ export default function Home() {
               </div>
 
 
+              {/* BLOG CONTENT */}
+
               <div className="blog-body">
 
                 <div className="blog-meta">
 
-                  <span>
-                    {post.date}
-                  </span>
+                  <span>{post.date}</span>
 
                   <i />
 
-                  <span>
-                    {post.read}
-                  </span>
+                  <span>{post.read}</span>
 
                 </div>
 
-                <h3>
-                  {post.title}
-                </h3>
+                <h3>{post.title}</h3>
 
-                <p>
-                  {post.excerpt}
-                </p>
+                <p>{post.excerpt}</p>
+
+
+                {/* BLOG AUTHOR */}
 
                 <div className="blog-author">
 
-                  <span>
-                    EO
-                  </span>
+                  <span>EO</span>
 
                   <small>
                     Eroll Oliver
@@ -719,9 +761,9 @@ export default function Home() {
       </section>
 
 
-      {/* =========================================================
-          FINAL CTA
-      ========================================================= */}
+      {/* ============================================
+          FINAL CALL TO ACTION
+      ============================================ */}
 
       <section className="final-cta">
 
@@ -732,10 +774,12 @@ export default function Home() {
           </p>
 
           <h2>
-            Let's build something that{' '}
+            Let's build something that{" "}
+
             <span className="outline">
               converts
             </span>
+
             .
           </h2>
 
@@ -767,7 +811,7 @@ export default function Home() {
 
 
 /* =========================================================
-   TESTIMONIAL
+   TESTIMONIAL COMPONENT
 ========================================================= */
 
 function Testimonial({ t }) {

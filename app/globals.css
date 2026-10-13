@@ -3559,3 +3559,77 @@ small {
   }
 
 }
+
+
+/* ==========================================
+   EROLL OLIVER PORTFOLIO
+   ORIGINAL COLORS + WHITE HEADINGS
+========================================== */
+
+/* ==========================================
+   1. TRUSTED BY INDUSTRY LEADERS
+   Make entire heading white
+========================================== */
+
+.eo-brands-heading h2,
+.eo-brands-heading h2 span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Show original logo colors at all times */
+
+.eo-brands-logo-card img,
+.eo-brands-logo-card:hover img {
+  filter: none !important;
+  -webkit-filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Keep logo card background consistent */
+
+.eo-brands-logo-card,
+.eo-brands-logo-card:hover {
+  background: #ededed !important;
+}
+
+/* ==========================================
+   2. PAST PROJECTS
+   Make entire heading white
+========================================== */
+
+.eoPP-heading h2,
+.eoPP-heading h2 span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+/* Original colors for project card images */
+
+.eoPP-cardImage > img,
+.eoPP-card:hover .eoPP-cardImage > img {
+  filter: none !important;
+  -webkit-filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Original colors for gallery images */
+
+.eoPP-itemImage > img,
+.eoPP-itemImage:hover > img,
+.eoPP-lightboxBody > img {
+  filter: none !important;
+  -webkit-filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Remove image color transitions */
+
+.eo-brands-logo-card img,
+.eoPP-cardImage > img,
+.eoPP-itemImage > img {
+  transition: none !important;
+}
