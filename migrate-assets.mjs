@@ -1,4 +1,3 @@
-
 import fs from "node:fs/promises";
 import path from "node:path";
 
@@ -7,7 +6,7 @@ const dataFile = path.join(process.cwd(), "lib", "data.js");
 const source = await fs.readFile(dataFile, "utf8");
 
 const pattern =
-  /https\\?:\/\/shaheer-portfolio-theta\.vercel\.app\/(?:icons|shots|blog)\/[\w.-]+/g;
+  /https\\?:\/\/eroll-portfolio\.vercel\.app\/(?:icons|shots|blog)\/[\w.-]+/g;
 
 const urls = [...new Set(source.match(pattern) || [])];
 

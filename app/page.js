@@ -11,9 +11,13 @@ import {
   posts,
 } from "../lib/data";
 
-// COMPONENTS
+// ==========================================
+// COMPONENT IMPORTS
+// ==========================================
+
 import BrandCarousel from "../components/BrandCarousel";
 import PastProjects from "../components/PastProjects";
+import TechLogoLoop from "../components/TechLogoLoop";
 import SectionHeading from "../components/SectionHeading";
 import Marquee from "../components/Marquee";
 import VantaHero from "../components/VantaHero";
@@ -24,11 +28,10 @@ import HoverScrollPreview from "../components/HoverScrollPreview";
 import Typewriter from "../components/Typewriter";
 
 /* =========================================================
-   EROLL OLIVER — COMPLETE HOMEPAGE
+   EROLL OLIVER - COMPLETE HOMEPAGE
 ========================================================= */
 
 export default function Home() {
-
   const getToolIcon = (toolName) => {
     const tool = tools.find(
       ([name]) =>
@@ -188,8 +191,8 @@ export default function Home() {
       {/* ============================================
           BRAND CAROUSEL
 
-          Two rows of scrolling brand logos
-          Black, charcoal, gray and white theme
+          Continuous two-row brand logos
+          Black / Gray / White Palette
       ============================================ */}
 
       <BrandCarousel />
@@ -253,15 +256,12 @@ export default function Home() {
 
 
       {/* ============================================
-          NEW — PAST PROJECTS SHOWCASE
+          PAST PROJECTS SHOWCASE
 
           Automation Projects
           Chat Agents
           Voice Agents
           GoHighLevel Websites / Funnels
-
-          Includes interactive project galleries,
-          image preview dialogs, and website links.
       ============================================ */}
 
       <PastProjects />
@@ -311,7 +311,12 @@ export default function Home() {
 
 
       {/* ============================================
-          SKILLS AND TOOLS
+          SKILLS & TOOLS SECTION
+
+          UPDATED:
+          Removed old 8 static cards.
+          Added 16 rotating technology logos.
+          Existing section location retained.
       ============================================ */}
 
       <section className="section shell">
@@ -319,37 +324,12 @@ export default function Home() {
         <SectionHeading
           eyebrow="Skills & Tools"
           title="Technologies I work with"
-          copy="The stack I use every day to design, build and automate — from WordPress and Shopify to GoHighLevel and AI agents."
+          copy="From CRM platforms and workflow automation to AI agents, website development, and digital marketing — these are the tools I use to build smarter systems, streamline operations, and help businesses grow."
         />
 
-        <div className="tools-grid">
+        {/* NEW CONTINUOUS TECHNOLOGY ROTATION */}
 
-          {tools.map(([name, img]) => (
-
-            <div
-              className="tool-card"
-              key={name}
-            >
-
-              <span />
-
-              <div>
-
-                <img
-                  src={img}
-                  alt={`${name} logo`}
-                  loading="lazy"
-                />
-
-              </div>
-
-              <p>{name}</p>
-
-            </div>
-
-          ))}
-
-        </div>
+        <TechLogoLoop />
 
       </section>
 

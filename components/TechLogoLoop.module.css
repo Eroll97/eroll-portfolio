@@ -1,0 +1,251 @@
+
+/* ==========================================
+   EROLL OLIVER - TECHNOLOGY LOGO LOOP
+
+   STATIC CSS MODULE
+   Prevents First-Load Layout Flash
+
+   Palette:
+   Black / White / Gray
+========================================== */
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+.root {
+  width: 100%;
+  margin: 0;
+  padding: 10px 0 0;
+
+  background: transparent;
+  overflow: hidden;
+}
+
+/* ==========================================
+   TECHNOLOGY VIEWPORT
+
+   Fixed height prevents layout shifts.
+========================================== */
+
+.viewport {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  height: 208px;
+
+  overflow: hidden;
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+}
+
+/* ==========================================
+   WHITE LOGO PILL CARDS
+========================================== */
+
+.pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 168px;
+  height: 70px;
+
+  padding: 0 12px;
+
+  border: 1px solid #e4e4e4;
+  border-radius: 999px;
+
+  background: #ffffff;
+  color: #151515;
+
+  white-space: nowrap;
+
+  /* Hide unpositioned cards initially. */
+
+  opacity: 0;
+
+  will-change: transform;
+
+  box-shadow:
+    0 3px 12px rgba(
+      0,
+      0,
+      0,
+      0.10
+    );
+}
+
+/* ==========================================
+   SHOW CARDS WHEN READY
+
+   Prevents visible positions changing
+   during initial JavaScript initialization.
+========================================== */
+
+.viewport.ready .pill {
+  opacity: 1;
+}
+
+/* ==========================================
+   TECHNOLOGY ICONS
+
+   Original colors displayed at all times.
+========================================== */
+
+.icon {
+  display: block;
+
+  width: 34px;
+  height: 34px;
+
+  min-width: 34px;
+  max-width: 34px;
+  max-height: 34px;
+
+  flex: 0 0 34px;
+
+  object-fit: contain;
+
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* ==========================================
+   FALLBACK ICONS
+========================================== */
+
+.fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 9px;
+
+  color: #ffffff;
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+/* ==========================================
+   TECHNOLOGY NAMES
+========================================== */
+
+.name {
+  color: #151515;
+
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================
+   MOBILE LAYOUT
+========================================== */
+
+@media (max-width: 600px) {
+
+  .viewport {
+    height: 184px;
+  }
+
+  .pill {
+    width: 150px;
+    height: 60px;
+
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .icon,
+  .fallback {
+    width: 29px;
+    height: 29px;
+
+    min-width: 29px;
+    max-width: 29px;
+    max-height: 29px;
+
+    flex-basis: 29px;
+  }
+
+  .name {
+    font-size: 13px;
+  }
+
+}
+
+/* ==========================================
+   REDUCED MOTION ACCESSIBILITY
+
+   Show all 16 tools in a static grid
+   when animations are disabled.
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .root {
+    overflow: visible;
+  }
+
+  .viewport {
+    height: auto;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        auto-fit,
+        minmax(150px, 1fr)
+      );
+
+    gap: 12px;
+
+    overflow: visible;
+
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .pill {
+    position: relative;
+
+    width: 100%;
+    height: 64px;
+
+    opacity: 1 !important;
+
+    transform: none !important;
+
+    will-change: auto;
+  }
+
+}

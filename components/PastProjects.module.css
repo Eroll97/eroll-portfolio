@@ -1,0 +1,796 @@
+
+/* ==========================================
+   EROLL OLIVER - PAST PROJECTS
+   STATIC CSS MODULE
+
+   Prevents:
+   - Flash of unstyled content
+   - Oversized images
+   - Layout jumping on first load
+
+   Palette:
+   Black / Charcoal / Gray / White
+========================================== */
+
+/* ==========================================
+   MAIN SECTION
+========================================== */
+
+.section {
+  width: 100%;
+  padding: 82px 0 108px;
+  background: #080808;
+  color: #f5f5f5;
+  overflow: hidden;
+}
+
+.section *,
+.overlay *,
+.lightbox * {
+  box-sizing: border-box;
+}
+
+.shell {
+  width: min(100% - 48px, 1240px);
+  margin: 0 auto;
+}
+
+/* ==========================================
+   SECTION HEADING
+========================================== */
+
+.heading {
+  margin-bottom: 37px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 19px;
+
+  color: #818181;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.21em;
+}
+
+.kickerLine {
+  display: inline-block;
+  width: 29px;
+  height: 1px;
+  flex: 0 0 auto;
+  background: #777777;
+}
+
+.headingRow {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.title {
+  margin: 0;
+
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+
+  font-size: clamp(38px, 6vw, 67px);
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+  font-weight: 800;
+}
+
+.headingRow > p {
+  max-width: 390px;
+  margin: 0 0 3px;
+
+  color: #939393;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ==========================================
+   PROJECT CATEGORY GRID
+========================================== */
+
+.grid {
+  display: grid;
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  align-items: stretch;
+  gap: 16px;
+}
+
+/* ==========================================
+   PROJECT CARDS
+========================================== */
+
+.card {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+
+  text-align: left;
+  font: inherit;
+  color: inherit;
+
+  border: 1px solid #303030;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    145deg,
+    #181818,
+    #101010
+  );
+
+  cursor: pointer;
+
+  transition:
+    transform 0.24s ease,
+    border-color 0.24s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #656565;
+}
+
+/* KEYBOARD FOCUS */
+
+.card:focus-visible,
+.overlay button:focus-visible,
+.overlay a:focus-visible,
+.lightbox button:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   PROJECT CARD IMAGE CONTAINER
+
+   FIXED HEIGHT TO PREVENT FIRST-LOAD FLASH
+========================================== */
+
+.cardImage {
+  position: relative;
+
+  width: 100%;
+  height: 177px;
+  min-height: 177px;
+
+  background: #171717;
+
+  border-bottom: 1px solid #2d2d2d;
+  overflow: hidden;
+}
+
+/* ==========================================
+   PREVIEW IMAGES
+   ORIGINAL COLORS ALWAYS VISIBLE
+========================================== */
+
+.previewMedia {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  max-width: none;
+
+  object-fit: cover;
+
+  filter: none !important;
+  -webkit-filter: none !important;
+
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* EXAMPLE COUNT */
+
+.count {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+
+  padding: 7px 10px;
+
+  color: #ffffff;
+
+  background: rgba(
+    10,
+    10,
+    10,
+    0.85
+  );
+
+  border: 1px solid #5d5d5d;
+  border-radius: 999px;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+}
+
+/* ==========================================
+   PROJECT CARD CONTENT
+========================================== */
+
+.cardBody {
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  padding: 20px 18px 19px;
+}
+
+.index {
+  margin-bottom: 13px;
+
+  color: #777777;
+
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+}
+
+.cardBody h3 {
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+
+  margin: 0 0 10px;
+}
+
+.cardBody > p {
+  margin: 0 0 19px;
+
+  color: #999999;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+/* PROJECT TECHNOLOGY TAGS */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+
+  margin: auto 0 24px;
+}
+
+.tags span {
+  padding: 5px 9px;
+
+  background: #202020;
+  border: 1px solid #393939;
+  border-radius: 20px;
+
+  color: #b8b8b8;
+  font-size: 10px;
+}
+
+/* EXPLORE BUTTON LABEL */
+
+.explore {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  width: 100%;
+
+  border-top: 1px solid #323232;
+  padding-top: 13px;
+
+  color: #f1f1f1;
+
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+}
+
+.explore b {
+  font-size: 19px;
+  font-weight: 400;
+}
+
+/* ==========================================
+   IMAGE FALLBACK
+========================================== */
+
+.imageFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: repeating-linear-gradient(
+    45deg,
+    #141414,
+    #141414 9px,
+    #1d1d1d 10px
+  );
+
+  color: #a3a3a3;
+  text-align: center;
+
+  padding: 16px;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================
+   FULL-SCREEN PROJECT MODAL
+========================================== */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 38px 24px;
+
+  background: rgba(
+    0,
+    0,
+    0,
+    0.93
+  );
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* MODAL CONTAINER */
+
+.dialog {
+  width: min(100%, 1200px);
+
+  margin: 0;
+  padding: 22px 30px 36px;
+
+  color: #f5f5f5;
+
+  background: #101010;
+
+  border: 1px solid #323232;
+  border-radius: 20px;
+
+  box-shadow:
+    0 30px 110px #000000;
+}
+
+/* MODAL TOP TOOLBAR */
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  margin-bottom: 22px;
+}
+
+/* BACK BUTTON */
+
+.backButton {
+  background: transparent;
+  border: 0;
+
+  color: #aaaaaa;
+
+  font: inherit;
+  font-weight: 650;
+  font-size: 13px;
+
+  padding: 10px 0;
+
+  cursor: pointer;
+}
+
+.backButton:hover {
+  color: #ffffff;
+}
+
+/* CLOSE BUTTONS */
+
+.closeButton,
+.lightboxClose {
+  display: grid;
+  place-items: center;
+
+  width: 43px;
+  height: 43px;
+
+  border: 1px solid #454545;
+  border-radius: 50%;
+
+  background: #222222;
+  color: #ffffff;
+
+  font: inherit;
+  font-size: 27px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.closeButton:hover,
+.lightboxClose:hover {
+  background: #444444;
+}
+
+/* ==========================================
+   MODAL HEADING
+========================================== */
+
+.dialogHeader {
+  margin-bottom: 32px;
+}
+
+.dialogLabel {
+  margin: 0 0 12px;
+
+  color: #919191;
+
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  font-weight: 800;
+}
+
+.dialogHeader h2 {
+  max-width: 970px;
+  margin: 0 0 12px;
+
+  color: #ffffff;
+
+  font-size: clamp(29px, 4.4vw, 52px);
+  font-weight: 850;
+
+  letter-spacing: -0.045em;
+  line-height: 1.08;
+}
+
+.dialogHeader h2 span {
+  color: #ffffff;
+}
+
+.dialogHeader > p:last-child {
+  max-width: 720px;
+  margin: 0;
+
+  color: #a4a4a4;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+/* ==========================================
+   PROJECT GALLERY GRID
+========================================== */
+
+.gallery {
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.galleryItem {
+  min-width: 0;
+
+  border: 1px solid #343434;
+  border-radius: 13px;
+
+  background: #1a1a1a;
+
+  overflow: hidden;
+}
+
+/* ==========================================
+   GALLERY IMAGE BUTTON
+========================================== */
+
+.galleryImageButton {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  height: 185px;
+
+  padding: 0;
+
+  background: #0c0c0c;
+
+  border: 0;
+
+  cursor: zoom-in;
+  overflow: hidden;
+}
+
+/* ==========================================
+   GALLERY IMAGES
+   ORIGINAL COLORS - NO HOVER FILTER
+========================================== */
+
+.galleryMedia {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+
+  object-fit: contain;
+
+  filter: none !important;
+  -webkit-filter: none !important;
+
+  opacity: 1 !important;
+
+  transform: none !important;
+  transition: none !important;
+}
+
+/* VIEW IMAGE LABEL */
+
+.zoomHint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  padding: 7px 10px;
+
+  color: #ffffff;
+
+  background: rgba(
+    0,
+    0,
+    0,
+    0.85
+  );
+
+  border: 1px solid #404040;
+  border-radius: 18px;
+
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* ==========================================
+   GALLERY ITEM FOOTER
+========================================== */
+
+.galleryItemBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  min-height: 66px;
+  padding: 15px;
+}
+
+.galleryItemBottom h3 {
+  margin: 0;
+
+  color: #f0f0f0;
+
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 750;
+}
+
+.galleryItemBottom a {
+  flex: 0 0 auto;
+
+  color: #ffffff;
+
+  border-bottom: 1px solid #757575;
+
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+
+  text-decoration: none;
+  padding-bottom: 3px;
+}
+
+.galleryItemBottom a:hover {
+  color: #dddddd;
+}
+
+/* ==========================================
+   FULLSCREEN IMAGE LIGHTBOX
+========================================== */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+
+  display: grid;
+  place-items: center;
+
+  padding: 75px 24px 36px;
+
+  background: rgba(
+    0,
+    0,
+    0,
+    0.97
+  );
+
+  color: #ffffff;
+}
+
+/* LIGHTBOX CLOSE */
+
+.lightboxClose {
+  position: fixed;
+  top: 22px;
+  right: 26px;
+  z-index: 2;
+}
+
+/* LIGHTBOX IMAGE CONTAINER */
+
+.lightboxBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+
+  width: 100%;
+  max-width: 1250px;
+  max-height: 100%;
+}
+
+/* LIGHTBOX IMAGE */
+
+.lightboxBody .galleryMedia {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 100%;
+  max-height: calc(100vh - 160px);
+
+  object-fit: contain;
+
+  border: 1px solid #333333;
+  border-radius: 9px;
+}
+
+.lightboxBody p {
+  margin: 0;
+
+  color: #c1c1c1;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 1040px) {
+
+  .grid,
+  .gallery {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .headingRow {
+    align-items: flex-start;
+  }
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 650px) {
+
+  .section {
+    padding: 64px 0 76px;
+  }
+
+  .shell {
+    width: calc(100% - 32px);
+  }
+
+  .headingRow {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .title {
+    font-size: 39px;
+  }
+
+  .headingRow > p {
+    font-size: 13px;
+  }
+
+  .grid,
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cardImage {
+    height: 205px;
+    min-height: 205px;
+  }
+
+  .cardBody {
+    padding: 21px;
+  }
+
+  .overlay {
+    padding: 12px;
+  }
+
+  .dialog {
+    padding: 15px 14px 25px;
+    border-radius: 13px;
+  }
+
+  .galleryImageButton {
+    height: 205px;
+  }
+
+  .dialogHeader h2 {
+    font-size: 32px;
+  }
+
+  .lightbox {
+    padding: 70px 12px 28px;
+  }
+
+  .lightboxClose {
+    top: 13px;
+    right: 13px;
+  }
+
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .card {
+    transition: none;
+    transform: none !important;
+  }
+
+}
