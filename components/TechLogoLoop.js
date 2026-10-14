@@ -7,18 +7,17 @@ import styles from "./TechLogoLoop.module.css";
 /* ==========================================
    EROLL OLIVER - TECHNOLOGY LOGO LOOP
 
-   20 Logos
-   Continuous Two-Row Rotation
-   Original Logo Colors
-   Responsive Design
-   CSS Module - No First-Load Flash
+   16 Technology Logos
+   Two-Row Continuous Rotation
+   Even Spacing - No Large Empty Gaps
+   Responsive Desktop / Tablet / Mobile
 ========================================== */
 
 const favicon = (domain) =>
   `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
 
 /* ==========================================
-   TECHNOLOGY & COMPANY LOGOS
+   TECHNOLOGIES
 ========================================== */
 
 const BRANDS = [
@@ -122,41 +121,10 @@ const BRANDS = [
     fallback: "C",
     color: "#cb8466",
   },
-
-  /* ========================================
-     ADDITIONAL COMPANY LOGOS
-  ======================================== */
-
-  {
-    name: "D1TechCreative",
-    image: "/icons/d1tech.png",
-    fallback: "D1",
-    color: "#181818",
-    compact: true,
-  },
-  {
-    name: "Hamsol",
-    image: "/icons/hamsol.png",
-    fallback: "H",
-    color: "#181818",
-  },
-  {
-    name: "Leadflex",
-    image: "/icons/leadflex.png",
-    fallback: "L",
-    color: "#181818",
-  },
-  {
-    name: "ZG Tech Solutions",
-    image: "/icons/zgtech.png",
-    fallback: "ZG",
-    color: "#181818",
-    compact: true,
-  },
 ];
 
 /* ==========================================
-   BRAND IMAGE WITH FALLBACK
+   LOGO COMPONENT
 ========================================== */
 
 function BrandIcon({ brand }) {
@@ -177,7 +145,6 @@ function BrandIcon({ brand }) {
   }
 
   return (
-    // eslint-disable-next-line @next/next/no-img-element
     <img
       className={styles.icon}
       src={brand.image}
@@ -193,7 +160,7 @@ function BrandIcon({ brand }) {
 }
 
 /* ==========================================
-   MAIN TECHNOLOGY LOOP
+   MAIN COMPONENT
 ========================================== */
 
 export default function TechLogoLoop() {
@@ -209,89 +176,125 @@ export default function TechLogoLoop() {
       "(prefers-reduced-motion: reduce)"
     );
 
-    let frameId = 0;
+    let animationFrame = 0;
     let geometry = null;
 
     const startTime = performance.now();
 
-    /* ========================================
-       MEASURE CARD DIMENSIONS
-    ======================================== */
+    /* ======================================
+       FIXED EVEN-SPACING CALCULATION
+
+       The previous version could leave
+       large empty portions of the track.
+
+       This version calculates the loop
+       from the viewport width and the
+       actual size of each logo card.
+    ====================================== */
 
     function measure() {
       const firstCard = cardRefs.current[0];
 
-      if (!firstCard) return;
+      if (!firstCard) return false;
+
+      const viewportWidth = viewport.clientWidth;
+
+      if (viewportWidth <= 0) return false;
 
       const cardWidth = firstCard.offsetWidth;
       const cardHeight = firstCard.offsetHeight;
 
-      const width = viewport.clientWidth;
-      const mobile = width <= 600;
+      const mobile = viewportWidth <= 600;
 
-      const gap = mobile ? 14 : 18;
+      const cardGap = mobile ? 14 : 18;
       const rowGap = mobile ? 16 : 18;
 
-      const topY = cardHeight / 2 + 16;
+      const topY =
+        cardHeight / 2 + (mobile ? 14 : 18);
 
       const bottomY =
         topY + cardHeight + rowGap;
 
+      const centerY =
+        (topY + bottomY) / 2;
+
       const radius =
         (bottomY - topY) / 2;
 
-      const arcLength = Math.PI * radius;
+      const arcLength =
+        Math.PI * radius;
 
-      // Automatically adjust spacing based
-      // on the number of logos.
+      /* KEEP EVEN SPACING BETWEEN LOGOS */
 
-      const minimumStraight =
-        (BRANDS.length / 2) *
-          (cardWidth + gap) -
-        arcLength;
+      const preferredStep =
+        cardWidth + cardGap;
 
-      const straight = Math.max(
-        minimumStraight,
-        width - cardWidth - 2 * radius - 32
+      /* KEEP THE FULL WIDTH POPULATED */
+
+      const screenStep =
+        (
+          2 * (viewportWidth + 40) +
+          2 * arcLength
+        ) / BRANDS.length;
+
+      const step = Math.max(
+        preferredStep,
+        screenStep
       );
 
+      /* MATCH LOOP SIZE TO ALL 16 LOGOS */
+
+      const straight =
+        (BRANDS.length * step) / 2 -
+        arcLength;
+
       const leftX =
-        (width - straight) / 2;
+        (viewportWidth - straight) / 2;
 
       const rightX =
         leftX + straight;
 
+      const perimeter =
+        BRANDS.length * step;
+
       geometry = {
         cardWidth,
         cardHeight,
-        leftX,
-        rightX,
         topY,
         bottomY,
-
-        centerY: (topY + bottomY) / 2,
-
+        centerY,
         radius,
         arcLength,
         straight,
+        leftX,
+        rightX,
+        perimeter,
+        step,
 
-        perimeter:
-          2 * straight + 2 * arcLength,
+        /* ANIMATION SPEED */
 
-        speed: mobile ? 44 : 55,
+        speed: mobile ? 42 : 56,
 
-        initialOffset: Math.max(
-          0,
-          cardWidth / 2 + 16 - leftX
-        ),
+        /* HIGHLEVEL STARTS ON TOP LEFT */
+
+        initialOffset:
+          cardWidth / 2 + 16 - leftX,
       };
+
+      return true;
     }
 
-    /* ========================================
-       ONE CONTINUOUS CLOSED LOOP
-    ======================================== */
+    /* ======================================
+       SINGLE CLOSED LOOP
 
-    function position(distance) {
+       TOP     -> RIGHT
+       RIGHT   -> DOWN
+       BOTTOM  -> LEFT
+       LEFT    -> UP
+       REPEAT
+    ====================================== */
+
+    function getPosition(distance) {
       const g = geometry;
 
       const d =
@@ -299,7 +302,7 @@ export default function TechLogoLoop() {
           g.perimeter) %
         g.perimeter;
 
-      /* TOP ROW - MOVES RIGHT */
+      /* TOP ROW */
 
       if (d < g.straight) {
         return {
@@ -308,9 +311,11 @@ export default function TechLogoLoop() {
         };
       }
 
-      /* RIGHT SIDE - MOVES DOWN */
+      /* RIGHT SIDE - DOWNWARD TURN */
 
-      if (d < g.straight + g.arcLength) {
+      if (
+        d < g.straight + g.arcLength
+      ) {
         const angle =
           -Math.PI / 2 +
           (d - g.straight) / g.radius;
@@ -326,7 +331,7 @@ export default function TechLogoLoop() {
         };
       }
 
-      /* BOTTOM ROW - MOVES LEFT */
+      /* BOTTOM ROW */
 
       if (
         d <
@@ -343,14 +348,15 @@ export default function TechLogoLoop() {
         };
       }
 
-      /* LEFT SIDE - MOVES UP */
+      /* LEFT SIDE - UPWARD TURN */
 
       const angle =
         Math.PI / 2 +
-        (d -
+        (
+          d -
           2 * g.straight -
-          g.arcLength) /
-          g.radius;
+          g.arcLength
+        ) / g.radius;
 
       return {
         x:
@@ -363,37 +369,40 @@ export default function TechLogoLoop() {
       };
     }
 
-    /* ========================================
-       POSITION ALL 20 LOGOS
-    ======================================== */
+    /* ======================================
+       POSITION ALL 16 LOGOS
+
+       Equal spacing along the entire
+       loop prevents large empty gaps.
+    ====================================== */
 
     function draw(time) {
       if (!geometry) return;
 
-      const progress =
-        ((time - startTime) / 1000) *
-        geometry.speed;
+      const elapsed =
+        (time - startTime) / 1000;
 
-      const spacing =
-        geometry.perimeter /
-        BRANDS.length;
+      const progress =
+        elapsed * geometry.speed;
 
       cardRefs.current.forEach(
         (card, index) => {
           if (!card) return;
 
-          const p = position(
+          const distance =
             geometry.initialOffset +
-              index * spacing +
-              progress
-          );
+            index * geometry.step +
+            progress;
+
+          const position =
+            getPosition(distance);
 
           const x =
-            p.x -
+            position.x -
             geometry.cardWidth / 2;
 
           const y =
-            p.y -
+            position.y -
             geometry.cardHeight / 2;
 
           card.style.transform =
@@ -401,87 +410,97 @@ export default function TechLogoLoop() {
         }
       );
 
-      // Reveal logos after correct
-      // positions have been calculated.
+      /* SHOW ONLY AFTER POSITIONING */
 
-      viewport.classList.add(styles.ready);
+      viewport.classList.add(
+        styles.ready
+      );
     }
 
-    /* ========================================
-       SMOOTH CONTINUOUS ANIMATION
-    ======================================== */
+    /* ======================================
+       CONTINUOUS ANIMATION
+    ====================================== */
 
-    function animate(time) {
-      draw(time);
+    function animate(timestamp) {
+      draw(timestamp);
 
-      frameId =
+      animationFrame =
         requestAnimationFrame(animate);
     }
 
-    /* ========================================
-       INITIALIZE ANIMATION
-    ======================================== */
+    /* ======================================
+       START / RESTART
+    ====================================== */
 
-    function resetAnimation() {
-      cancelAnimationFrame(frameId);
+    function restart() {
+      cancelAnimationFrame(animationFrame);
 
       if (motionPreference.matches) {
-        // CSS displays a static grid
-        // for reduced-motion preference.
-
         viewport.classList.remove(
           styles.ready
         );
 
+        cardRefs.current.forEach((card) => {
+          if (card) {
+            card.style.transform = "";
+          }
+        });
+
         return;
       }
 
-      measure();
+      if (!measure()) return;
 
       draw(performance.now());
 
-      frameId =
+      animationFrame =
         requestAnimationFrame(animate);
     }
 
-    /* ========================================
-       RESPONSIVE RESIZING
-    ======================================== */
+    /* ======================================
+       RESPONSIVE RESIZE HANDLING
+    ====================================== */
 
-    const observer = new ResizeObserver(() => {
-      if (!motionPreference.matches) {
-        measure();
-        draw(performance.now());
-      }
-    });
+    const resizeObserver =
+      new ResizeObserver(() => {
+        if (motionPreference.matches) {
+          return;
+        }
 
-    observer.observe(viewport);
+        if (measure()) {
+          draw(performance.now());
+        }
+      });
+
+    resizeObserver.observe(viewport);
 
     motionPreference.addEventListener(
       "change",
-      resetAnimation
+      restart
     );
 
-    resetAnimation();
+    restart();
 
-    /* ========================================
+    /* ======================================
        CLEANUP
-    ======================================== */
+    ====================================== */
 
     return () => {
-      cancelAnimationFrame(frameId);
+      cancelAnimationFrame(
+        animationFrame
+      );
 
-      observer.disconnect();
+      resizeObserver.disconnect();
 
       motionPreference.removeEventListener(
         "change",
-        resetAnimation
+        restart
       );
     };
   }, []);
 
   /* ==========================================
-     RENDER ALL LOGOS
+     RENDER
   ========================================== */
 
   return (
@@ -494,26 +513,16 @@ export default function TechLogoLoop() {
       >
         {BRANDS.map((brand, index) => (
           <div
+            key={brand.name}
             role="listitem"
             className={styles.pill}
-            key={brand.name}
             ref={(node) => {
               cardRefs.current[index] = node;
             }}
           >
             <BrandIcon brand={brand} />
 
-            <span
-              className={styles.name}
-              style={
-                brand.compact
-                  ? {
-                      fontSize: "11px",
-                      letterSpacing: "-0.04em",
-                    }
-                  : undefined
-              }
-            >
+            <span className={styles.name}>
               {brand.name}
             </span>
           </div>
