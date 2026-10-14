@@ -1641,7 +1641,7 @@ export default function About() {
 
                   <div className="stat-box">
                     <strong>
-                      55
+                      4+
                     </strong>
 
                     <span>

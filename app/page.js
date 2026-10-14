@@ -149,7 +149,7 @@ export default function Home() {
               </div>
 
               <div>
-                <strong>55</strong>
+                <strong>4+</strong>
                 <span>Companies worked with</span>
               </div>
 
