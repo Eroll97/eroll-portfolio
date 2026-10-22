@@ -1048,3 +1048,64 @@
     font-size: 17px;
   }
 }
+/* ==========================================
+   BLOG PAGE - REMOVE EXCESS TOP SPACING
+   Keep header and blog design unchanged
+========================================== */
+
+.page {
+  padding-top: 110px !important;
+}
+
+.container {
+  padding-top: 0 !important;
+}
+
+.intro {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  min-height: 0 !important;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+  .page {
+    padding-top: 100px !important;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .page {
+    padding-top: 90px !important;
+  }
+}
+
+/* ==========================================
+   BLOG TOP SPACING FIX
+========================================== */
+
+.page {
+  padding-top: 102px !important;
+}
+
+.container {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.intro {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  min-height: 0 !important;
+}
+
+/* MOBILE */
+
+@media (max-width: 767px) {
+  .page {
+    padding-top: 88px !important;
+  }
+}

@@ -457,6 +457,129 @@ const aboutStyles = String.raw`
 
 
 /* =========================================================
+   PORTFOLIO VIDEO SHOWCASE (ABOVE MY TOOLS)
+========================================================= */
+
+.about-demo-section {
+  width: 100%;
+  padding: 90px 0 100px;
+  background: #080808;
+  border-top: 1px solid #171717;
+}
+
+.about-demo-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 88px);
+}
+
+.about-demo-media,
+.about-demo-copy {
+  min-width: 0;
+}
+
+.about-demo-video-frame {
+  overflow: hidden;
+  width: 100%;
+  border: 1px solid #323232;
+  border-radius: 16px;
+  background: #000000;
+  box-shadow: 0 18px 65px rgba(0, 0, 0, 0.28);
+}
+
+.about-demo-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: #000000;
+}
+
+.about-demo-eyebrow {
+  margin: 0 0 19px;
+  color: #8c8c8c;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.about-demo-copy h2 {
+  max-width: 580px;
+  margin: 0 0 22px;
+  color: #ffffff;
+  font-size: clamp(30px, 3.25vw, 48px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+}
+
+.about-demo-copy h2 span {
+  color: #a7a7a7;
+}
+
+.about-demo-copy p.about-demo-description {
+  max-width: 580px;
+  margin: 0 0 17px;
+  color: #a6a6a6;
+  font-size: 15px;
+  line-height: 1.78;
+}
+
+.about-demo-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 25px;
+}
+
+.about-demo-keywords span {
+  padding: 8px 13px;
+  color: #c8c8c8;
+  background: #111111;
+  border: 1px solid #343434;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .about-demo-section {
+    padding: 68px 0 76px;
+  }
+
+  .about-demo-layout {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .about-demo-copy h2 {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 650px) {
+  .about-demo-section {
+    padding: 55px 0 65px;
+  }
+
+  .about-demo-video-frame {
+    border-radius: 12px;
+  }
+
+  .about-demo-copy h2 {
+    font-size: 30px;
+  }
+
+  .about-demo-copy p.about-demo-description {
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================================
    TOOLS SECTION
 ========================================================= */
 
@@ -1597,7 +1720,7 @@ export default function About() {
 
 
                 <p className="about-description">
-                  Based in Karachi, Pakistan, I've spent the last six years
+                  Based in the Philippines, I've spent the last six years
                   working with agencies and businesses across the world —
                   building WordPress websites, Shopify stores, high-converting
                   funnels, and Go HighLevel CRM systems. My focus is always the
@@ -1917,6 +2040,67 @@ export default function About() {
 
 
         {/* =====================================================
+            VIDEO SHOWCASE — VIDEO LEFT, DESCRIPTION RIGHT
+            Positioned immediately above MY TOOLS
+        ====================================================== */}
+
+        <section
+          className="about-demo-section"
+          aria-labelledby="about-demo-heading"
+        >
+          <div className="section-container about-demo-layout">
+
+            {/* LEFT COLUMN — ACTUAL PORTFOLIO VIDEO */}
+            <div className="about-demo-media">
+              <div className="about-demo-video-frame">
+                <video
+                  className="about-demo-video"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  aria-label="Eroll Oliver portfolio demonstration video"
+                >
+                  <source
+                    src="/eroll-portfolio-demo.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support MP4 video playback.
+                </video>
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN — INTRODUCTION CONNECTED TO THE VIDEO */}
+            <div className="about-demo-copy">
+              <p className="about-demo-eyebrow">MY WORK IN ACTION</p>
+
+              <h2 id="about-demo-heading">
+                More than a website. <span>A smarter way to work.</span>
+              </h2>
+
+              <p className="about-demo-description">
+                I bring ideas to life through professional, responsive websites
+                and digital experiences built with purpose. This video gives
+                you a closer look at the work behind my portfolio.
+              </p>
+
+              <p className="about-demo-description">
+                From thoughtful website layouts to connected forms, CRM
+                workflows, and automation, my focus is on creating solutions
+                that look polished and make day-to-day business easier.
+              </p>
+
+              <div className="about-demo-keywords" aria-label="Areas of expertise">
+                <span>Web Development</span>
+                <span>CRM Systems</span>
+                <span>Automation</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        {/* =====================================================
             TECHNOLOGIES
         ====================================================== */}
 
@@ -1925,14 +2109,14 @@ export default function About() {
           <div className="section-container">
 
             <p className="section-label">
-              MY TOOLS
+              MY SKILLS
             </p>
 
 
             <h2>
-              Technologies I work with
+              Tools I've mastered
             </h2>
-
+            <span>The stack I use every day to design, build and automate.</span>
 
             <div className="tools-grid">
 
@@ -2171,7 +2355,7 @@ export default function About() {
                   <div className="timeline-left">
 
                     <span className="timeline-date">
-                      ADD YEAR
+                      2019-2024
                     </span>
 
 
@@ -2185,7 +2369,7 @@ export default function About() {
 
 
                         <p>
-                          Add your school name
+                          Caraga State University
                         </p>
 
                       </div>
@@ -2208,8 +2392,7 @@ export default function About() {
                   <div className="timeline-right">
 
                     <p className="timeline-description">
-                      Add your degree, course, major or other education
-                      information here.
+                      My academic experience at Caraga State University helped me develop a strong foundation in critical thinking, problem-solving, adaptability, and continuous learning. These skills continue to support my professional growth in web development, digital solutions, and technology-driven business systems.
                     </p>
 
                   </div>
@@ -2224,7 +2407,7 @@ export default function About() {
                   <div className="timeline-left">
 
                     <span className="timeline-date">
-                      ADD YEAR
+                      2023
                     </span>
 
 
@@ -2238,7 +2421,7 @@ export default function About() {
 
 
                         <p>
-                          Add institution
+                          Website Design & Development Certification
                         </p>
 
                       </div>
@@ -2261,8 +2444,7 @@ export default function About() {
                   <div className="timeline-right">
 
                     <p className="timeline-description">
-                      Add your professional certification, training program
-                      or technical qualification here.
+                      Completed a two-week intensive practical training program in website design and development, covering GoHighLevel (GHL), WordPress, custom coding, eCommerce website development, and basic Search Engine Optimization (SEO).
                     </p>
 
                   </div>
@@ -2277,7 +2459,7 @@ export default function About() {
                   <div className="timeline-left">
 
                     <span className="timeline-date">
-                      ADD YEAR
+                      2022-2023
                     </span>
 
 
@@ -2291,7 +2473,7 @@ export default function About() {
 
 
                         <p>
-                          Add school or organization
+                          Maintaining and Repairing Systems
                         </p>
 
                       </div>
@@ -2314,8 +2496,7 @@ export default function About() {
                   <div className="timeline-right">
 
                     <p className="timeline-description">
-                      Add any other relevant education, workshops,
-                      certifications or training.
+                      Responsible for monitoring, maintaining, troubleshooting, and repairing computer systems, software, hardware, and networks to ensure they operate efficiently. Performs regular system updates, identifies technical issues, resolves errors, and implements preventive maintenance to minimize downtime and maintain system reliability and security.
                     </p>
 
                   </div>

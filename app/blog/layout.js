@@ -1,4 +1,9 @@
 
+/* ==========================================
+   EROLL OLIVER - BLOG LAYOUT
+   FIXED DOUBLE TOP SPACING
+========================================== */
+
 export default function BlogArticleLayout({ children }) {
   return (
     <div className="blog-article-layout">
@@ -9,14 +14,19 @@ export default function BlogArticleLayout({ children }) {
           position: relative;
           width: 100%;
           min-height: 100vh;
-          padding-top: 110px;
+
+          /* REMOVE EXTRA TOP SPACING */
+          padding: 0;
+          margin: 0;
+
           background: #070707;
           color: #ffffff;
         }
 
         @media (max-width: 768px) {
           .blog-article-layout {
-            padding-top: 95px;
+            padding: 0;
+            margin: 0;
           }
         }
       `}</style>
