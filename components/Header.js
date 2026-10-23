@@ -17,86 +17,68 @@ const nav = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const path = usePathname();
-
-  /* =========================================================
-     SCROLL EFFECT
-  ========================================================= */
+  const path = usePathname() || '/';
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-
-    window.addEventListener('scroll', handleScroll, {
-      passive: true,
-    });
-
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
-  /* =========================================================
-     CLOSE MOBILE MENU WHEN PAGE CHANGES
-  ========================================================= */
-
+  // Close the mobile menu on client-side navigation (including Back/Forward).
   useEffect(() => {
     setOpen(false);
   }, [path]);
 
+  // Allow Escape to close the menu; return to desktop layout when resized.
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    const handleResize = () => {
+      if (window.innerWidth > 900) setOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [open]);
+
+  const isActive = (href) =>
+    href === '/'
+      ? path === '/'
+      : path === href || path.startsWith(`${href}/`);
 
   return (
     <header
-      className={`site-header ${scrolled ? 'is-scrolled' : ''}`}
+      className={`site-header ${scrolled ? 'is-scrolled' : ''} ${open ? 'menu-open' : ''}`}
     >
-
-      <nav className="nav-shell">
-
-        {/* =====================================================
-            LOGO
-        ====================================================== */}
-
+      <nav className="nav-shell" aria-label="Main navigation">
         <Link
           className="brand"
           href="/"
+          onClick={() => setOpen(false)}
         >
           EROLL<span>.</span>
         </Link>
 
-
-        {/* =====================================================
-            DESKTOP NAVIGATION
-        ====================================================== */}
-
         <ul className="desktop-nav">
-
           {nav.map(([label, href]) => (
-
             <li key={href}>
-
               <Link
-                className={path === href ? 'active' : ''}
                 href={href}
+                className={isActive(href) ? 'active' : ''}
+                aria-current={isActive(href) ? 'page' : undefined}
               >
                 {label}
               </Link>
-
             </li>
-
           ))}
-
         </ul>
-
-
-        {/* =====================================================
-            DESKTOP HIRE ME
-            DOWNLOADS YOUR CV
-        ====================================================== */}
 
         <a
           className="hire-btn"
@@ -107,62 +89,47 @@ export default function Header() {
           Hire Me
         </a>
 
-
-        {/* =====================================================
-            MOBILE MENU BUTTON
-        ====================================================== */}
-
         <button
           type="button"
           className={`menu-btn ${open ? 'open' : ''}`}
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => setOpen((previous) => !previous)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
+          aria-controls="portfolio-mobile-menu"
         >
-          <span />
-          <span />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
         </button>
-
       </nav>
 
-
-      {/* =======================================================
-          MOBILE MENU
-      ======================================================== */}
-
-      <div
-        className={`mobile-menu ${open ? 'show' : ''}`}
+      <nav
+        id="portfolio-mobile-menu"
+        className={`mobile-menu ${open ? 'open' : ''}`}
+        aria-label="Mobile navigation"
       >
-
         {nav.map(([label, href]) => (
-
           <Link
             key={href}
             href={href}
-            className={path === href ? 'active' : ''}
+            className={isActive(href) ? 'active' : ''}
+            aria-current={isActive(href) ? 'page' : undefined}
+            onClick={() => setOpen(false)}
           >
             {label}
           </Link>
-
         ))}
-
-
-        {/* =====================================================
-            MOBILE HIRE ME
-            SAME CV AS DESKTOP
-        ====================================================== */}
 
         <a
           className="mobile-hire-btn"
           href="/Eroll-Oliver-CV.pdf"
           download="Eroll-Oliver-CV.pdf"
           aria-label="Download Eroll Oliver CV"
+          onClick={() => setOpen(false)}
         >
-          Hire Me
+          Hire Me — Download CV
         </a>
-
-      </div>
-
+      </nav>
     </header>
   );
-} 
+}

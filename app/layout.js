@@ -4,19 +4,17 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import VisualEffects from "../components/VisualEffects";
-import AssistantBubble from "../components/AssistantBubble";
 import CustomCursor from "../components/CustomCursor";
-
-// WHITE SCROLL PROGRESS ABOVE HEADER
 import ScrollProgressBar from "../components/ScrollProgressBar";
+import PortfolioChatbot from "../components/PortfolioChatbot";
 
 export const metadata = {
   title: "EROLL OLIVER — WordPress Developer & GHL Expert",
   description:
-    "Portfolio replica inspired by the inspected reference: WordPress, GoHighLevel, funnels, automation and Shopify.",
+    "Eroll Oliver is a WordPress Developer, GoHighLevel Expert, and AI Automation Specialist specializing in professional websites, Shopify stores, high-converting funnels, CRM systems, and intelligent automation workflows.",
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
   },
 };
 
@@ -25,26 +23,42 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
 
-        {/* GLOBAL VISUAL EFFECTS */}
+        {/* ============================================
+            GLOBAL VISUAL EFFECTS
+        ============================================ */}
         <VisualEffects />
 
-        {/* CUSTOM CURSOR */}
+        {/* ============================================
+            CUSTOM CURSOR
+        ============================================ */}
         <CustomCursor />
 
-        {/* WHITE SCROLL PROGRESS BAR */}
+        {/* ============================================
+            WHITE SCROLL PROGRESS BAR
+        ============================================ */}
         <ScrollProgressBar />
 
-        {/* EXISTING HEADER */}
+        {/* ============================================
+            WEBSITE HEADER
+        ============================================ */}
         <Header />
 
-        {/* PAGE CONTENT */}
-        <main>{children}</main>
+        {/* ============================================
+            PAGE CONTENT
+        ============================================ */}
+        <main>
+          {children}
+        </main>
 
-        {/* FOOTER */}
+        {/* ============================================
+            WEBSITE FOOTER
+        ============================================ */}
         <Footer />
 
-        {/* ASSISTANT BUBBLE */}
-        <AssistantBubble />
+        {/* ============================================
+            REAL AI PORTFOLIO CHATBOT
+        ============================================ */}
+        <PortfolioChatbot />
 
       </body>
     </html>
