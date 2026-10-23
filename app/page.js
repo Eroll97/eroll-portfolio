@@ -45,6 +45,24 @@ export default function Home() {
   const ghlIcon = getToolIcon("GoHighLevel");
   const shopifyIcon = getToolIcon("Shopify");
 
+  // Match the three featured homepage cards to their published articles.
+  // Other articles continue using their normal post.slug links.
+  const getBlogHref = (post) => {
+    const title = (post.title || "").toLowerCase();
+
+    if (title.includes("traditional crm")) {
+      return "/blog/gohighlevel-vs-traditional-crm";
+    }
+    if (title.includes("local seo")) {
+      return "/blog/local-seo-service-business";
+    }
+    if (title.includes("high-converting landing page")) {
+      return "/blog/high-converting-landing-page";
+    }
+
+    return `/blog/${post.slug}`;
+  };
+
   const firstLaunchImage =
     projects?.[0]?.image || "";
 
@@ -674,7 +692,7 @@ export default function Home() {
 
             <Link
               className="blog-card"
-              href={`/blog/${post.slug}`}
+              href={getBlogHref(post)}
               key={post.slug}
             >
 
