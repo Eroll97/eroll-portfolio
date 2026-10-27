@@ -1,4 +1,3 @@
-
 import "./globals.css";
 
 import Header from "../components/Header";
@@ -7,6 +6,8 @@ import VisualEffects from "../components/VisualEffects";
 import CustomCursor from "../components/CustomCursor";
 import ScrollProgressBar from "../components/ScrollProgressBar";
 import PortfolioChatbot from "../components/PortfolioChatbot";
+import FloatingLetsTalk from "../components/FloatingLetsTalk";
+import ContentDeterrents from "../components/ContentDeterrents";
 
 export const metadata = {
   title: "EROLL OLIVER — WordPress Developer & GHL Expert",
@@ -22,44 +23,17 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-
-        {/* ============================================
-            GLOBAL VISUAL EFFECTS
-        ============================================ */}
+        <ContentDeterrents />
         <VisualEffects />
-
-        {/* ============================================
-            CUSTOM CURSOR
-        ============================================ */}
         <CustomCursor />
-
-        {/* ============================================
-            WHITE SCROLL PROGRESS BAR
-        ============================================ */}
         <ScrollProgressBar />
-
-        {/* ============================================
-            WEBSITE HEADER
-        ============================================ */}
         <Header />
 
-        {/* ============================================
-            PAGE CONTENT
-        ============================================ */}
-        <main>
-          {children}
-        </main>
+        <main>{children}</main>
 
-        {/* ============================================
-            WEBSITE FOOTER
-        ============================================ */}
         <Footer />
-
-        {/* ============================================
-            REAL AI PORTFOLIO CHATBOT
-        ============================================ */}
         <PortfolioChatbot />
-
+        <FloatingLetsTalk />
       </body>
     </html>
   );

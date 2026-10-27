@@ -1,0 +1,239 @@
+/* EROLL OLIVER — floating video + large Calendly booking modal */
+
+/* Bottom-left video stays visible on every page and has NO close button. */
+.floating {
+  position: fixed;
+  left: clamp(12px, 2vw, 24px);
+  bottom: clamp(14px, 2.2vw, 26px);
+  z-index: 9999;
+  width: 116px;
+  height: 154px;
+  pointer-events: auto;
+}
+
+.previewButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 15px;
+  background: #111;
+  color: #fff;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.5);
+  transition: transform 220ms ease, border-color 220ms ease;
+}
+
+.previewButton:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.previewButton:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.previewVideo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 36%;
+  pointer-events: none;
+  background: #151515;
+}
+
+.previewShade {
+  position: absolute;
+  inset: auto 0 0;
+  height: 40%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
+  pointer-events: none;
+}
+
+.previewLabel {
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  bottom: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  text-shadow: 0 2px 6px #000;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+}
+
+.arrow { font-size: 14px; }
+
+.onlineDot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #111;
+  border-radius: 50%;
+  background: #67d95b;
+  box-shadow: 0 0 0 5px rgba(103, 217, 91, 0.17);
+  pointer-events: none;
+}
+
+/* Semi-transparent overlay: backdrop remains visible WITHOUT blur. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 64px 12px 24px;
+  background: rgba(0, 0, 0, 0.8);
+  overscroll-behavior: contain;
+  /* Intentionally NO backdrop-filter: blur() */
+  pointer-events: auto !important;
+  isolation: isolate;
+}
+
+/* Calendly opens directly as a large white two-column booking window. */
+.modal {
+  position: relative;
+  min-height: 0;
+  overflow: visible;
+  border-radius: 9px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  pointer-events: auto !important;
+}
+
+.calendarFrame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: var(--calendar-width);
+  height: var(--calendar-height);
+  transform: scale(var(--calendar-scale));
+  transform-origin: top left;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  pointer-events: auto !important;
+}
+
+.calendarFrame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: inherit;
+}
+
+.calendarFrame :global(.calendly-spinner) { display: none; }
+
+.closeButton {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  color: #050505;
+  background: #fff;
+  border: 1px solid #111;
+  border-radius: 9px;
+  box-shadow: 0 0 0 2px #fff;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.closeButton:hover { background: #e8e8e8; transform: scale(1.05); }
+.closeButton:focus-visible { outline: 2px solid white; outline-offset: 3px; }
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  color: #0b2540;
+  text-align: center;
+  background: #fff;
+  border-radius: 9px;
+}
+
+.loading p { margin: 0; }
+.loading a { color: #006bff; text-decoration: underline; }
+.modal > span[tabindex] { position: absolute; width: 1px; height: 1px; overflow: hidden; }
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #eaf2ff;
+  border-top-color: #006bff;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+:global(html):has(.backdrop) :global(.custom-cursor-dot),
+:global(html):has(.backdrop) :global(.custom-cursor-ring) {
+  display: none !important;
+}
+
+/* The site has a custom cursor. Show the NORMAL cursor over the modal so
+   visitors can click and select calendar dates inside Calendly's iframe.
+   The custom cursor cannot track inside a cross-origin Calendly iframe. */
+:global(html.eo-calendly-open) .backdrop,
+:global(html.eo-calendly-open) .backdrop *,
+:global(html.eo-calendly-open) .calendarFrame {
+  cursor: auto !important;
+}
+
+:global(html.eo-calendly-open) .closeButton,
+:global(html.eo-calendly-open) .closeButton * {
+  cursor: pointer !important;
+}
+
+@media (max-width: 700px) {
+  .floating {
+    left: 12px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    width: 84px;
+    height: 112px;
+  }
+
+  .previewButton { border-radius: 12px; }
+  .previewLabel { bottom: 7px; font-size: 9px; }
+  .arrow { font-size: 11px; }
+  .onlineDot { top: 6px; right: 6px; width: 11px; height: 11px; }
+
+  .backdrop { padding: 64px 12px 24px; }
+  .modal {
+    min-height: 0;
+    border-radius: 9px;
+  }
+  .closeButton { top: -44px; right: 0; width: 35px; height: 35px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .previewButton, .closeButton { transition: none; }
+  .spinner { animation: none; }
+}

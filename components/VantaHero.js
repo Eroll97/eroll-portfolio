@@ -10,7 +10,7 @@ import { useEffect, useRef } from "react";
  * (for example, Home -> Portfolio -> Home).
  */
 export default function VantaHero({ children }) {
-  const heroRef = useRef(null);
+  const globeRef = useRef(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -24,12 +24,12 @@ export default function VantaHero({ children }) {
           import("vanta/dist/vanta.globe.min"),
         ]);
 
-        if (cancelled || !heroRef.current) return;
+        if (cancelled || !globeRef.current) return;
 
         const createGlobe = vantaModule.default || vantaModule;
 
         globeEffect = createGlobe({
-          el: heroRef.current,
+          el: globeRef.current,
           THREE,
           mouseControls: true,
           touchControls: true,
@@ -63,7 +63,8 @@ export default function VantaHero({ children }) {
   }, []);
 
   return (
-    <section ref={heroRef} className="hero-section">
+    <section className="hero-section">
+      <div ref={globeRef} className="hero-globe" aria-hidden="true" />
       {children}
     </section>
   );

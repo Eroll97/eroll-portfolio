@@ -51,3 +51,38 @@ Keep the terminal running while the site is open.
 - `app/globals.css` — visual styling and responsive behavior
 - `components/Header.js` — navigation and brand
 - `components/Footer.js` — footer/contact placeholders
+
+## Project assistant and inquiry emails
+
+The assistant uses the server-side `GEMINI_API_KEY` and `GEMINI_MODEL` settings.
+Configure both in the hosting environment as well as `.env.local`. If the AI
+provider is unavailable, the visitor receives guided service answers and can
+still use the inquiry form.
+
+Visitors choose **Send project inquiry**, review their requirements, provide a
+name and email, and consent to sharing the conversation. `/api/inquiries`
+validates the submission and sends it through the same Formspree form used by
+the Contact page. The email includes the requirements/concerns, optional budget
+and timeline, transcript, UTC timestamp, and a unique reference. Success is shown
+only after Formspree acknowledges the submission. Chats are retained in the
+current browser tab's session; closing the chat widget does not email them.
+
+The shared notification endpoint is in `lib/inquiryConfig.js`. Manage recipient
+settings and email delivery in the existing Formspree account. Provider limits
+still apply. The built-in rate limiter is per process; use a shared limiter if
+the site is scaled across multiple instances.
+
+Run `npm.cmd test` for validation, delivery acknowledgment, fallback, origin, and
+request-limit checks. Tests mock external services and do not send email.
+
+## Video playback and content deterrents
+
+`TapVideo` hides native media controls. Click/tap, Enter, or Space toggles
+playback. The intro and GHL demo use the same player. Site-wide context-menu
+and common inspection/source/save shortcuts are cancelled by `ContentDeterrents`.
+Normal copy, paste, form input, navigation, and Escape remain available.
+
+These are convenience deterrents, not access control or DRM. Public media URLs
+remain retrievable, browser menus can still open developer tools, and a webpage
+cannot prevent OS-level screen recording. Do not rely on these features to hide
+secrets or guarantee that videos cannot be copied.

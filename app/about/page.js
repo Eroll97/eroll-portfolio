@@ -1,4 +1,6 @@
 import { tools, experience } from '../../lib/data';
+import GHLAgentShowcase from '../../components/GHLAgentShowcase';
+import AboutDemoSection from '../../components/AboutDemoSection';
 
 export const metadata = {
   title: 'About — Eroll Oliver',
@@ -457,127 +459,41 @@ const aboutStyles = String.raw`
 
 
 /* =========================================================
-   PORTFOLIO VIDEO SHOWCASE (ABOVE MY TOOLS)
+   GOHIGHLEVEL AI AGENT SHOWCASE — REPLACES SKILLS AREA
+   Located after the portfolio video and before the career tabs.
 ========================================================= */
 
-.about-demo-section {
+.about-ghl-agents-section {
   width: 100%;
-  padding: 90px 0 100px;
+  padding: 85px 0 100px;
   background: #080808;
-  border-top: 1px solid #171717;
-}
-
-.about-demo-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  align-items: center;
-  gap: clamp(32px, 5vw, 88px);
-}
-
-.about-demo-media,
-.about-demo-copy {
-  min-width: 0;
-}
-
-.about-demo-video-frame {
-  overflow: hidden;
-  width: 100%;
-  border: 1px solid #323232;
-  border-radius: 16px;
-  background: #000000;
-  box-shadow: 0 18px 65px rgba(0, 0, 0, 0.28);
-}
-
-.about-demo-video {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  background: #000000;
-}
-
-.about-demo-eyebrow {
-  margin: 0 0 19px;
-  color: #8c8c8c;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-}
-
-.about-demo-copy h2 {
-  max-width: 580px;
-  margin: 0 0 22px;
   color: #ffffff;
-  font-size: clamp(30px, 3.25vw, 48px);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.045em;
+  border-top: 1px solid #202020;
 }
 
-.about-demo-copy h2 span {
-  color: #a7a7a7;
-}
-
-.about-demo-copy p.about-demo-description {
-  max-width: 580px;
-  margin: 0 0 17px;
-  color: #a6a6a6;
-  font-size: 15px;
-  line-height: 1.78;
-}
-
-.about-demo-keywords {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 25px;
-}
-
-.about-demo-keywords span {
-  padding: 8px 13px;
-  color: #c8c8c8;
-  background: #111111;
-  border: 1px solid #343434;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 500;
+.about-ghl-agents-section .section-container {
+  width: calc(100% - 64px);
+  max-width: 1390px;
+  margin: 0 auto;
 }
 
 @media (max-width: 900px) {
-  .about-demo-section {
-    padding: 68px 0 76px;
+  .about-ghl-agents-section {
+    padding: 64px 0 76px;
   }
-
-  .about-demo-layout {
-    grid-template-columns: 1fr;
-    gap: 34px;
-  }
-
-  .about-demo-copy h2 {
-    max-width: 720px;
+  .about-ghl-agents-section .section-container {
+    width: calc(100% - 36px);
   }
 }
 
-@media (max-width: 650px) {
-  .about-demo-section {
-    padding: 55px 0 65px;
+@media (max-width: 550px) {
+  .about-ghl-agents-section {
+    padding: 54px 0 65px;
   }
-
-  .about-demo-video-frame {
-    border-radius: 12px;
-  }
-
-  .about-demo-copy h2 {
-    font-size: 30px;
-  }
-
-  .about-demo-copy p.about-demo-description {
-    font-size: 14px;
+  .about-ghl-agents-section .section-container {
+    width: calc(100% - 24px);
   }
 }
-
 
 /* =========================================================
    TOOLS SECTION
@@ -2039,118 +1955,23 @@ export default function About() {
         </section>
 
 
+        <AboutDemoSection />
+
         {/* =====================================================
-            VIDEO SHOWCASE — VIDEO LEFT, DESCRIPTION RIGHT
-            Positioned immediately above MY TOOLS
+            GOHIGHLEVEL AI AGENT DEMO — ABOUT PAGE
+            Interactive demo in place of the previous Skills area.
+            This is a scripted, illustrative simulation; no GHL API calls.
         ====================================================== */}
 
         <section
-          className="about-demo-section"
-          aria-labelledby="about-demo-heading"
+          id="ghl-ai-agents"
+          className="about-ghl-agents-section"
+          aria-label="GoHighLevel AI agent and CRM workflow demonstrations"
         >
-          <div className="section-container about-demo-layout">
-
-            {/* LEFT COLUMN — ACTUAL PORTFOLIO VIDEO */}
-            <div className="about-demo-media">
-              <div className="about-demo-video-frame">
-                <video
-                  className="about-demo-video"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  aria-label="Eroll Oliver portfolio demonstration video"
-                >
-                  <source
-                    src="/eroll-portfolio-demo.mp4"
-                    type="video/mp4"
-                  />
-                  Your browser does not support MP4 video playback.
-                </video>
-              </div>
-            </div>
-
-            {/* RIGHT COLUMN — INTRODUCTION CONNECTED TO THE VIDEO */}
-            <div className="about-demo-copy">
-              <p className="about-demo-eyebrow">MY WORK IN ACTION</p>
-
-              <h2 id="about-demo-heading">
-                More than a website. <span>A smarter way to work.</span>
-              </h2>
-
-              <p className="about-demo-description">
-                I bring ideas to life through professional, responsive websites
-                and digital experiences built with purpose. This video gives
-                you a closer look at the work behind my portfolio.
-              </p>
-
-              <p className="about-demo-description">
-                From thoughtful website layouts to connected forms, CRM
-                workflows, and automation, my focus is on creating solutions
-                that look polished and make day-to-day business easier.
-              </p>
-
-              <div className="about-demo-keywords" aria-label="Areas of expertise">
-                <span>Web Development</span>
-                <span>CRM Systems</span>
-                <span>Automation</span>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-
-        {/* =====================================================
-            TECHNOLOGIES
-        ====================================================== */}
-
-        <section className="inner-section tools-section">
-
           <div className="section-container">
-
-            <p className="section-label">
-              MY SKILLS
-            </p>
-
-
-            <h2>
-              Tools I've mastered
-            </h2>
-            <span>The stack I use every day to design, build and automate.</span>
-
-            <div className="tools-grid">
-
-              {tools.map(([name, image]) => (
-
-                <div
-                  className="tool-card"
-                  key={name}
-                >
-
-                  <div className="tool-icon">
-
-                    <img
-                      src={image}
-                      alt={name}
-                    />
-
-                  </div>
-
-
-                  <p>
-                    {name}
-                  </p>
-
-                </div>
-
-              ))}
-
-            </div>
-
+            <GHLAgentShowcase />
           </div>
-
         </section>
-
 
         {/* =====================================================
             EXPERIENCE / EDUCATION / ACHIEVEMENTS

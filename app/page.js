@@ -26,6 +26,7 @@ import ServiceCard from "../components/ServiceCard";
 import FeaturedCarousel from "../components/FeaturedCarousel";
 import HoverScrollPreview from "../components/HoverScrollPreview";
 import Typewriter from "../components/Typewriter";
+import PortfolioVideoPopup from "../components/PortfolioVideoPopup";
 
 /* =========================================================
    EROLL OLIVER - COMPLETE HOMEPAGE
@@ -147,6 +148,9 @@ export default function Home() {
                 >
                   Contact me
                 </Link>
+
+                {/* Open the GHL AI demo in a modal without leaving the home page. */}
+                <PortfolioVideoPopup />
 
               </div>
 

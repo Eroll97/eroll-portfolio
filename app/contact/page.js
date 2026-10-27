@@ -3,6 +3,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CONTACT_FORM_ENDPOINT } from "../../lib/inquiryConfig";
 
 /* ==========================================
    PORTFOLIO CONTACT SETTINGS
@@ -13,8 +14,7 @@ const EMAIL = "erolloliver97@gmail.com";
 const PHONE_DISPLAY = "+63 927 793 7650";
 const PHONE_LINK = "tel:+639277937650";
 
-const FORMSPREE_ENDPOINT =
-  "https://formspree.io/f/xzedjryr";
+const FORMSPREE_ENDPOINT = CONTACT_FORM_ENDPOINT;
 
 // Add a confirmed WhatsApp number, digits only.
 const WHATSAPP_NUMBER = "";

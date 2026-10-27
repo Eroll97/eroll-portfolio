@@ -1,21 +1,15 @@
 // For Next.js App Router. Copy this file only if using the /app folder.
 import { handlePortfolioChat } from '../../../lib/portfolioAI.js';
+import { readJson, PRIVATE_HEADERS } from '../../../lib/requestGuards.js';
 
 export const runtime = 'nodejs';
 
 export async function POST(request) {
-  if (Number(request.headers.get('content-length') || 0) > 12000) {
-    return Response.json({ error: 'Message is too large.' }, { status: 413 });
-  }
   let body;
   try {
-    const raw = await request.text();
-    if (raw.length > 12000) {
-      return Response.json({ error: 'Message is too large.' }, { status: 413 });
-    }
-    body = JSON.parse(raw);
+    body = await readJson(request, 24000);
   } catch {
-    return Response.json({ error: 'Invalid request body.' }, { status: 400 });
+    return Response.json({ error: 'Please shorten your message and try again.' }, { status: 400, headers: PRIVATE_HEADERS });
   }
 
   const response = await handlePortfolioChat({

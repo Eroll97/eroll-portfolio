@@ -1,117 +1,37 @@
-
 import { experience } from "../lib/data";
 import styles from "./BrandCarousel.module.css";
 
-/* ==========================================
-   EROLL OLIVER - BRAND CAROUSEL
-
-   Trusted by Industry Leaders
-
-   Existing Brand Logos
-   + D1TechCreative
-   + Hamsol
-   + Leadflex
-   + ZG Tech Solutions
-
-   Original Logo Colors
-   Continuous Two-Row Scrolling
-   CSS Module - No First-Load Flash
-========================================== */
-
-/* ==========================================
-   EXISTING BRAND LOGOS
-========================================== */
-
-const ORIGINAL_LOGO_ROWS = [
-  [
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-2eSdvrKOZW1M5XJSzj06tmR15Le2te.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-X9HnA7wE5MY2Vl0tLJZAEEOFXjeSWi.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-nSciI8m3X1Q92wt3YPdU9gRE18yjP0.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-tyArjVjdTOWVNmisn3y38bXQFYFb3z.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-WNfGuvpSmliPEZWZlwBVZ5gtQ98w6K.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-KCQ6fhrk0ogn4qFkVc3lGxBxdrqrMO.png",
-    "https://assets.cdn.filesafe.space/GyrIBT0jZYs6WUxSTMfo/media/69d53c08ebf1a60843046174.webp",
-    "https://assets.cdn.filesafe.space/GyrIBT0jZYs6WUxSTMfo/media/69d53c083d829c73b2aac14a.webp",
-  ],
-
-  [
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zYX9xrokZoyqpbnoDp7FgA91AVFo4O.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-wqxQVyQk9tFoTX4FCqBnwgUW6KtEnt.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-eiWU5tZiGh2HKgFRHAMgOT6JK3dRnt.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-V0r7GO61ghqrQg7YWHRo9rCLTXiMPN.png",
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-zGb4qVkcyWMRdfXOR6zoynmXbOa8pt.png",
-    "https://assets.cdn.filesafe.space/GyrIBT0jZYs6WUxSTMfo/media/69d53af0cf3e84bbd0aa7dc7.png",
-  ],
-];
-
-/* ==========================================
-   FOUR COMPANY LOGOS
-
-   Reuse existing logos from lib/data.js.
-========================================== */
-
-const COMPANY_NAMES = [
-  "D1TechCreative",
-  "Hamsol",
-  "Leadflex",
-  "ZG Tech Solutions",
-];
-
+// Retain the four company logos from the experience section.
+const COMPANY_NAMES = ["D1TechCreative", "Hamsol", "Leadflex", "ZG Tech Solutions"];
 const companyLogos = COMPANY_NAMES.map((name) => {
   const company = experience.find(
-    (item) =>
-      item.company.trim().toLowerCase() ===
-      name.toLowerCase()
+    (item) => item.company.trim().toLowerCase() === name.toLowerCase()
   );
-
-  if (!company?.logo) {
-    return null;
-  }
-
-  return {
-    name,
-    src: company.logo,
-  };
+  return company?.logo ? { name, src: company.logo } : null;
 }).filter(Boolean);
 
-/* ==========================================
-   COMBINE BRAND LOGOS
-
-   First Row:
-   Existing logos + D1TechCreative + Hamsol
-
-   Second Row:
-   Existing logos + Leadflex + ZG Tech Solutions
-========================================== */
-
-const LOGO_ROWS = [
-  [
-    ...ORIGINAL_LOGO_ROWS[0].map(
-      (src, index) => ({
-        src,
-        name: `Brand ${index + 1}`,
-      })
-    ),
-
-    ...companyLogos.slice(0, 2),
-  ],
-
-  [
-    ...ORIGINAL_LOGO_ROWS[1].map(
-      (src, index) => ({
-        src,
-        name: `Brand ${index + 9}`,
-      })
-    ),
-
-    ...companyLogos.slice(2, 4),
-  ],
+const CLIENT_LOGOS = [
+  { name: "Vanity Van Lines", src: "/brands/vanity-van-lines.jpeg" },
+  { name: "Liv Funding", src: "/brands/liv-funding.jpeg" },
+  { name: "Foreclosure Solutions USA", src: "/brands/foreclosure-solutions-usa.jpeg" },
+  { name: "VitaHub", src: "/brands/vitahub.jpeg" },
+  { name: "Mary Angels Home Care", src: "/brands/mary-angels-home-care.jpeg" },
+  { name: "Morse Hauling & Junk Removal", src: "/brands/morse.jpeg" },
+  { name: "Qulfi Wala", src: "/brands/qulfi-wala.jpeg" },
+  { name: "The Paper Roll", src: "/brands/the-paper-roll.jpeg" },
+  { name: "A Plus Moving & Storage", src: "/brands/a-plus-moving-storage.jpeg" },
+  { name: "GuaraBoost", src: "/brands/guaraboost.jpeg" },
+  { name: "The Clean Power Experts", src: "/brands/clean-power-experts.jpeg" },
+  { name: "4RT Cars", src: "/brands/4rt-cars.jpeg" },
+  { name: "Moskowitz Legal Group", src: "/brands/moskowitz-legal-group.jpeg" },
+  { name: "Baystone Marketing", src: "/brands/baystone-marketing.jpeg" },
 ];
 
-/* ==========================================
-   MAIN BRAND CAROUSEL
-========================================== */
-
+// Nine brands per row; each row is duplicated below for a seamless loop.
+const LOGO_ROWS = [
+  [...companyLogos.slice(0, 2), ...CLIENT_LOGOS.slice(0, 7)],
+  [...companyLogos.slice(2, 4), ...CLIENT_LOGOS.slice(7)],
+];
 export default function BrandCarousel() {
   return (
     <section
