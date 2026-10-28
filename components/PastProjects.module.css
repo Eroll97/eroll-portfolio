@@ -274,6 +274,25 @@
 
 /* PROJECT EXAMPLE COUNT */
 
+/* Only the four cover pictures move; gallery and lightbox images stay still. */
+.cardImage img.previewMedia {
+  animation: ppCoverMotion 9s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+.card:nth-child(2) .cardImage img.previewMedia { animation-delay: -3s; transform-origin: 35% 50%; }
+.card:nth-child(3) .cardImage img.previewMedia { animation-delay: -6s; transform-origin: 65% 50%; }
+.card:nth-child(4) .cardImage img.previewMedia { animation-delay: -2s; }
+
+@keyframes ppCoverMotion {
+  from { transform: scale(1.02) translateY(-1%); }
+  to { transform: scale(1.14) translateY(2%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardImage img.previewMedia { animation: none; transform: none; }
+}
+
 .count {
 
   position: absolute;
@@ -351,6 +370,7 @@
   letter-spacing: -0.02em;
 
 }
+
 
 .cardBody > p {
 
@@ -1047,6 +1067,7 @@
   text-align: center;
 
 }
+
 
 /* IMAGE POPUP PANEL SUPPORT
    If the image viewer uses the titled panel markup, style it like the reference. */

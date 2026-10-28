@@ -4049,15 +4049,17 @@ small {
   }
 
   .hero-globe {
-    /* Render in a short viewport so the globe stays round and fits the phone. */
-    top: 80px;
-    left: -12%;
+    /* Keep the globe behind the hero, without reserving space above the title. */
+    top: 50%;
+    left: -15%;
     right: auto;
     bottom: auto;
-    width: 100%;
-    height: clamp(240px, 68vw, 280px);
-    -webkit-mask-image: linear-gradient(#000 75%, transparent);
-    mask-image: linear-gradient(#000 75%, transparent);
+    width: 130%;
+    height: clamp(320px, 100vw, 460px);
+    transform: translateY(-50%);
+    opacity: 0.65;
+    -webkit-mask-image: linear-gradient(transparent, #000 20%, #000 75%, transparent);
+    mask-image: linear-gradient(transparent, #000 20%, #000 75%, transparent);
   }
 
   .hero-vanta-overlay {
@@ -4108,7 +4110,7 @@ small {
 
     padding:
 
-      200px 0 50px !important;
+      44px 0 50px !important;
 
   }
 

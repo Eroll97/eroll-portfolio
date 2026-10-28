@@ -33,7 +33,7 @@ const PROJECTS = [
       "End-to-end workflow automation systems that eliminate manual tasks and streamline operations. Built with n8n, Make, and Zapier.",
 
     preview:
-      CDN + "69d405b2d768ca60777e451d.png",
+      "/images/projects-automation.svg",
 
     tags: [
       "n8n",
@@ -153,7 +153,7 @@ const PROJECTS = [
       "Intelligent conversational AI agents that handle customer inquiries and automate support. From simple FAQ bots to complex multi-turn conversation systems.",
 
     preview:
-      CDN + "69d405b2d768ca60777e451c.jpg",
+      "/images/projects-chat.svg",
 
     tags: [
       "AI Chatbots",
@@ -217,7 +217,7 @@ const PROJECTS = [
       "AI-powered voice assistants for phone automation, bookings, and customer interactions. Natural conversations that handle real business calls.",
 
     preview:
-      CDN + "69d405b23d829c73b27be210.png",
+      "/images/projects-voice.svg",
 
     tags: [
       "Retell AI",
@@ -280,7 +280,7 @@ const PROJECTS = [
       "Custom-built websites and high-converting funnels designed to scale your business using GoHighLevel.",
 
     preview:
-      CDN + "69d405b2bec7abdef117d030.jpg",
+      "/images/projects-funnels.svg",
 
     tags: [
       "GoHighLevel",
@@ -290,46 +290,14 @@ const PROJECTS = [
 
     items: [
       {
-        title: "7 Figure Builder",
-        image:
-          CDN + "69d41777daf6c22526e5a716.png",
-        website:
-          "https://7figurebuilder.com/",
+        title: "Moskowitz Legal Group",
+        image: "/shots/moskowitz-legal-group.png",
+        website: "https://www.moskowitzlegalgroup.com/",
       },
       {
-        title: "RJ Pierce Law Group",
-        image:
-          CDN + "69d417cea7dcb4cff0edfbfd.png",
-        website:
-          "https://multiplythemark.com/",
-      },
-      {
-        title: "Power Suite",
-        image:
-          CDN + "69d41844fa2dde97428b06c4.png",
-        website:
-          "https://yourpowersuite.com/",
-      },
-      {
-        title: "Row House",
-        image:
-          CDN + "69d41899c7e70ac57d9e5aad.png",
-        website:
-          "https://www.therowhouse.com/",
-      },
-      {
-        title: "Beauty Biz Pro",
-        image:
-          CDN + "69d418e53b2aa54fd7c791ce.png",
-        website:
-          "https://beautybizpro.com/",
-      },
-      {
-        title: "The Data Driven Practice",
-        image:
-          CDN + "69d41943c237db08773767b2.png",
-        website:
-          "https://datadrivendoc.com/home",
+        title: "4RT Cars",
+        image: "/shots/4rt-cars.png",
+        website: "https://4rtcars.com/",
       },
       {
         title: "Swanson Reserve Capital",
@@ -368,44 +336,15 @@ const PROJECTS = [
    FIXED DIMENSIONS PREVENT LAYOUT JUMPS
 ========================================== */
 
-function ProjectImage({
-  src,
-  alt,
-  variant = "preview",
-  eager = false,
-}) {
+function ProjectImage({ src, alt, variant = "preview", eager = false }) {
   const [failed, setFailed] = useState(false);
-
-  const imageClass =
-    variant === "preview"
-      ? styles.previewMedia
-      : styles.galleryMedia;
+  const imageClass = variant === "preview" ? styles.previewMedia : styles.galleryMedia;
 
   if (!src || failed) {
-    return (
-      <div
-        className={`${imageClass} ${styles.imageFallback}`}
-        role="img"
-        aria-label={`${alt} image unavailable`}
-      >
-        PREVIEW UNAVAILABLE
-      </div>
-    );
+    return <div className={`${imageClass} ${styles.imageFallback}`} role="img" aria-label={`${alt} image unavailable`}>PREVIEW UNAVAILABLE</div>;
   }
 
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={src}
-      alt={alt}
-      width={variant === "preview" ? 900 : 1200}
-      height={variant === "preview" ? 520 : 800}
-      className={imageClass}
-      loading={eager ? "eager" : "lazy"}
-      decoding="async"
-      onError={() => setFailed(true)}
-    />
-  );
+  return <img src={src} alt={alt} width={variant === "preview" ? 900 : 1200} height={variant === "preview" ? 520 : 800} className={imageClass} loading={eager ? "eager" : "lazy"} decoding="async" onError={() => setFailed(true)} />;
 }
 
 /* ==========================================
@@ -619,24 +558,13 @@ export default function PastProjects() {
               key={project.id}
               type="button"
               className={styles.card}
-              onClick={(event) =>
-                openCategory(project.id, event)
-              }
+              onClick={(event) => openCategory(project.id, event)}
               aria-label={`Explore ${project.name} gallery`}
             >
 
               <div className={styles.cardImage}>
-
-                <ProjectImage
-                  src={project.preview}
-                  alt={project.name}
-                  eager
-                />
-
-                <span className={styles.count}>
-                  {project.items.length} EXAMPLES
-                </span>
-
+                <ProjectImage src={project.preview} alt={project.name} eager />
+                <span className={styles.count}>{project.items.length} EXAMPLES</span>
               </div>
 
               <div className={styles.cardBody}>
@@ -770,11 +698,7 @@ export default function PastProjects() {
                           aria-label={`Enlarge ${item.title} image`}
                         >
 
-                          <ProjectImage
-                            src={item.image}
-                            alt={item.title}
-                            variant="gallery"
-                          />
+                          <ProjectImage src={item.image} alt={item.title} variant="gallery" />
 
                           <span className={styles.zoomHint}>
                             VIEW IMAGE ↗
@@ -847,12 +771,7 @@ export default function PastProjects() {
 
                 <div className={styles.lightboxBody}>
 
-                  <ProjectImage
-                    src={zoomImage.image}
-                    alt={zoomImage.title}
-                    variant="gallery"
-                    eager
-                  />
+                  <ProjectImage src={zoomImage.image} alt={zoomImage.title} variant="gallery" eager />
 
                   <p>{zoomImage.title}</p>
 

@@ -27,6 +27,7 @@ import FeaturedCarousel from "../components/FeaturedCarousel";
 import HoverScrollPreview from "../components/HoverScrollPreview";
 import Typewriter from "../components/Typewriter";
 import PortfolioVideoPopup from "../components/PortfolioVideoPopup";
+import ExpertiseNetwork from "../components/ExpertiseNetwork";
 
 /* =========================================================
    EROLL OLIVER - COMPLETE HOMEPAGE
@@ -190,6 +191,8 @@ export default function Home() {
         </div>
 
       </VantaHero>
+
+      <ExpertiseNetwork />
 
 
       {/* ============================================

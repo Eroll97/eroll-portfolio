@@ -8,6 +8,9 @@ test('blocks common inspection, source and save shortcuts', () => {
     { key: 'j', ctrlKey: true, shiftKey: true }, { key: 'C', ctrlKey: true, shiftKey: true },
     { key: 'i', metaKey: true, altKey: true }, { key: 'u', metaKey: true, altKey: true },
     { key: 'u', ctrlKey: true }, { key: 's', metaKey: true },
+    { code: 'F12' }, { key: 'Unidentified', code: 'F12' },
+    { key: 'Unidentified', code: 'KeyI', ctrlKey: true, shiftKey: true },
+    { code: 'KeyJ', metaKey: true, altKey: true },
   ]) assert.equal(isRestrictedShortcut(event), true);
 });
 

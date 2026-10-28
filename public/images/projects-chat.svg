@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+<defs><radialGradient id="bg"><stop stop-color="#303030"/><stop offset="1" stop-color="#0c0c0c"/></radialGradient><linearGradient id="panel" x2="1" y2="1"><stop stop-color="#303030"/><stop offset="1" stop-color="#161616"/></linearGradient><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#ffffff12"/></pattern></defs>
+<rect width="800" height="480" fill="url(#bg)"/><rect width="800" height="480" fill="url(#grid)"/>
+<rect x="195" y="76" width="410" height="334" rx="23" fill="#111" stroke="#555"/><path d="M195 141H605" stroke="#373737"/>
+<circle cx="235" cy="110" r="17" fill="#eee"/><path d="M227 107h16v10h-16z" fill="none" stroke="#222" stroke-width="2"/><circle cx="232" cy="112" r="1"/><circle cx="238" cy="112" r="1"/>
+<text x="266" y="109" fill="#eee" font-size="15" font-family="Arial,sans-serif">AI Assistant</text><text x="266" y="126" fill="#888" font-size="9" font-family="Arial,sans-serif">Ready to help, around the clock</text><circle cx="570" cy="110" r="4" fill="#ddd"/>
+<rect x="295" y="164" width="280" height="48" rx="13" fill="#343434"/><text x="315" y="193" fill="#ddd" font-size="12" font-family="Arial,sans-serif">Can I book a consultation?</text>
+<rect x="225" y="230" width="286" height="70" rx="13" fill="url(#panel)" stroke="#484848"/><text x="245" y="258" fill="#eee" font-size="12" font-family="Arial,sans-serif">Absolutely. Let’s find a time</text><text x="245" y="279" fill="#aaa" font-size="12" font-family="Arial,sans-serif">that works for you.</text>
+<rect x="225" y="318" width="92" height="32" rx="16" fill="#242424" stroke="#555"/><g fill="#ddd"><circle cx="252" cy="334" r="3"/><circle cx="271" cy="334" r="3"/><circle cx="290" cy="334" r="3"/></g>
+<rect x="225" y="370" width="350" height="22" rx="11" fill="#1e1e1e"/><path d="m549 376 8 5-8 5" fill="none" stroke="#aaa" stroke-width="2"/>
+<circle cx="156" cy="248" r="37" fill="#202020" stroke="#555"/><path d="M144 237h24v17h-13l-7 6v-6h-4z" fill="none" stroke="#ddd" stroke-width="2"/>
+<text x="42" y="42" fill="#999" font-family="Arial,sans-serif" font-size="10" letter-spacing="3">02 / INTELLIGENT CONVERSATIONS</text></svg>
