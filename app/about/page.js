@@ -147,6 +147,11 @@ const aboutStyles = String.raw`
   line-height: 1.68;
 }
 
+.about-description strong {
+  color: #e4e4e4;
+  font-weight: 600;
+}
+
 
 /* =========================================================
    STATS
@@ -1633,27 +1638,37 @@ export default function About() {
 
 
                 <h1>
-                  The developer behind the sites
+                  THE MIND BEHIND THE SYSTEMS
                 </h1>
 
 
                 <p className="about-intro">
-                  WordPress and Go HighLevel (GHL) specialist with over 6 years
-                  of experience in CRM development, sales automation, and lead
-                  generation. I build responsive websites and intelligent
-                  automation workflows — including AI agent–powered systems —
-                  that help businesses convert more leads and save time.
+                  <strong>Developer by craft. Systems thinker by instinct. AI-driven by design.</strong>
                 </p>
 
 
                 <p className="about-description">
-                  Based in the Philippines, I've spent the last six years
-                  working with agencies and businesses across the world —
-                  building WordPress websites, Shopify stores, high-converting
-                  funnels, and Go HighLevel CRM systems. My focus is always the
-                  same: a site that loads fast, looks professional, and turns
-                  visitors into leads — backed by automation that follows up
-                  with every single one of them.
+                  A website is only the visible part of what I create. Behind every interface, I see an opportunity to connect technology, eliminate friction, and make a business operate more intelligently.
+                </p>
+
+                <p className="about-description">
+                  I'm a Philippines-based developer and automation specialist with <strong>6+ years of experience and 800+ websites launched</strong>, specializing in WordPress, Shopify, GoHighLevel, and AI-powered business systems.
+                </p>
+
+                <p className="about-description">
+                  My work goes beyond conventional development. I craft premium digital experiences, engineer intelligent CRM systems, and build AI voice agents, chatbots, and automated workflows that connect customer interactions with real business operations.
+                </p>
+
+                <p className="about-description">
+                  What sets my approach apart is how everything works together. A beautiful interface should lead somewhere. A new inquiry should have a clear next step. And automation should do more than execute tasks — it should make the entire business smarter.
+                </p>
+
+                <p className="about-description">
+                  <strong>I care about what visitors experience. I'm equally obsessed with what happens after they leave.</strong>
+                </p>
+
+                <p className="about-description">
+                  Because the most powerful part of a digital experience isn't always what you see. <strong>It's everything working intelligently behind it.</strong>
                 </p>
 
 
