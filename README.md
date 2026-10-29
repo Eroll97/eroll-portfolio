@@ -55,9 +55,18 @@ Keep the terminal running while the site is open.
 ## Project assistant and inquiry emails
 
 The assistant uses the server-side `GEMINI_API_KEY` and `GEMINI_MODEL` settings.
-Configure both in the hosting environment as well as `.env.local`. If the AI
-provider is unavailable, the visitor receives guided service answers and can
-still use the inquiry form.
+Configure these in the hosting environment as well as `.env.local`. The default
+primary model is `gemini-3.6-flash`; `GEMINI_FALLBACK_MODEL` defaults to
+`gemini-3.5-flash-lite`. The primary has a 26-second deadline and the backup an
+18-second deadline, within a 44-second total budget. Timeouts, quota/overload errors, and empty or exhausted
+responses try the backup once. Authentication failures stop immediately.
+If both models are unavailable, the visitor receives guided answers and a
+Retry AI answer button, and can still use the inquiry form.
+
+Chat context keeps the opening brief and recent turns (up to 36 messages within
+a 60,000-character budget). Explicit corrections take priority over earlier
+details. Published package facts are shared with `/pricing` in
+`lib/pricingData.js`; custom quotes and availability require Eroll's confirmation.
 
 Visitors choose **Send project inquiry**, review their requirements, provide a
 name and email, and consent to sharing the conversation. `/api/inquiries`

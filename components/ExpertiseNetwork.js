@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import styles from "./ExpertiseNetwork.module.css";
 
 const websites = [
@@ -9,25 +12,84 @@ const systems = [
   "Email & SMS Follow-ups", "Appointment Booking", "Lead Capture & Nurture", "Platform Integrations",
 ];
 
-function Connections({ side }) {
+function Connections({ diagramRef }) {
+  const [paths, setPaths] = useState([]);
+
+  useEffect(() => {
+    const diagram = diagramRef.current;
+    if (!diagram) return;
+    let disposed = false;
+    let frame;
+    const measure = () => {
+      if (disposed || !diagram.isConnected) return;
+      const bounds = diagram.getBoundingClientRect();
+      const portrait = diagram.querySelector('[data-portrait]').getBoundingClientRect();
+      const caption = diagram.querySelector('figcaption').getBoundingClientRect();
+      const centerX = portrait.left + portrait.width / 2 - bounds.left;
+      const centerY = portrait.top + portrait.height / 2 - bounds.top;
+      const sourceY = portrait.bottom - bounds.top;
+      const forkY = caption.bottom - bounds.top + 18;
+      const next = [];
+
+      diagram.querySelectorAll('[data-branch]').forEach(branch => {
+        const side = branch.dataset.branch;
+        const targetX = (side === 'left' ? portrait.left : portrait.right) - bounds.left;
+        branch.querySelectorAll('li i').forEach((dot, index) => {
+          const rect = dot.getBoundingClientRect();
+          const x = rect.left + rect.width / 2 - bounds.left;
+          const y = rect.top + rect.height / 2 - bounds.top;
+          const bend = (x + targetX) / 2;
+          next.push({ key: `${side}-${index}`, side: true, index,
+            d: `M ${x} ${y} C ${bend} ${y}, ${bend} ${centerY}, ${targetX} ${centerY}` });
+        });
+      });
+      diagram.querySelectorAll('[data-outcome]').forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const x = rect.left + rect.width / 2 - bounds.left;
+        const y = rect.top - bounds.top;
+        next.push({ key: `outcome-${index}`, index, side: false,
+          d: `M ${centerX} ${sourceY} L ${centerX} ${forkY} C ${centerX} ${forkY + 28}, ${x} ${y - 38}, ${x} ${y}` });
+      });
+      setPaths(next);
+    };
+    const schedule = () => {
+      if (disposed) return;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(measure);
+    };
+    const observer = new ResizeObserver(schedule);
+    observer.observe(diagram);
+    diagram.querySelectorAll('[data-portrait], [data-branch], [data-outcome], figcaption').forEach(node => observer.observe(node));
+    document.fonts?.ready.then(schedule);
+    schedule();
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [diagramRef]);
+
   return (
-    <svg className={`${styles.connections} ${styles[side]}`} viewBox="0 0 200 400" preserveAspectRatio="none" aria-hidden="true">
-      {websites.map((_, index) => {
-        const y = 25 + index * 50;
-        return <g key={y}>
-          <path id={`network-${side}-${index}`} d={`M 0 ${y} C 105 ${y}, 95 200, 200 200`} />
-          <circle cx="0" cy={y} r="3" />
-          <circle className={styles.particle} r="2.5">
-            <animateMotion dur={`${3 + index * .3}s`} begin={`${index * -.7}s`} repeatCount="indefinite" path={`M 0 ${y} C 105 ${y}, 95 200, 200 200`} />
-          </circle>
-        </g>;
-      })}
-      <circle cx="198" cy="200" r="4" />
+    <svg className={styles.connections} aria-hidden="true">
+      {paths.map(({ key, d, index, side }) => (
+        <g key={key} className={side ? styles.serviceConnection : styles.outcomeConnection}>
+          <path d={d} />
+          {[0, 1].map(pulse => (
+            <g key={pulse} className={styles.particle}>
+              <animateMotion dur={side ? '4.8s' : '3.6s'} begin={`${-index * .38 - pulse * (side ? 2.4 : 1.8)}s`} repeatCount="indefinite" path={d} calcMode="paced" />
+              <circle className={styles.particleHalo} r={side ? 4 : 7} />
+              <circle r={side ? 1.6 : 2.4} />
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" dur={side ? '4.8s' : '3.6s'} begin={`${-index * .38 - pulse * (side ? 2.4 : 1.8)}s`} repeatCount="indefinite" />
+            </g>
+          ))}
+        </g>
+      ))}
     </svg>
   );
 }
 
 export default function ExpertiseNetwork() {
+  const diagramRef = useRef(null);
   return (
     <section className={styles.section} aria-labelledby="expertise-network-title">
       <div className="shell">
@@ -37,30 +99,30 @@ export default function ExpertiseNetwork() {
           <p>I bring design, development, and intelligent automation together to help your business work smarter.</p>
         </header>
 
+        <div className={styles.diagram} ref={diagramRef}>
+        <Connections diagramRef={diagramRef} />
         <div className={styles.network}>
-          <div className={`${styles.branch} ${styles.websites}`}>
+          <div className={`${styles.branch} ${styles.websites}`} data-branch="left">
             <h3>WEBSITES &amp; DIGITAL EXPERIENCES</h3>
             <ul>{websites.map(item => <li key={item}><span>{item}</span><i /></li>)}</ul>
           </div>
-          <Connections side="left" />
           <figure className={styles.identity}>
             <div className={styles.orbit} aria-hidden="true"><span /></div>
-            <div className={styles.portrait}>
+            <div className={styles.portrait} data-portrait>
               <img src="/images/eroll-brain.png" alt="Eroll Oliver with a cybernetic face surrounded by digital rings" width="1254" height="1254" />
             </div>
             <figcaption><strong>Eroll Oliver</strong><span>DEVELOPER · AUTOMATION SPECIALIST</span></figcaption>
           </figure>
-          <Connections side="right" />
-          <div className={`${styles.branch} ${styles.systems}`}>
+          <div className={`${styles.branch} ${styles.systems}`} data-branch="right">
             <h3>AUTOMATION &amp; AI SYSTEMS</h3>
             <ul>{systems.map(item => <li key={item}><i /><span>{item}</span></li>)}</ul>
           </div>
         </div>
 
         <div className={styles.outcomes}>
-          <svg viewBox="0 0 520 90" preserveAspectRatio="none" aria-hidden="true"><path d="M260 0 C260 48 130 35 130 90 M260 0 C260 48 390 35 390 90" /><circle cx="260" cy="1" r="3" /></svg>
-          <div className={styles.outcome}><span>01 / STRATEGY</span><h3>Built with purpose.</h3><p>A clear plan around your business, your audience, and your goals.</p></div>
-          <div className={styles.outcome}><span>02 / EXECUTION</span><h3>Connected to perform.</h3><p>Websites that convert. Automations that keep your business moving.</p></div>
+          <div className={styles.outcome} data-outcome><i className={styles.cardPort} aria-hidden="true" /><span>01 / STRATEGY</span><h3>Built with purpose.</h3><p>A clear plan around your business, your audience, and your goals.</p></div>
+          <div className={styles.outcome} data-outcome><i className={styles.cardPort} aria-hidden="true" /><span>02 / EXECUTION</span><h3>Connected to perform.</h3><p>Websites that convert. Automations that keep your business moving.</p></div>
+        </div>
         </div>
       </div>
     </section>

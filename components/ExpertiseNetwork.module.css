@@ -5,7 +5,11 @@
 .heading h2 { font-family: var(--display); font-size: clamp(30px, 3.4vw, 48px); line-height: 1.13; letter-spacing: -.045em; margin: 20px 0; }
 .heading h2 span { color: #888; }
 .heading > p:last-child { color: #999; font-size: 14px; line-height: 1.8; max-width: 500px; margin: auto; }
-.network { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(45px, .42fr) minmax(250px, 1.3fr) minmax(45px, .42fr) minmax(180px, 1fr); align-items: center; max-width: 1160px; margin: auto; }
+.diagram { position: relative; isolation: isolate; max-width: 1160px; margin: auto; }
+.network { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(45px, .42fr) minmax(250px, 1.3fr) minmax(45px, .42fr) minmax(180px, 1fr); align-items: center; }
+.websites { grid-column: 1; }
+.identity { grid-column: 3; }
+.systems { grid-column: 5; }
 .branch { position: relative; z-index: 1; }
 .branch h3 { font-family: var(--body); color: #8e8e8e; font-weight: 500; font-size: 9px; letter-spacing: .15em; height: 36px; margin: 0; white-space: nowrap; }
 .websites h3 { text-align: right; }
@@ -14,24 +18,25 @@
 .branch li:hover { color: #fff; }
 .branch i { display: block; flex: 0 0 5px; height: 5px; border-radius: 50%; background: #ddd; box-shadow: 0 0 9px #ffffff35; }
 .websites li { justify-content: flex-end; text-align: right; }
-.connections { width: 100%; height: 360px; overflow: visible; margin-top: 36px; }
+.connections { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: -1; }
 .connections path { fill: none; stroke: #ffffff35; stroke-width: 1; stroke-dasharray: 3 6; vector-effect: non-scaling-stroke; }
 .connections circle { fill: #bfbfbf; }
 .connections .particle { fill: #fff; }
-.right { transform: scaleX(-1); }
+.connections .particleHalo { fill: #fff; opacity: .12; }
+.connections .outcomeConnection path { stroke: #ffffff65; }
 .identity { position: relative; margin: 0; aspect-ratio: 1; width: 100%; isolation: isolate; }
 .portrait { position: absolute; inset: 0; display: grid; place-items: center; }
 .portrait img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .orbit { position: absolute; inset: 0; border: 1px solid #ffffff2d; border-radius: 50%; animation: orbit 35s linear infinite; }
 .orbit span { position: absolute; top: 14%; right: 14%; width: 7px; height: 7px; background: #fff; border-radius: 50%; box-shadow: 0 0 0 6px #ffffff12, 0 0 16px #ffffff60; }
 .identity figcaption { position: absolute; bottom: -47px; width: 125%; left: -12.5%; text-align: center; }
+.identity figcaption strong, .identity figcaption span { position: relative; width: fit-content; margin-left: auto; margin-right: auto; padding: 0 10px; background: #0a0a0a; }
 .identity strong { display: block; font-family: var(--display); font-size: 21px; letter-spacing: -.04em; }
 .identity figcaption span { display: block; margin-top: 7px; font-size: 8px; color: #999; letter-spacing: .13em; }
 .outcomes { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 560px; margin: 125px auto 0; }
-.outcomes > svg { position: absolute; width: 100%; height: 70px; top: -70px; overflow: visible; }
-.outcomes path { fill: none; stroke: #ffffff55; stroke-width: 1; stroke-dasharray: 3 5; }
-.outcomes circle { fill: #ddd; }
-.outcome { text-align: center; padding: 26px 21px; background: linear-gradient(135deg, #191919, #0b0b0b); border: 1px solid #ffffff20; border-radius: 14px; }
+.outcome { position: relative; text-align: center; padding: 26px 21px; background: linear-gradient(135deg, #191919, #0b0b0b); border: 1px solid #ffffff20; border-radius: 14px; transition: border-color .35s ease, box-shadow .35s ease; }
+.outcome:hover { border-color: #ffffff45; box-shadow: 0 0 28px #ffffff06; }
+.cardPort { position: absolute; top: -3px; left: calc(50% - 3px); width: 5px; height: 5px; border-radius: 50%; background: #eee; box-shadow: 0 0 10px #ffffff70; }
 .outcome > span { font-size: 9px; color: #888; letter-spacing: .16em; }
 .outcome h3 { font-family: var(--display); font-size: 21px; letter-spacing: -.04em; margin: 12px 0 9px; }
 .outcome p { font-size: 12px; color: #999; line-height: 1.7; margin: 0; }
@@ -41,14 +46,16 @@
   .section { padding: 64px 0; }
   .heading { margin-bottom: 35px; }
   .heading > p:last-child { font-size: 13px; }
-  .network { grid-template-columns: 1fr 1fr; gap: 58px 20px; }
-  .identity { grid-column: 1 / -1; grid-row: 1; max-width: 285px; justify-self: center; margin-bottom: 25px; }
-  .connections { display: none; }
+  .diagram { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 38px 20px; }
+  .network { display: contents; }
+  .identity { grid-column: 1 / -1; grid-row: 1; max-width: 285px; justify-self: center; margin-bottom: 0; }
+  .serviceConnection { display: none; }
+  .websites { grid-column: 1; grid-row: 3; }
+  .systems { grid-column: 2; grid-row: 3; }
   .branch h3, .websites h3 { text-align: left; font-size: 8px; letter-spacing: .09em; white-space: normal; height: 38px; line-height: 1.7; }
   .branch li { font-size: 11px; height: 43px; gap: 8px; }
   .websites li { flex-direction: row-reverse; justify-content: flex-end; text-align: left; }
-  .outcomes { margin-top: 50px; gap: 10px; }
-  .outcomes > svg { display: none; }
+  .outcomes { grid-column: 1 / -1; grid-row: 2; width: 100%; margin-top: 82px; gap: 10px; }
   .outcome { padding: 22px 13px; }
   .outcome h3 { font-size: 18px; }
   .outcome p { font-size: 11px; }

@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { BOOKING_URL, CONTACT_EMAIL, inferService, INQUIRY_SERVICES } from '../lib/inquiryConfig';
+import { prepareChatHistory } from '../lib/chatContext';
 import styles from './PortfolioChatbot.module.css';
 
 const STARTERS = ['Explore services', 'I need a website', 'Help with GoHighLevel', 'Get a project quote'];
 const INTRO = {
   role: 'assistant', intro: true,
-  text: "Welcome! I'm Eroll's AI project assistant. I can help you explore website, funnel, CRM, and automation services, or share a project inquiry with Eroll. What would you like to build or improve?",
+  text: "Welcome! I'm Eroll's AI assistant. Ask a question, describe a problem, or tell me about your project in English, Bisaya, or Tagalog. I can explain your options and help share an inquiry with Eroll. How can I help?",
 };
 const EMPTY_INQUIRY = { name: '', email: '', service: 'Website development', details: '', budget: '', timeline: '', consent: false, website: '' };
 const SESSION_KEY = 'eroll-project-chat-v2';
@@ -57,7 +58,11 @@ export default function PortfolioChatbot() {
 
   useEffect(() => {
     if (!hydrated) return;
-    try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages.slice(-60))); } catch { /* Storage may be disabled. */ }
+    try {
+      const conversation = messages.filter(message => !message.intro);
+      const saved = conversation.length > 60 ? [...conversation.slice(0, 6), ...conversation.slice(-54)] : conversation;
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(saved));
+    } catch { /* Storage may be disabled. */ }
   }, [messages, hydrated]);
 
   useEffect(() => {
@@ -86,18 +91,20 @@ export default function PortfolioChatbot() {
     setLoading(true);
     setError('');
     setInput('');
+    const retryGuided = messages.at(-1)?.guided && messages.at(-2)?.role === 'user' && messages.at(-2)?.text === question;
     const retrying = messages.at(-1)?.role === 'user' && messages.at(-1)?.text === question;
-    const history = (retrying ? messages.slice(0, -1) : messages)
-      .filter(m => !m.intro).slice(-10).map(m => ({ role: m.role, content: m.text }));
-    if (!retrying) setMessages(prev => [...prev, { role: 'user', text: question }]);
+    const beforeQuestion = retryGuided ? messages.slice(0, -2) : retrying ? messages.slice(0, -1) : messages;
+    const nextMessages = [...beforeQuestion, { role: 'user', text: question }];
+    const conversation = prepareChatHistory(nextMessages);
+    setMessages(nextMessages);
     const controller = new AbortController();
     controllerRef.current = controller;
-    const timeout = setTimeout(() => controller.abort(), 30000);
+    const timeout = setTimeout(() => controller.abort(), 52000);
     try {
       const response = await fetch('/api/chat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin', cache: 'no-store',
-        body: JSON.stringify({ messages: [...history, { role: 'user', content: question }] }),
+        body: JSON.stringify({ messages: conversation }),
         signal: controller.signal,
       });
       const result = await response.json().catch(() => ({}));
@@ -105,7 +112,7 @@ export default function PortfolioChatbot() {
         throw new Error(result.error || 'I could not answer just now. Please try again or send a project inquiry.');
       }
       setMode(result.mode || 'ai');
-      setMessages(prev => [...prev, { role: 'assistant', text: result.reply }]);
+      setMessages(prev => [...prev, { role: 'assistant', text: result.reply, guided: result.mode === 'guided' }]);
     } catch (err) {
       setError(err.name === 'AbortError'
         ? 'That took longer than expected. Please retry or use Send project inquiry.'
@@ -218,6 +225,7 @@ export default function PortfolioChatbot() {
                   <div key={index} className={`${styles.message} ${message.role === 'user' ? styles.user : styles.assistant}`}><span><MessageText text={message.text} /></span></div>
                 ))}
                 {loading && <div className={`${styles.message} ${styles.assistant} ${styles.typing}`} role="status">Thinking<span className={styles.dots}>…</span></div>}
+                {!loading && !error && messages.at(-1)?.guided && <div className={styles.error} role="status">AI is temporarily unavailable. You can retry your question.<button type="button" onClick={() => sendMessage(messages.filter(m => m.role === 'user').at(-1)?.text || '')}>Retry AI answer</button></div>}
                 {error && <div className={styles.error} role="alert">{error}<button type="button" onClick={() => sendMessage(messages.filter(m => m.role === 'user').at(-1)?.text || '')}>Retry message</button></div>}
               </div>
               {messages.length === 1 && <div className={styles.starters} aria-label="Suggested questions">{STARTERS.map(label => <button disabled={loading} type="button" key={label} onClick={() => sendMessage(label)}>{label}</button>)}</div>}
@@ -226,7 +234,7 @@ export default function PortfolioChatbot() {
                 <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a call ↗</a>
               </div>
               <form className={styles.composer} onSubmit={event => { event.preventDefault(); sendMessage(); }}>
-                <input ref={inputRef} value={input} onChange={event => setInput(event.target.value)} maxLength={1200} aria-label="Your message" placeholder="Tell me what you have in mind…" disabled={loading} />
+                <input ref={inputRef} value={input} onChange={event => setInput(event.target.value)} maxLength={1200} aria-label="Your message" placeholder="Ask a question or describe what you need…" disabled={loading} />
                 <button type="submit" disabled={loading || !input.trim()} aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m4 12 16-8-4 16-4-7-8-1Z" /><path d="m12 13 8-9" /></svg></button>
               </form>
               <p className={styles.disclaimer}>AI assistance · Please don't share passwords. <Link href="/contact" onClick={() => setOpen(false)}>Contact Eroll ↗</Link></p>

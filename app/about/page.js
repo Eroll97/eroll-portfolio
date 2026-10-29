@@ -287,6 +287,9 @@ const aboutStyles = String.raw`
 
 
 .profile-details h2 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   margin: 0;
 
   color: #ffffff;
@@ -295,6 +298,12 @@ const aboutStyles = String.raw`
   font-weight: 700;
 
   line-height: 1.2;
+}
+
+.profile-verified-badge {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
 }
 
 
@@ -1725,6 +1734,10 @@ export default function About() {
 
                   <h2>
                     Eroll Oliver
+                    <svg className="profile-verified-badge" viewBox="0 0 24 24" role="img" aria-label="Verified">
+                      <path fill="#1d9bf0" d="m12 1 2.7 2 3.3-.1 1 3.2 2.7 1.9-1.1 3.1 1.1 3.1-2.7 1.9-1 3.2-3.3-.1-2.7 2-2.7-2-3.3.1-1-3.2-2.7-1.9L3.4 12 2.3 8.9 5 7l1-3.2 3.3.1Z" />
+                      <path d="m7.5 12 3 3 6-6" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </h2>
 
 
