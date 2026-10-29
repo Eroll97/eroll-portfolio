@@ -1,6 +1,7 @@
 import { tools, experience } from '../../lib/data';
 import GHLAgentShowcase from '../../components/GHLAgentShowcase';
 import AboutDemoSection from '../../components/AboutDemoSection';
+import AboutStats from '../../components/AboutStats';
 
 export const metadata = {
   title: 'About — Eroll Oliver',
@@ -200,6 +201,7 @@ const aboutStyles = String.raw`
 
 
 .stat-box strong {
+  font-variant-numeric: tabular-nums;
   margin-bottom: 9px;
 
   color: #ffffff;
@@ -1659,56 +1661,7 @@ export default function About() {
                     STATS
                 ================================================== */}
 
-                <div className="about-stats">
-
-                  <div className="stat-box">
-                    <strong>
-                      6+
-                    </strong>
-
-                    <span>
-                      YEARS
-                      <br />
-                      EXPERIENCE
-                    </span>
-                  </div>
-
-
-                  <div className="stat-box">
-                    <strong>
-                      800+
-                    </strong>
-
-                    <span>
-                      SITES
-                      <br />
-                      LAUNCHED
-                    </span>
-                  </div>
-
-
-                  <div className="stat-box">
-                    <strong>
-                      4+
-                    </strong>
-
-                    <span>
-                      COMPANIES
-                    </span>
-                  </div>
-
-
-                  <div className="stat-box">
-                    <strong>
-                      24/7
-                    </strong>
-
-                    <span>
-                      AUTOMATION
-                    </span>
-                  </div>
-
-                </div>
+                <AboutStats />
 
               </div>
 
