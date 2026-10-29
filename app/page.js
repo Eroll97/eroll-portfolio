@@ -28,6 +28,7 @@ import HoverScrollPreview from "../components/HoverScrollPreview";
 import Typewriter from "../components/Typewriter";
 import PortfolioVideoPopup from "../components/PortfolioVideoPopup";
 import ExpertiseNetwork from "../components/ExpertiseNetwork";
+import HeroStats from "../components/HeroStats";
 
 /* =========================================================
    EROLL OLIVER - COMPLETE HOMEPAGE
@@ -159,24 +160,7 @@ export default function Home() {
 
             {/* HERO STATISTICS */}
 
-            <div className="hero-stats">
-
-              <div>
-                <strong>6+</strong>
-                <span>Years experience</span>
-              </div>
-
-              <div>
-                <strong>800+</strong>
-                <span>Websites launched</span>
-              </div>
-
-              <div>
-                <strong>4+</strong>
-                <span>Companies worked with</span>
-              </div>
-
-            </div>
+            <HeroStats />
 
           </div>
 
